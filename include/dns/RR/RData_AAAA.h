@@ -1,0 +1,37 @@
+#pragma once
+
+#include "Common.h"
+#include "RData.h"
+
+
+namespace daniel
+{
+
+namespace dns
+{
+
+namespace RR
+{
+
+class RData_AAAA : public RData
+{
+
+private :
+	uint16_t address[ 8 ] ; // ipv6
+
+public :
+	uint16_t ToNullStr( uint8_t * pStr , uint16_t const & length ) const override ;
+
+public :
+	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
+
+public :
+	RData_AAAA() ;
+
+} ; // class RData_AAAA
+	
+}   // name RR
+
+}   // namespace dns
+	
+}   // namespace daniel

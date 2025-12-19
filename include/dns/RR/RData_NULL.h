@@ -1,0 +1,38 @@
+#pragma once
+
+#include "Common.h"
+#include "RData.h"
+
+
+namespace daniel
+{
+
+namespace dns
+{
+
+namespace RR
+{
+
+class RData_NULL : public RData
+{
+
+private :
+	uint16_t binlen ;
+	uint8_t  binary[ 65535 ] ;
+
+public :
+	uint16_t ToNullStr( uint8_t * pStr , uint16_t const & length ) const override ;
+
+public :
+	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
+
+public :
+	RData_NULL() ;
+
+} ; // class RData_NULL
+	
+}   // name RR
+
+}   // namespace dns
+	
+}   // namespace daniel
