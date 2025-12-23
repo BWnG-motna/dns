@@ -15,6 +15,7 @@ PREFIX   ?= /usr/local
 BINDIR   ?= $(PREFIX)/bin
 DESTDIR  ?=
 
+.PHONY : all clean install
 
 all : $(APP) 
 
@@ -33,5 +34,3 @@ clean :
 install : $(APP)
 	mkdir -p $(DESTDIR)$(BINDIR)
 	install -m 755 $(APP) $(DESTDIR)$(BINDIR)/$(APP)
-
-.PHONY : all clean install
