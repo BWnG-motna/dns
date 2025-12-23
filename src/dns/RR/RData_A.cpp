@@ -4,7 +4,7 @@
 
 
 daniel::dns::RR::RData_A::RData_A()
-	: RData( nullptr )
+	: RData( nullptr ) , address( 0 )
 {
 
 }

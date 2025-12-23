@@ -5,7 +5,7 @@
 
 
 daniel::dns::RR::RData_SOA::RData_SOA( uint8_t const * pRef )
-	: RData( pRef )
+	: RData( pRef ) , serial( 0 ) , refresh( 0 ) , retry( 0 ) , expire( 0 ) , minimum( 0 )
 {
 	mname[ 0 ] = '\0' ;
 	rname[ 0 ] = '\0' ;

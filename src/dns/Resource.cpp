@@ -25,7 +25,7 @@
 
 
 daniel::dns::Resource::Resource()
-	: nameLen( 0 ) , qtype( QType::A ) , qclass( QClass::IN ) , ttl( 0 ) , rdlength( 0 ) , pRDat( nullptr )
+	: pDataGram( nullptr ) , nameLen( 0 ) , qtype( QType::A ) , qclass( QClass::IN ) , ttl( 0 ) , rdlength( 0 ) , pRDat( nullptr )
 {
 	name[ 0 ] = '\0' ;
 }

@@ -7,6 +7,7 @@
 #include "view/HexView.h"
 
 #include <iostream>
+#include <cstring>
 #include <random>
 
 
