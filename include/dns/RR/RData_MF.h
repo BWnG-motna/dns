@@ -17,6 +17,9 @@ class RData_MF : public RData_DNAME
 {
 
 public :
+	uint8_t const * GetMadName() const ;
+
+public :
 	RData_MF( uint8_t const * pRef ) ;
 
 } ; // class RData_MF

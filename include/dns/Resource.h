@@ -58,6 +58,9 @@ public :
 	uint16_t GetRdLen() const ;
 
 public :
+	RR::RData const * GetRData() const ;
+
+public :
 	 Resource() ;
 	~Resource() ;
 

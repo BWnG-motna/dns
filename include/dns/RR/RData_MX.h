@@ -27,6 +27,10 @@ public :
 	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
 
 public :
+	uint16_t GetPreference() const ;
+	uint8_t const * GetExchange() const ;
+
+public :
 	RData_MX( uint8_t const * pRef ) ;
 
 } ; // class RData_MX

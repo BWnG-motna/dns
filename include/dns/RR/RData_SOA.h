@@ -32,6 +32,16 @@ public :
 	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
 
 public :
+	uint8_t const * GetMName() const ;
+	uint8_t const * GetRName() const ;
+
+	uint32_t GetSerial()  const ;
+	uint32_t GetRefresh() const ;
+	uint32_t GetRetry()   const ;
+	uint32_t GetExpire()  const ;
+	uint32_t GetMinimum() const ;
+
+public :
 	RData_SOA( uint8_t const * pRef ) ;
 
 } ; // class RData_SOA

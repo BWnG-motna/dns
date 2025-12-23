@@ -26,6 +26,9 @@ public :
 	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
 
 public :
+	uint8_t const * GetTxtData() const ;
+
+public :
 	RData_TXT() ;
 
 } ; // class RData_TXT

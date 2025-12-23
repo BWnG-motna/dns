@@ -25,6 +25,8 @@ public :
 
 public :
 	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
+	uint8_t const * GetCPUInfo() const ;
+	uint8_t const * GetOSInfo()  const ;
 
 public :
 	RData_HINFO( uint8_t const * pRef ) ;

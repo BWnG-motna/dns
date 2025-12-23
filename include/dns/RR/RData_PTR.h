@@ -17,6 +17,9 @@ class RData_PTR : public RData_DNAME
 {
 
 public :
+	uint8_t const * GetPTRDName() const ;
+
+public :
 	RData_PTR( uint8_t const * pRef ) ;
 
 } ; // class RData_PTR

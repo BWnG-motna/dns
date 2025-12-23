@@ -24,6 +24,7 @@ public :
 
 public :
 	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
+	void GetAddress( uint16_t ( & addr )[ 8 ] ) ;
 
 public :
 	RData_AAAA() ;

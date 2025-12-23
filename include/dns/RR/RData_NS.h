@@ -17,6 +17,9 @@ class RData_NS : public RData_DNAME
 {
 
 public :
+	uint8_t const * GetNSDName() const ;
+
+public :
 	RData_NS( uint8_t const * pRef ) ;
 
 } ; // class RData_NS

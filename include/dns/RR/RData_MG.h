@@ -17,6 +17,9 @@ class RData_MG : public RData_DNAME
 {
 
 public :
+	uint8_t const * GetMgmName() const ;
+
+public :
 	RData_MG( uint8_t const * pRef ) ;
 
 } ; // class RData_MG

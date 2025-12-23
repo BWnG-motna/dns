@@ -24,6 +24,7 @@ public :
 
 public :
 	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
+	uint8_t const * GetDName() const ;
 
 public :
 	RData_DNAME( uint8_t const * pRef ) ;

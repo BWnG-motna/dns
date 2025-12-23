@@ -27,6 +27,10 @@ public :
 	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
 
 public :
+	uint16_t GetLength() const ;
+	uint8_t const * GetBinary() const ;
+
+public :
 	RData_NULL() ;
 
 } ; // class RData_NULL

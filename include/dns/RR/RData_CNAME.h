@@ -17,6 +17,9 @@ class RData_CNAME : public RData_DNAME
 {
 
 public :
+	uint8_t const * GetCNAME() const ;
+
+public :
 	RData_CNAME( uint8_t const * pRef ) ;
 
 } ; // class RData_CNAME

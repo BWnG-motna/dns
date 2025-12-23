@@ -27,6 +27,10 @@ public :
 	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
 
 public :
+	uint8_t const * GetRMailBx() const ;
+	uint8_t const * GetEMailBx() const ;
+
+public :
 	RData_MINFO( uint8_t const * pRef ) ;
 
 } ; // class RData_MINFO

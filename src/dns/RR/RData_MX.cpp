@@ -57,3 +57,15 @@ bool daniel::dns::RR::RData_MX::Load( uint8_t const * pData , uint16_t const & l
 
 	return true ;
 }
+
+
+uint16_t daniel::dns::RR::RData_MX::GetPreference() const
+{
+	return preference ;
+}
+
+
+uint8_t const * daniel::dns::RR::RData_MX::GetExchange() const
+{
+	return exchange ;
+}

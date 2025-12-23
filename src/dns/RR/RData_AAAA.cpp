@@ -55,3 +55,12 @@ bool daniel::dns::RR::RData_AAAA::Load( uint8_t const * pData , uint16_t const &
 
 	return true ;
 }
+
+
+void daniel::dns::RR::RData_AAAA::GetAddress( uint16_t ( & addr )[ 8 ] )
+{
+	for( uint8_t pos = 0 ; pos < 8 ; ++pos )
+	{
+		addr[ pos ] = address[ pos ] ;
+	}
+}

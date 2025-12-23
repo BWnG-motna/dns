@@ -69,3 +69,15 @@ bool daniel::dns::RR::RData_HINFO::Load( uint8_t const * pData , uint16_t const 
 
 	return true ;
 }
+
+
+uint8_t const * daniel::dns::RR::RData_HINFO::GetCPUInfo() const
+{
+	return cpu ;
+}
+
+
+uint8_t const * daniel::dns::RR::RData_HINFO::GetOSInfo() const
+{
+	return os ;
+}

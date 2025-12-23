@@ -47,3 +47,9 @@ bool daniel::dns::RR::RData_DNAME::Load( uint8_t const * pData , uint16_t const 
 
 	return true ;
 }
+
+
+uint8_t const * daniel::dns::RR::RData_DNAME::GetDName() const
+{
+	return dname ;
+}

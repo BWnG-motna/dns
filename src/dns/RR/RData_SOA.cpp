@@ -107,3 +107,45 @@ bool daniel::dns::RR::RData_SOA::Load( uint8_t const * pData , uint16_t const & 
 
 	return true ;
 }
+
+
+uint8_t const * daniel::dns::RR::RData_SOA::GetMName() const
+{
+	return mname ;
+}
+
+
+uint8_t const * daniel::dns::RR::RData_SOA::GetRName() const
+{
+	return rname ;
+}
+
+
+uint32_t daniel::dns::RR::RData_SOA::GetSerial() const
+{
+	return serial ;
+}
+
+
+uint32_t daniel::dns::RR::RData_SOA::GetRefresh() const
+{
+	return refresh ;
+}
+
+
+uint32_t daniel::dns::RR::RData_SOA::GetRetry() const
+{
+	return retry ;
+}
+
+
+uint32_t daniel::dns::RR::RData_SOA::GetExpire() const
+{
+	return expire ;
+}
+
+
+uint32_t daniel::dns::RR::RData_SOA::GetMinimum() const
+{
+	return minimum ;
+}

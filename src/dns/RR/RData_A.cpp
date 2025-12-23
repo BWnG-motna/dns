@@ -53,3 +53,12 @@ bool daniel::dns::RR::RData_A::Load( uint8_t const * pData , uint16_t const & le
 
 	return true ;
 }
+
+
+void daniel::dns::RR::RData_A::GetAddress( uint8_t ( & addr )[ 4 ] )
+{
+	addr[ 0 ] = static_cast< uint8_t >( ( address >> 24 ) & 0x000000FF ) ;
+	addr[ 1 ] = static_cast< uint8_t >( ( address >> 16 ) & 0x000000FF ) ;
+	addr[ 2 ] = static_cast< uint8_t >( ( address >>  8 ) & 0x000000FF ) ;
+	addr[ 3 ] = static_cast< uint8_t >( ( address >>  0 ) & 0x000000FF ) ;
+}

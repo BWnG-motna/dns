@@ -69,3 +69,15 @@ bool daniel::dns::RR::RData_RP::Load( uint8_t const * pData , uint16_t const & l
 
 	return true ;
 }
+
+
+uint8_t const * daniel::dns::RR::RData_RP::GetMBoxDName() const
+{
+	return mboxDName ;
+}
+
+
+uint8_t const * daniel::dns::RR::RData_RP::GetTxtDName()  const
+{
+	return txtDName ;
+}

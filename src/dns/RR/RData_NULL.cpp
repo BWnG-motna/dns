@@ -69,3 +69,15 @@ bool daniel::dns::RR::RData_NULL::Load( uint8_t const * pData , uint16_t const &
 
 	return true ;
 }
+
+
+uint16_t daniel::dns::RR::RData_NULL::GetLength() const
+{
+	return binlen ;
+}
+
+
+uint8_t const * daniel::dns::RR::RData_NULL::GetBinary() const
+{
+	return binary ;
+}

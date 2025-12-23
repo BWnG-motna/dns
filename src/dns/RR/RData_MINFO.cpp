@@ -69,3 +69,15 @@ bool daniel::dns::RR::RData_MINFO::Load( uint8_t const * pData , uint16_t const 
 
 	return true ;
 }
+
+
+uint8_t const * daniel::dns::RR::RData_MINFO::GetRMailBx() const
+{
+	return rmailbx ;
+}
+
+
+uint8_t const * daniel::dns::RR::RData_MINFO::GetEMailBx() const
+{
+	return emailbx ;
+}

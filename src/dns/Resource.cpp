@@ -336,3 +336,9 @@ uint16_t daniel::dns::Resource::GetRdLen() const
 {
 	return rdlength ;
 }
+
+
+daniel::dns::RR::RData const * daniel::dns::Resource::GetRData() const
+{
+	return pRDat ;
+}

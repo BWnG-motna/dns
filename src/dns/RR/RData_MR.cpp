@@ -6,3 +6,9 @@ daniel::dns::RR::RData_MR::RData_MR( uint8_t const * pRef )
 {
 	
 }
+
+
+uint8_t const * daniel::dns::RR::RData_MR::GetNewName() const
+{
+	return GetDName() ;
+}
