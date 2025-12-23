@@ -41,12 +41,14 @@ daniel::dns::Resource::~Resource()
 }
 
 
-uint16_t daniel::dns::Resource::Load( uint8_t const * pBuf , uint16_t const & length , uint8_t * pRef )
+uint16_t daniel::dns::Resource::Load( uint8_t const * pBuf , uint16_t const & length , uint8_t const * pRef )
 {
-	if( 1 > length || nullptr == pBuf )
+	if( 1 > length || nullptr == pBuf || nullptr == pRef  )
 	{
 		return 0 ;
 	}
+
+	pDataGram = pRef ;
 
 	uint16_t bPos = 0 ;
 	uint16_t nPos = 0 ;
@@ -118,8 +120,6 @@ uint16_t daniel::dns::Resource::Load( uint8_t const * pBuf , uint16_t const & le
 	}
 
 	MakeRData( & ( pBuf[ bPos + 10 ] ) , rdlength ) ;
-
-	pDataGram = pRef ;
 
 	return bPos + 10 + rdlength ;
 }

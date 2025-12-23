@@ -21,7 +21,7 @@ private :
 	static constexpr uint16_t const nameMaxLen = 255 ;
 
 private :
-	uint8_t * pDataGram ;
+	uint8_t const * pDataGram ;
 
 private :
 	uint8_t  name[ nameMaxLen + 1 ] ;
@@ -44,7 +44,7 @@ private :
 	void MakeRData( uint8_t const * pBuf , uint32_t const & length ) ;
 
 public :
-	uint16_t Load( uint8_t const * pBuf , uint16_t const & length , uint8_t * pRef ) ;
+	uint16_t Load( uint8_t const * pBuf , uint16_t const & length , uint8_t const * pRef ) ;
 //	uint16_t Save( uint8_t       * pBuf , uint16_t const & length ) ;
 
 public :
