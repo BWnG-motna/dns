@@ -11,7 +11,7 @@
 #include <random>
 
 
-void Run( char const * qname , char const * qtype ) ;
+void Run( char const * qname , char const * qtype , char const * svrIp ) ;
 
 uint16_t MakeQuery ( uint8_t * pBuf , char const * qname , char const * qytpe ) ;
 uint16_t MakeId() ;
@@ -25,33 +25,82 @@ int main( int argc , char * argv[] )
 {
 	if( 1 == argc )
 	{
-		Run( "." , "ns" ) ;
+		Run( "." , "ns" , "8.8.8.8" ) ;
 	}
 	else if( 2 == argc )
 	{
-		Run( argv[ 1 ] , "ns" ) ;
+		Run( argv[ 1 ] , "ns" , "8.8.8.8" ) ;
 	}
 	else if( 3 >= argc )
 	{
-		Run( argv[ 1 ] , argv[ 2 ] ) ;
+		Run( argv[ 1 ] , argv[ 2 ] , "8.8.8.8" ) ;
+	}
+	else if( 4 >= argc )
+	{
+		Run( argv[ 1 ] , argv[ 2 ] , argv[ 3 ] ) ;
 	}
 
 	return 0 ;
 }
 
 
-void Run( char const * qname , char const * sqtype )
+void Run( char const * qname , char const * sqtype , char const * svrIp )
 {
 	uint8_t  sbuf[ 512 ] ;
 	uint16_t slen = MakeQuery( sbuf , qname , sqtype ) ;
 
-	uint8_t  rbuf[ 1500 ] ;
-	int tLen = daniel::net::RequestOnUdp( rbuf , 1500 , sbuf , slen ) ;
+	uint8_t  rbuf[ 4096 + 1 ] ;
 
-	if( 12 > tLen )
+	bool isTcp = false ;
+	int  tLen  = 0 ;
+
+
+DNS_QUERY :
+
+	if( true == isTcp )
+	{
+		tLen = daniel::net::RequestOnTcp( rbuf , 4096 , sbuf , slen , svrIp , 53 ) ;
+	}
+	else
+	{
+		tLen = daniel::net::RequestOnUdp( rbuf , 1500 , sbuf , slen , "8.8.8.8" , 53 ) ;	
+	}
+
+	/**/ if( 12 > tLen )
 	{
 		std::cerr << "response error - length of received datagram is less than 12" << std::endl ;
 		return ;
+	}
+	else if( false == isTcp && 1500 < tLen )
+	{
+		std::cerr << "processing error - length of received datagram is greater than 1500. tcp-fallback will be operated" << std::endl ;
+		isTcp = true ;
+
+		goto DNS_QUERY ;
+	}
+	else if(  true == isTcp && 4096 < tLen )
+	{
+		std::cerr << "processing error - length of received datagram is greater than 4096. quit" << std::endl ;
+		return ;
+	}
+
+
+	{
+		daniel::dns::Header h ;
+		h.Load( rbuf , tLen ) ;
+
+		/**/ if( false == isTcp && 0 != h.GetTC() )
+		{
+			std::cout << "TC = 1 , so tcp-fallback is operated" << std::endl ;
+			isTcp = true ;
+			
+			goto DNS_QUERY ;
+		}
+		else if(  true == isTcp && 0 != h.GetTC() )
+		{
+			std::cerr << "response error - TC is set with 1 even if tcp-fallback is operated" << std::endl ;
+			return ;
+		}
 	}
 
 	daniel::view::HexView::View( sbuf , slen , 2 ) ;

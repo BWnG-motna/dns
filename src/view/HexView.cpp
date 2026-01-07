@@ -87,6 +87,6 @@ void daniel::view::HexView::ViewValues( std::array< uint8_t , 32 > const & valAr
 	for( uint8_t pos = 0 ; pos < size ; ++pos )
 	{
 		std::cout << std::dec << std::nouppercase << std::setw( 0 ) << std::setfill( ' ' ) ;
-		std::cout << static_cast< uint8_t >( valArray[ pos ] );
+		std::cout << static_cast< uint8_t >( valArray[ pos ] ) ;
 	}
 }
