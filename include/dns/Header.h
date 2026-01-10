@@ -33,7 +33,9 @@ private :
 
 	uint16_t rd     : 1 ;  // recursion desired       : it is set, it directs the name server to pursue the query recursively
 	uint16_t ra     : 1 ;  // recursion available     : it is set or cleared in a response - in the name server recursive query support is available
-	uint16_t z      : 3 ;  // reserved for future use : must be zero in all queries and response
+	uint16_t z      : 1 ;  // reserved for future use : must be zero in all queries and response
+	uint16_t ad     : 1 ;  // authenticated data
+	uint16_t cd     : 1 ;  // checking disabled
 
 	uint16_t rcode  : 4 ;  // 0      : no error
 	                       // 1      : format error
@@ -55,8 +57,21 @@ public :
 public :
 	void SetId( uint16_t const & id ) ;
 	void SetQR( QR const & qr ) ;
-	void SetQdCount( uint16_t const & count ) ;
+	
+	void SetOpCode( uint16_t const & opCode ) ;
+	void SetRCode ( uint16_t const &  rCode ) ;
+	
+	void SetAA( bool const & isSet ) ;
+	void SetTC( bool const & isSet ) ;
 	void SetRD( bool const & isSet ) ;
+	void SetRA( bool const & isSet ) ;
+	void SetAD( bool const & isSet ) ;
+	void SetCD( bool const & isSet ) ;
+
+	void SetQdCount( uint16_t const & count ) ;
+	void SetAnCount( uint16_t const & count ) ;
+	void SetNsCount( uint16_t const & count ) ;
+	void SetArCount( uint16_t const & count ) ;
 
 public :
 	uint16_t GetID()     const ;
@@ -67,6 +82,8 @@ public :
 	uint16_t GetRD()     const ;
 	uint16_t GetRA()     const ;
 	uint16_t GetZ()      const ;
+	uint16_t GetAD()     const ;
+	uint16_t GetCD()     const ;
 	uint16_t GetRCode()  const ;
 
 public :

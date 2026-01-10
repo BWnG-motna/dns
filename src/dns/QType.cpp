@@ -71,6 +71,12 @@ char const * daniel::dns::ToString( QType const & type )
 		case QType::AAAA :
 			return "AAAA" ;
 
+		case QType::A6 :
+			return "A6" ;
+
+		case QType::OPT :
+			return "OPT" ;
+
 		case QType::AXFR :
 			return "AXFR" ;
 
@@ -183,6 +189,12 @@ daniel::dns::QType daniel::dns::StrToQType( char const * pStr )
 
 		case hash( "AAAA" ) :
 			return QType::AAAA ;
+
+		case hash( "A6" ) :
+			return QType::A6 ;
+
+		case hash( "OPT" ) :
+			return QType::OPT ; 
 
 		case hash( "AXFR" ) :
 			return QType::AXFR ;

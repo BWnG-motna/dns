@@ -62,7 +62,11 @@ enum class QType : uint16_t
 #if 0
 	DNAME       =     39  ,
 	SINK        =     40  ,
+#endif
+
 	OPT         =     41  ,
+
+#if 0
 	APL         =     42  ,
 	DS          =     43  ,
 	SSHFP       =     44  ,

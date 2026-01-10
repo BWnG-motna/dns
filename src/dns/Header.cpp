@@ -40,7 +40,11 @@ uint16_t daniel::dns::Header::Load( uint8_t const * pBuf , uint16_t const & leng
 
     ra      =   ( pBuf[  3 ] >> 7 ) & 0x01 ;
 
-    z       =   ( pBuf[  3 ] >> 4 ) & 0x07 ;
+    z       =   ( pBuf[  3 ] >> 6 ) & 0x01 ;
+
+    ad      =   ( pBuf[  3 ] >> 5 ) & 0x01 ;
+
+    cd      =   ( pBuf[  3 ] >> 4 ) & 0x01 ;
 
     rcode   =   ( pBuf[  3 ] >> 0 ) & 0x0F ;
 
@@ -82,7 +86,9 @@ uint16_t daniel::dns::Header::Save( uint8_t * pBuf , uint16_t const & length ) c
 		       | ( ( rd      << 0 ) & 0x01 ) ;
 
 	pBuf[  3 ] = ( ( ra      << 7 ) & 0x80 )
-	           | ( ( z       << 4 ) & 0x70 )
+	           | ( ( z       << 6 ) & 0x40 )
+	           | ( ( ad      << 5 ) & 0x20 )
+	           | ( ( cd      << 4 ) & 0x10 )
 	           | ( ( rcode   << 0 ) & 0x0F ) ;
 
 	pBuf[  4 ] =   ( qdcount >> 8 ) & 0x00FF ;
@@ -118,6 +124,8 @@ void daniel::dns::Header::SetQR( QR const & _qr )
 		rd     = 0 ;
 		ra     = 0 ;
 		z      = 0 ;
+		ad     = 0 ;
+		cd     = 0 ;
 		rcode  = 0 ;
 	}
 	else
@@ -127,15 +135,75 @@ void daniel::dns::Header::SetQR( QR const & _qr )
 }
 
 
+void daniel::dns::Header::SetOpCode( uint16_t const & opCode )
+{
+	opcode = opCode ;
+}
+
+
+void daniel::dns::Header::SetRCode ( uint16_t const &  rCode )
+{
+	rcode = rCode ;
+}
+
+
 void daniel::dns::Header::SetQdCount( uint16_t const & count )
 {
 	qdcount = count ;
 }
 
 
+void daniel::dns::Header::SetAnCount( uint16_t const & count )
+{
+	ancount = count ;
+}
+
+
+void daniel::dns::Header::SetNsCount( uint16_t const & count )
+{
+	nscount = count ;
+}
+
+
+void daniel::dns::Header::SetArCount( uint16_t const & count )
+{
+	arcount = count ;
+}
+
+
+void daniel::dns::Header::SetAA( bool const & isSet )
+{
+	aa = ( true == isSet ) ? 1 : 0 ;
+}
+
+
+void daniel::dns::Header::SetTC( bool const & isSet )
+{
+	tc = ( true == isSet ) ? 1 : 0 ;
+}	
+
+
 void daniel::dns::Header::SetRD( bool const & isSet )
 {
 	rd = ( true == isSet ) ? 1 : 0 ;
+}
+
+
+void daniel::dns::Header::SetRA( bool const & isSet )
+{
+	ra = ( true == isSet ) ? 1 : 0 ;
+}
+
+
+void daniel::dns::Header::SetAD( bool const & isSet )
+{
+	ad = ( true == isSet ) ? 1 : 0 ;
+}
+
+
+void daniel::dns::Header::SetCD( bool const & isSet )
+{
+	cd = ( true == isSet ) ? 1 : 0 ;
 }
 
 
@@ -184,6 +252,18 @@ uint16_t daniel::dns::Header::GetRA() const
 uint16_t daniel::dns::Header::GetZ()  const
 {
 	return z ;
+}
+
+
+uint16_t daniel::dns::Header::GetAD()  const
+{
+	return ad ;
+}
+
+
+uint16_t daniel::dns::Header::GetCD()  const
+{
+	return cd ;
 }
 
 

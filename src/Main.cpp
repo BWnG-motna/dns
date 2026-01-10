@@ -2,6 +2,7 @@
 #include "dns/Header.h"
 #include "dns/Question.h"
 #include "dns/Resource.h"
+#include "dns/EDNS0.h"
 
 #include "net/net.h"
 #include "view/HexView.h"
@@ -13,12 +14,13 @@
 
 void Run( char const * qname , char const * qtype , char const * svrIp ) ;
 
-uint16_t MakeQuery ( uint8_t * pBuf , char const * qname , char const * qytpe ) ;
+uint16_t MakeQuery ( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * qname , char const * qytpe ) ;
 uint16_t MakeId() ;
 
 void ViewHeader  ( daniel::dns::Header   const & h ) ;
 void ViewQuestion( daniel::dns::Question const & q ) ;
 void ViewResource( daniel::dns::Resource const & r ) ;
+void ViewResource( daniel::dns::EDNS0    const & e ) ;
 
 
 int main( int argc , char * argv[] )
@@ -46,8 +48,8 @@ int main( int argc , char * argv[] )
 
 void Run( char const * qname , char const * sqtype , char const * svrIp )
 {
-	uint8_t  sbuf[ 512 ] ;
-	uint16_t slen = MakeQuery( sbuf , qname , sqtype ) ;
+	uint8_t  sbuf[ 1500 + 1 ] ;
+	uint16_t slen = MakeQuery( sbuf , 1500 , qname , sqtype ) ;
 
 	uint8_t  rbuf[ 4096 + 1 ] ;
 
@@ -133,6 +135,7 @@ DNS_QUERY :
 
 
 	daniel::dns::Resource r ;
+	daniel::dns::EDNS0    e ;
 
 	std::cout << "[ Answer     ]" << std::endl ;
 	for( uint16_t pos = 0 ; pos < h.GetAnCount() ; ++pos )
@@ -162,7 +165,16 @@ DNS_QUERY :
 	for( uint16_t pos = 0 ; pos < h.GetArCount() ; ++pos )
 	{
 		int adLen = r.Load( & ( rbuf[ sPos ] ) , tLen - len , rbuf ) ;
-		ViewResource( r ) ;	
+		
+		if( daniel::dns::QType::OPT == r.GetType() )
+		{
+			adLen = e.Load( & ( rbuf[ sPos ] ) , tLen - len ) ;
+			ViewResource( e ) ;
+		}
+		else
+		{
+			ViewResource( r ) ;	
+		}
 
 		len  = len  - adLen ;
 		sPos = sPos + adLen ;
@@ -172,7 +184,7 @@ DNS_QUERY :
 }
 
 
-uint16_t MakeQuery( uint8_t * pBuf , char const * qname , char const * sqtype )
+uint16_t MakeQuery( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * qname , char const * sqtype )
 {
 	daniel::dns::QType qtype = ( nullptr == sqtype ) ? daniel::dns::QType::A : daniel::dns::StrToQType( sqtype )  ;
 
@@ -180,6 +192,7 @@ uint16_t MakeQuery( uint8_t * pBuf , char const * qname , char const * sqtype )
 	h.SetId( MakeId() ) ;
 	h.SetQR( daniel::dns::QR::Query ) ;
 	h.SetQdCount( 1 ) ;
+	h.SetArCount( 1 ) ;
 	h.SetRD( true ) ;
 
 	daniel::dns::Question q ;
@@ -187,13 +200,21 @@ uint16_t MakeQuery( uint8_t * pBuf , char const * qname , char const * sqtype )
 	q.SetType ( qtype ) ;
 	q.SetClass( daniel::dns::QClass::IN ) ;
 
+	daniel::dns::EDNS0 e ;
+	e.SetPayloadSize( 1500 ) ;
+	e.SetVersion ( 0 ) ;
+	e.SetExtRCode( 0 ) ;
+	e.SetDNSSecOk( true ) ;
+
 	uint16_t hslen = 0 ;
 	uint16_t qslen = 0 ;
+	uint16_t eslen = 0 ;
 
-	hslen = h.Save( pBuf , 512 ) ;
-	qslen = q.Save( & ( pBuf[ hslen ] ) , 512 - hslen ) ;
+	hslen = h.Save( & ( pBuf[ 0             ] ) , bufMaxLen ) ;
+	qslen = q.Save( & ( pBuf[ hslen         ] ) , bufMaxLen - hslen ) ;
+	eslen = e.Save( & ( pBuf[ hslen + qslen ] ) , bufMaxLen - hslen - qslen ) ;
 
-	return hslen + qslen ;
+	return hslen + qslen + eslen ;
 }
 
 
@@ -219,6 +240,8 @@ void ViewHeader( daniel::dns::Header const & h )
 	std::cout << "  RD      : " << h.GetRD()      << "    " ;
 	std::cout << "  RA      : " << h.GetRA()      << std::endl ;
 	std::cout << "  Z       : " << h.GetZ()       << "    " ;
+	std::cout << "  AD      : " << h.GetAD()      << "    " ;
+	std::cout << "  CD      : " << h.GetCD()      << std::endl ;
 	std::cout << "  RCODE   : " << h.GetRCode()   << std::endl ;
 	std::cout << std::endl ;
 
@@ -242,6 +265,11 @@ void ViewQuestion( daniel::dns::Question const & q )
 
 void ViewResource( daniel::dns::Resource const & r )
 {
+	if( daniel::dns::QType::OPT == r.GetType() )
+	{
+		return ;
+	}
+
 	uint8_t  nameBuf[ 512 ] ;
 	uint8_t rdataBuf[ 512 ] ;
 
@@ -255,4 +283,19 @@ void ViewResource( daniel::dns::Resource const & r )
 			  << r.GetTTL()   << "\t"
 			  << r.GetRdLen() << "\t"
 			  << rdataBuf << std::endl ;
+}
+
+
+void ViewResource( daniel::dns::EDNS0 const & e )
+{
+	if( daniel::dns::QType::OPT != e.GetType() )
+	{
+		return ;
+	}
+
+	std::cout << "  "
+	          << daniel::dns::ToString( e.GetType() ) << "\t"
+	          << "Payload size  : " << static_cast< uint16_t >( e.GetPayloadSize() ) << std::endl << "        "
+	          << "Extended RCode: " << static_cast< uint16_t >( e.GetExtRCode()    ) << std::endl << "        "
+	          << "Version       : " << static_cast< uint16_t >( e.GetVersion()     ) << std::endl ;
 }
