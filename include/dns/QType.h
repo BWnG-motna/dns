@@ -71,7 +71,11 @@ enum class QType : uint16_t
 	DS          =     43  ,
 	SSHFP       =     44  ,
 	IPSECKEY    =     45  ,
+#endif
+
 	RRSIG       =     46  ,
+
+#if 0
 	NSEC        =     47  ,
 	DNSKEY      =     48  ,
 	DHCID       =     49  ,

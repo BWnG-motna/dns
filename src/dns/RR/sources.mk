@@ -18,4 +18,7 @@ OBJS += src/dns/RR/RData.o       \
 		src/dns/RR/RData_PTR.o   \
 		\
 		src/dns/RR/RData_HINFO.o \
-		src/dns/RR/RData_MINFO.o
+		src/dns/RR/RData_MINFO.o \
+		\
+		src/dns/RR/RData_RRSIG.o \
+		src/dns/RR/DnsSECAlog.o \

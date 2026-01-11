@@ -17,6 +17,16 @@ constexpr auto underlying( E e ) -> typename std::underlying_type< E >::type
 
 
 template < typename Enum >
+constexpr Enum enumFromUint8( std::uint8_t value ) noexcept
+{
+    static_assert( std::is_enum_v< Enum > , "Enum must be an enum type" ) ;
+    static_assert( std::is_same_v< std::underlying_type_t< Enum > , std::uint8_t > , "Underlying type of Enum must be uint8_t" ) ;
+
+    return static_cast< Enum >( value ) ;
+}
+
+
+template < typename Enum >
 constexpr Enum enumFromUint16( std::uint16_t value ) noexcept
 {
     static_assert( std::is_enum_v< Enum > , "Enum must be an enum type" ) ;
