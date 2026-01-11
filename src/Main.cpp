@@ -8,11 +8,22 @@
 #include "view/HexView.h"
 
 #include <iostream>
+#include <sstream>
 #include <cstring>
 #include <random>
 
 
-void Run( char const * qname , char const * qtype , char const * svrIp ) ;
+namespace daniel::dns
+{
+
+constexpr char     const * dname   = "."  ;
+constexpr char     const * qtype   = "ns" ;
+constexpr char     const * svrIp   = "8.8.8.8" ;
+constexpr uint16_t const   svrPort = 53 ;
+
+} // namespace daniel::server 
+
+void Run( char const * qname , char const * qtype , char const * svrIp , uint16_t const & port ) ;
 
 uint16_t MakeQuery ( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * qname , char const * qytpe ) ;
 uint16_t MakeId() ;
@@ -25,28 +36,47 @@ void ViewResource( daniel::dns::EDNS0    const & e ) ;
 
 int main( int argc , char * argv[] )
 {
-	if( 1 == argc )
+	/**/ if( 1 >= argc )
 	{
-		Run( "." , "ns" , "8.8.8.8" ) ;
+		Run( daniel::dns::dname   ,
+			 daniel::dns::qtype   , 
+			 daniel::dns::svrIp   ,
+			 daniel::dns::svrPort ) ;
 	}
 	else if( 2 == argc )
 	{
-		Run( argv[ 1 ] , "ns" , "8.8.8.8" ) ;
+		Run( argv[ 1 ] ,
+			 daniel::dns::qtype   , 
+			 daniel::dns::svrIp   ,
+			 daniel::dns::svrPort ) ;
 	}
-	else if( 3 >= argc )
+	else if( 3 == argc )
 	{
-		Run( argv[ 1 ] , argv[ 2 ] , "8.8.8.8" ) ;
+		Run( argv[ 1 ] , 
+			 argv[ 2 ] , 
+			 daniel::dns::svrIp   , 
+			 daniel::dns::svrPort ) ;
 	}
-	else if( 4 >= argc )
+	else if( 4 == argc )
 	{
-		Run( argv[ 1 ] , argv[ 2 ] , argv[ 3 ] ) ;
+		Run( argv[ 1 ] , 
+			 argv[ 2 ] , 
+			 argv[ 3 ] ,
+			 daniel::dns::svrPort ) ;
+	}
+	else
+	{
+		Run( argv[ 1 ] , 
+			 argv[ 2 ] , 
+			 argv[ 3 ] ,
+			 std::stoi( argv[ 4 ] ) ) ;
 	}
 
 	return 0 ;
 }
 
 
-void Run( char const * qname , char const * sqtype , char const * svrIp )
+void Run( char const * qname , char const * sqtype , char const * svrIp , uint16_t const & port )
 {
 	uint8_t  sbuf[ 1500 + 1 ] ;
 	uint16_t slen = MakeQuery( sbuf , 1500 , qname , sqtype ) ;
@@ -61,11 +91,11 @@ DNS_QUERY :
 
 	if( true == isTcp )
 	{
-		tLen = daniel::net::RequestOnTcp( rbuf , 4096 , sbuf , slen , svrIp , 53 ) ;
+		tLen = daniel::net::RequestOnTcp( rbuf , 4096 , sbuf , slen , svrIp , port ) ;
 	}
 	else
 	{
-		tLen = daniel::net::RequestOnUdp( rbuf , 1500 , sbuf , slen , "8.8.8.8" , 53 ) ;	
+		tLen = daniel::net::RequestOnUdp( rbuf , 1500 , sbuf , slen , "8.8.8.8" , port ) ;	
 	}
 
 	/**/ if( 12 > tLen )
