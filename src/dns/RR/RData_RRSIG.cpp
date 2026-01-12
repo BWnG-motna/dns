@@ -6,14 +6,22 @@
 
 
 daniel::dns::RR::RData_RRSIG::RData_RRSIG( uint8_t const * pRef )
-	: RData( pRef )
+	: RData( pRef ) , typeCovered( QType::NS )   , algorithm( DnsSECAlgo::RSA_MD5 ) , 
+	  labels( 0 )   , ttl( 0 ) , expiration( 0 ) , inception( 0 ) , keyTag( 0 )  ,
+	  signLen( 0 )
 {
-
+	name[ 0 ] = '\0' ;
 }
 
 
 uint16_t daniel::dns::RR::RData_RRSIG::ToNullStr( uint8_t * pStr , uint16_t const & length ) const
 {
+	if( nullptr == pStr || 1 > length )
+	{
+		return 0 ;
+	}
+	
+
 	std::stringstream ss ;
 
 	ss << daniel::dns::ToString( typeCovered ) << "\t"
@@ -25,24 +33,20 @@ uint16_t daniel::dns::RR::RData_RRSIG::ToNullStr( uint8_t * pStr , uint16_t cons
 	   << "0x"       << std::hex << std::setw( 4 ) << std::setfill( '0' ) << keyTag << "\t"
 	   << reinterpret_cast< char const * >( name ) << "\t"
 	   << std::dec   << std::setw( 0 ) << std::setfill( ' ' ) 
-	   << static_cast< uint16_t >( signLen )       << " bytes - signature" << std::endl ;
+	   << static_cast< uint16_t >( signLen )       << " bytes - signature" ;
 
 	std::string str = ss.str() ;
 
-	if( length < str.length() )
-	{
-		return 0 ;
-	}
-
 	uint16_t len = static_cast< uint16_t >( str.length() ) ;
-	for( uint16_t pos = 0 ; pos < len ; ++pos )
+	for( uint16_t pos = 0 ; pos < len && pos < length ; ++pos )
 	{
 		pStr[ pos ] = str[ pos ] ;
 	}
 
-	str[ len ] = '\0' ;
+	uint16_t less = len < ( length - 1 ) ? len : ( length - 1 ) ;
+	pStr[ less ] = '\0' ;
 
-	return len ;
+	return less  ;
 }
 
 

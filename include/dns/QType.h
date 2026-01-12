@@ -77,7 +77,11 @@ enum class QType : uint16_t
 
 #if 0
 	NSEC        =     47  ,
+#endif
+
 	DNSKEY      =     48  ,
+	
+#if 0
 	DHCID       =     49  ,
 	NSEC3       =     50  ,
 	NSEC3PARAM  =     51  ,

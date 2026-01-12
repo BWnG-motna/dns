@@ -80,6 +80,9 @@ char const * daniel::dns::ToString( QType const & type )
 		case QType::RRSIG :
 			return "RRSIG" ;
 
+		case QType::DNSKEY :
+			return "DNSKEY" ;
+
 		case QType::AXFR :
 			return "AXFR" ;
 
@@ -201,6 +204,9 @@ daniel::dns::QType daniel::dns::StrToQType( char const * pStr )
 
 		case hash( "RRSIG" ) :
 			return QType::RRSIG ;
+
+		case hash( "DNSKEY" ) :
+			return QType::DNSKEY ;
 
 		case hash( "AXFR" ) :
 			return QType::AXFR ;
