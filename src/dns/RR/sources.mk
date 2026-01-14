@@ -20,6 +20,6 @@ OBJS += src/dns/RR/RData.o       \
 		src/dns/RR/RData_HINFO.o \
 		src/dns/RR/RData_MINFO.o \
 		\
-		src/dns/RR/DnsSECAlog.o  \
+		src/dns/RR/SECAlog.o     \
 		src/dns/RR/RData_RRSIG.o \
 		src/dns/RR/RData_DNSKEY.o

@@ -12,7 +12,7 @@ namespace dns
 namespace RR
 {
 
-enum class DnsSECAlgo : uint8_t
+enum class SECAlgo : uint8_t
 {
 	RSA_MD5                  =   1 , // RFC 8624 - MUST NOT      / 128 bytes
 	DSA_SHA1                 =   2 , // RFC 8624 - MUST NOT      /  64 bytes
@@ -28,10 +28,10 @@ enum class DnsSECAlgo : uint8_t
 } ;
 
 
-bool IsEnvaildAlgo( DnsSECAlgo const & algorithm ) ;
+bool IsEnvaildAlgo( SECAlgo const & algorithm ) ;
 bool IsEnvaildAlgo( uint8_t const & algorithmNumber ) ;
 
-char const * ToString( DnsSECAlgo const & algo ) ;
+char const * ToString( SECAlgo const & algo ) ;
 
 } // namespace RR
 

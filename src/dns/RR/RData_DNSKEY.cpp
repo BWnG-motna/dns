@@ -5,7 +5,7 @@
 
 
 daniel::dns::RR::RData_DNSKEY::RData_DNSKEY()
-	: RData( nullptr ) , zsk( false ) , sep( false ) , flags( 0 ) , protocol( 0 ) , algorithm( DnsSECAlgo::RSA_MD5 ) , pklen( 0 )
+	: RData( nullptr ) , zsk( false ) , sep( false ) , flags( 0 ) , protocol( 0 ) , algorithm( SECAlgo::RSA_MD5 ) , pklen( 0 )
 {
 
 }
@@ -66,7 +66,7 @@ bool daniel::dns::RR::RData_DNSKEY::Load( uint8_t const * pData , uint16_t const
 
 	protocol = pData[ 2 ] ;
 
-	algorithm = daniel::enumFromUint8< DnsSECAlgo >( pData[ 3 ] ) ;
+	algorithm = daniel::enumFromUint8< SECAlgo >( pData[ 3 ] ) ;
 
 	uint16_t pkeyPos = 0 ;
 	for( uint16_t pos = 4 ; pos < length && pkeyPos < pkMaxLen ; ++pos )
@@ -92,7 +92,7 @@ bool daniel::dns::RR::RData_DNSKEY::IsSetSEP() const
 }
 
 
-daniel::dns::RR::DnsSECAlgo daniel::dns::RR::RData_DNSKEY::GetAlgorithm() const
+daniel::dns::RR::SECAlgo daniel::dns::RR::RData_DNSKEY::GetAlgorithm() const
 {
 	return algorithm ;
 }

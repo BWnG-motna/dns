@@ -1,9 +1,9 @@
-#include "dns/RR/DnsSECAlgo.h"
+#include "dns/RR/SECAlgo.h"
 
 
-bool daniel::dns::RR::IsEnvaildAlgo( DnsSECAlgo const & algorithm )
+bool daniel::dns::RR::IsEnvaildAlgo( SECAlgo const & algorithm )
 {
-	using A = daniel::dns::RR::DnsSECAlgo ;
+	using A = daniel::dns::RR::SECAlgo ;
 	
 	switch( algorithm )
 	{
@@ -49,9 +49,9 @@ bool daniel::dns::RR::IsEnvaildAlgo( uint8_t const & algorithmNumber )
 }
 
 
-char const * daniel::dns::RR::ToString( DnsSECAlgo const & algo )
+char const * daniel::dns::RR::ToString( SECAlgo const & algo )
 {
-	using A = daniel::dns::RR::DnsSECAlgo ;
+	using A = daniel::dns::RR::SECAlgo ;
 
 	switch( algo )
 	{

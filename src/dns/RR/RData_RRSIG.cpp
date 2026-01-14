@@ -6,7 +6,7 @@
 
 
 daniel::dns::RR::RData_RRSIG::RData_RRSIG( uint8_t const * pRef )
-	: RData( pRef ) , typeCovered( QType::NS )   , algorithm( DnsSECAlgo::RSA_MD5 ) , 
+	: RData( pRef ) , typeCovered( QType::NS )   , algorithm( SECAlgo::RSA_MD5 ) , 
 	  labels( 0 )   , ttl( 0 ) , expiration( 0 ) , inception( 0 ) , keyTag( 0 )  ,
 	  signLen( 0 )
 {
@@ -74,7 +74,7 @@ bool daniel::dns::RR::RData_RRSIG::Load( uint8_t const * pData , uint16_t const 
 	}
 	else
 	{
-		algorithm = daniel::enumFromUint8< DnsSECAlgo >( pData[ 2 ] ) ;
+		algorithm = daniel::enumFromUint8< SECAlgo >( pData[ 2 ] ) ;
 	}
 
 	labels = pData[ 3 ] ;
@@ -123,7 +123,7 @@ daniel::dns::QType daniel::dns::RR::RData_RRSIG::GetTypeCovered() const
 }
 
 
-daniel::dns::RR::DnsSECAlgo daniel::dns::RR::RData_RRSIG::GetAlgorithm() const
+daniel::dns::RR::SECAlgo daniel::dns::RR::RData_RRSIG::GetAlgorithm() const
 {
 	return algorithm ;
 }

@@ -3,7 +3,7 @@
 #include "Common.h"
 #include "RData.h"
 #include "dns/QType.h"
-#include "DnsSECAlgo.h"
+#include "SECAlgo.h"
 
 
 namespace daniel
@@ -19,17 +19,17 @@ class RData_RRSIG : public RData
 {
 
 private :
-	QType      typeCovered ;
-	DnsSECAlgo algorithm   ;
-	uint8_t    labels      ;
-	uint32_t   ttl         ;
-	uint32_t   expiration  ;
-	uint32_t   inception   ;
-	uint16_t   keyTag      ;
-	uint8_t    name[  512 ] ;
-	uint8_t    sign[ 1024 ] ;
+	QType    typeCovered ;
+	SECAlgo  algorithm   ;
+	uint8_t  labels      ;
+	uint32_t ttl         ;
+	uint32_t expiration  ;
+	uint32_t inception   ;
+	uint16_t keyTag      ;
+	uint8_t  name[  512 ] ;
+	uint8_t  sign[ 1024 ] ;
 
-	uint16_t   signLen ;
+	uint16_t signLen ;
 
 public :
 	uint16_t ToNullStr( uint8_t * pStr , uint16_t const & length ) const override ;
@@ -38,8 +38,8 @@ public :
 	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
 
 public :
-	QType      GetTypeCovered() const ;
-	DnsSECAlgo GetAlgorithm()   const ;
+	QType    GetTypeCovered() const ;
+	SECAlgo  GetAlgorithm()   const ;
 	
 	uint8_t  GetLabels()     const ;
 	uint32_t GetTTL()        const ;

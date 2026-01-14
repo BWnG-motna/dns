@@ -2,7 +2,7 @@
 
 #include "Common.h"
 #include "RData.h"
-#include "DnsSECAlgo.h"
+#include "SECAlgo.h"
 
 
 namespace daniel
@@ -24,12 +24,12 @@ private :
 	bool zsk ;
 	bool sep ;
 
-	uint16_t   flags ;
-	uint8_t    protocol  ;
-	DnsSECAlgo algorithm ;
-	uint8_t    publicKey[ pkMaxLen ] ;
+	uint16_t flags ;
+	uint8_t  protocol  ;
+	SECAlgo  algorithm ;
+	uint8_t  publicKey[ pkMaxLen ] ;
 
-	uint16_t   pklen ;
+	uint16_t pklen ;
 
 public :
 	uint16_t ToNullStr( uint8_t * pStr , uint16_t const & length ) const override ;
@@ -41,7 +41,7 @@ public :
 	bool IsSetZSK() const ;
 	bool IsSetSEP() const ;
 
-	DnsSECAlgo GetAlgorithm() const ;
+	SECAlgo GetAlgorithm() const ;
 	uint8_t const * GetPublicKey() const ;
 
 	uint16_t GetFlags() const ;
