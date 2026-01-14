@@ -5,7 +5,7 @@
 
 
 daniel::dns::RR::RData_DNSKEY::RData_DNSKEY()
-	: RData( nullptr ) , zsk( false ) , sep( false ) , flag( 0 ) , protocol( 0 ) , algorithm( DnsSECAlgo::RSA_MD5 ) , pklen( 0 )
+	: RData( nullptr ) , zsk( false ) , sep( false ) , flags( 0 ) , protocol( 0 ) , algorithm( DnsSECAlgo::RSA_MD5 ) , pklen( 0 )
 {
 
 }
@@ -24,7 +24,7 @@ uint16_t daniel::dns::RR::RData_DNSKEY::ToNullStr( uint8_t * pStr , uint16_t con
 
 	ss << "zsk: "  << ( true == zsk ? 1 : 0 )    << "\t"
 	   << "sep: "  << ( true == sep ? 1 : 0 )    << "\t"
-	   << "flag: " << std::hex << std::setw( 4 ) << std::setfill( '0' ) << flag << "\t"
+	   << "flag: " << std::hex << std::setw( 4 ) << std::setfill( '0' ) << flags << "\t"
 	   << std::dec << std::setw( 0 ) << std::setfill( ' ' )
 	   << static_cast< uint16_t >( protocol )  << "\t"
 	   << static_cast< uint16_t >( algorithm ) << "\t"
@@ -57,7 +57,7 @@ bool daniel::dns::RR::RData_DNSKEY::Load( uint8_t const * pData , uint16_t const
 		return false ;
 	}
 
-	flag 
+	flags 
 		= ( ( pData[ 0 ] << 8 ) & 0xFF00 )
 		| ( ( pData[ 1 ] << 0 ) & 0x00FF ) ;
 
@@ -77,4 +77,40 @@ bool daniel::dns::RR::RData_DNSKEY::Load( uint8_t const * pData , uint16_t const
 	pklen = pkeyPos ;
 
 	return true ;
+}
+
+
+bool daniel::dns::RR::RData_DNSKEY::IsSetZSK() const
+{
+	return zsk ;
+}
+
+
+bool daniel::dns::RR::RData_DNSKEY::IsSetSEP() const
+{
+	return sep ;
+}
+
+
+daniel::dns::RR::DnsSECAlgo daniel::dns::RR::RData_DNSKEY::GetAlgorithm() const
+{
+	return algorithm ;
+}
+
+
+uint8_t const * daniel::dns::RR::RData_DNSKEY::GetPublicKey() const
+{
+	return publicKey ;
+}
+
+
+uint16_t daniel::dns::RR::RData_DNSKEY::GetFlags() const
+{
+	return flags ;
+}
+
+
+uint16_t daniel::dns::RR::RData_DNSKEY::GetPublicKeyLength() const
+{
+	return pklen ;
 }

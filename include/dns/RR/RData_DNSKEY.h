@@ -24,7 +24,7 @@ private :
 	bool zsk ;
 	bool sep ;
 
-	uint16_t   flag ;
+	uint16_t   flags ;
 	uint8_t    protocol  ;
 	DnsSECAlgo algorithm ;
 	uint8_t    publicKey[ pkMaxLen ] ;
@@ -36,6 +36,16 @@ public :
 
 public :
 	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
+
+public :
+	bool IsSetZSK() const ;
+	bool IsSetSEP() const ;
+
+	DnsSECAlgo GetAlgorithm() const ;
+	uint8_t const * GetPublicKey() const ;
+
+	uint16_t GetFlags() const ;
+	uint16_t GetPublicKeyLength() const ;
 
 public :
 	RData_DNSKEY() ;
