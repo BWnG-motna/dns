@@ -5,7 +5,7 @@
 
 
 daniel::dns::RR::RData_DNSKEY::RData_DNSKEY()
-	: RData( nullptr ) , zsk( false ) , sep( false ) , flags( 0 ) , protocol( 0 ) , algorithm( SECAlgo::RSA_MD5 ) , pklen( 0 )
+	: RData( nullptr ) , zsk( false ) , sep( false ) , flags( 0 ) , protocol( 0 ) , algorithm( SECAlgo::INVALID ) , pklen( 0 )
 {
 
 }

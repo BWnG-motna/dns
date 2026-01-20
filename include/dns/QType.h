@@ -68,7 +68,11 @@ enum class QType : uint16_t
 
 #if 0
 	APL         =     42  ,
+#endif
+	
 	DS          =     43  ,
+
+#if 0	
 	SSHFP       =     44  ,
 	IPSECKEY    =     45  ,
 #endif

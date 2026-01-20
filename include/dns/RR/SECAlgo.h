@@ -14,6 +14,7 @@ namespace RR
 
 enum class SECAlgo : uint8_t
 {
+	INVALID                  =   0 ,
 	RSA_MD5                  =   1 , // RFC 8624 - MUST NOT      / 128 bytes
 	DSA_SHA1                 =   2 , // RFC 8624 - MUST NOT      /  64 bytes
 	RSA_SHA1                 =   5 , // RFC 8624 - SHOULD NOT    / 128 bytes
@@ -28,8 +29,8 @@ enum class SECAlgo : uint8_t
 } ;
 
 
-bool IsEnvaildAlgo( SECAlgo const & algorithm ) ;
-bool IsEnvaildAlgo( uint8_t const & algorithmNumber ) ;
+bool IsValidAlgo( SECAlgo const & algorithm ) ;
+bool IsValidAlgo( uint8_t const & algorithmNumber ) ;
 
 char const * ToString( SECAlgo const & algo ) ;
 

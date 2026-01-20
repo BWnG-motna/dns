@@ -1,7 +1,7 @@
 #include "dns/RR/SECAlgo.h"
 
 
-bool daniel::dns::RR::IsEnvaildAlgo( SECAlgo const & algorithm )
+bool daniel::dns::RR::IsValidAlgo( SECAlgo const & algorithm )
 {
 	using A = daniel::dns::RR::SECAlgo ;
 	
@@ -26,7 +26,7 @@ bool daniel::dns::RR::IsEnvaildAlgo( SECAlgo const & algorithm )
 }
 
 
-bool daniel::dns::RR::IsEnvaildAlgo( uint8_t const & algorithmNumber )
+bool daniel::dns::RR::IsValidAlgo( uint8_t const & algorithmNumber )
 {
 	switch( algorithmNumber )
 	{
