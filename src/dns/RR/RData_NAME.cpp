@@ -1,17 +1,17 @@
-#include "dns/RR/RData_DNAME.h"
+#include "dns/RR/RData_NAME.h"
 
 
 #include <cstring>
 
 
-daniel::dns::RR::RData_DNAME::RData_DNAME( uint8_t const * pRef )
+daniel::dns::RR::RData_NAME::RData_NAME( uint8_t const * pRef )
 	: RData( pRef )
 {
 	dname[ 0 ] = '\0' ;
 }
 
 
-uint16_t daniel::dns::RR::RData_DNAME::ToNullStr( uint8_t * pStr , uint16_t const & length ) const
+uint16_t daniel::dns::RR::RData_NAME::ToNullStr( uint8_t * pStr , uint16_t const & length ) const
 {
 	if( nullptr == pStr || 1 > length )
 	{
@@ -32,7 +32,7 @@ uint16_t daniel::dns::RR::RData_DNAME::ToNullStr( uint8_t * pStr , uint16_t cons
 }
 
 
-bool daniel::dns::RR::RData_DNAME::Load( uint8_t const * pData , uint16_t const & length )
+bool daniel::dns::RR::RData_NAME::Load( uint8_t const * pData , uint16_t const & length )
 {
 	if( nullptr == pData || 1 > length )
 	{
@@ -49,7 +49,7 @@ bool daniel::dns::RR::RData_DNAME::Load( uint8_t const * pData , uint16_t const 
 }
 
 
-uint8_t const * daniel::dns::RR::RData_DNAME::GetDName() const
+uint8_t const * daniel::dns::RR::RData_NAME::GetName() const
 {
 	return dname ;
 }

@@ -7,7 +7,7 @@ OBJS += src/dns/RR/RData.o       \
 		src/dns/RR/RData_SOA.o   \
 		src/dns/RR/RData_TXT.o   \
 		\
-		src/dns/RR/RData_DNAME.o \
+		src/dns/RR/RData_NAME.o  \
 		src/dns/RR/RData_CNAME.o \
 		src/dns/RR/RData_MB.o    \
 		src/dns/RR/RData_MD.o    \

@@ -2,7 +2,7 @@
 
 
 daniel::dns::RR::RData_CNAME::RData_CNAME( uint8_t const * pRef )
-	: RData_DNAME( pRef )
+	: RData_NAME( pRef )
 {
 	
 }
@@ -10,5 +10,5 @@ daniel::dns::RR::RData_CNAME::RData_CNAME( uint8_t const * pRef )
 
 uint8_t const * daniel::dns::RR::RData_CNAME::GetCNAME() const
 {
-	return GetDName() ;
+	return GetName() ;
 }

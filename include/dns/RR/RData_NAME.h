@@ -13,7 +13,7 @@ namespace dns
 namespace RR
 {
 
-class RData_DNAME : public RData
+class RData_NAME : public RData
 {
 
 private :
@@ -24,12 +24,12 @@ public :
 
 public :
 	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
-	uint8_t const * GetDName() const ;
+	uint8_t const * GetName() const ;
 
 public :
-	RData_DNAME( uint8_t const * pRef ) ;
+	RData_NAME( uint8_t const * pRef ) ;
 
-} ; // class RData_DNAME
+} ; // class RData_NAME
 	
 }   // name RR
 

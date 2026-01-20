@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Common.h"
-#include "RData_DNAME.h"
+#include "RData_NAME.h"
 
 
 namespace daniel
@@ -13,7 +13,7 @@ namespace dns
 namespace RR
 {
 
-class RData_MG : public RData_DNAME
+class RData_MG : public RData_NAME
 {
 
 public :
