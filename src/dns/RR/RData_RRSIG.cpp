@@ -106,7 +106,7 @@ bool daniel::dns::RR::RData_RRSIG::Load( uint8_t const * pData , uint16_t const 
 	len = SkipDName( & ( pData[ 18 ] ) , length - 18 ) ;
 
 	uint16_t signPos = 0 ;
-	for( uint16_t pos = 18 + len ; pos < length && signPos < 1024 ; ++pos )
+	for( uint16_t pos = 18 + len ; pos < length && signPos < signMaxLen ; ++pos )
 	{
 		sign[ signPos++ ] = pData[ pos ] ;
 	}
