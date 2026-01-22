@@ -19,6 +19,9 @@ class RData_RRSIG : public RData
 {
 
 private :
+	static constexpr uint16_t const signMaxLen = 1024 ;
+
+private :
 	QType    typeCovered ;
 	SECAlgo  algorithm   ;
 	uint8_t  labels      ;
@@ -27,7 +30,7 @@ private :
 	uint32_t inception   ;
 	uint16_t keyTag      ;
 	uint8_t  name[  512 ] ;
-	uint8_t  sign[ 1024 ] ;
+	uint8_t  sign[ signMaxLen ] ;
 
 	uint16_t signLen ;
 
