@@ -231,7 +231,7 @@ uint16_t MakeQuery( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * q
 	q.SetClass( daniel::dns::QClass::IN ) ;
 
 	daniel::dns::EDNS0 e ;
-	e.SetPayloadSize( 1500 ) ;
+	e.SetPayloadSize( 1232 ) ;
 	e.SetVersion ( 0 ) ;
 	e.SetExtRCode( 0 ) ;
 	e.SetDNSSecOk( true ) ;
