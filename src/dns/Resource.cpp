@@ -23,6 +23,7 @@
 #include "dns/RR/RData_RRSIG.h"
 #include "dns/RR/RData_DNSKEY.h"
 #include "dns/RR/RData_DS.h"
+#include "dns/RR/RData_NSEC3.h"
 
 
 #undef NULL
@@ -225,6 +226,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::DS :
 			pRDat = new RR::RData_DS() ;
+			break ;
+
+		case QType::NSEC3 :
+			pRDat = new RR::RData_NSEC3() ;
 			break ;
 
 		case QType::A6  :
