@@ -4,7 +4,6 @@
 
 #include <sstream>
 #include <iomanip>
-#include <iostream>
 
 
 daniel::dns::RR::RData_NSEC3::RData_NSEC3()
