@@ -396,31 +396,200 @@ daniel::dns::QType daniel::dns::StrToQType( char const * pStr )
 		case hash( "RP" ) :
 			return QType::RP ;
 
-#if 0
 		case hash( "AFSDB" ) :
 			return QType::AFSDB ;
-#endif
+
+		case hash( "X25" ) :
+			return QType::X25 ;
+
+		case hash( "ISDN" ) :
+			return QType::ISDN ;
+
+		case hash( "RT" ) :
+			return QType::RT ;
+
+		case hash( "NSAP" ) :
+			return QType::NSAP ;
+
+		case hash( "NSAP_PTR" ) :
+			return QType::NSAP_PTR ;
+
+		case hash( "SIG" ) :
+			return QType::SIG ;
+
+		case hash( "KEY" ) :
+			return QType::KEY ;
+
+		case hash( "PX" ) :
+			return QType::PX ;
+
+		case hash( "GPOS" ) :
+			return QType::GPOS ;
 
 		case hash( "AAAA" ) :
 			return QType::AAAA ;
 
+		case hash( "LOC" ) :
+			return QType::LOC ;
+
+		case hash( "NXT" ) :
+			return QType::NXT ;
+
+		case hash( "EID" ) :
+			return QType::EID ;
+
+		case hash( "NIMLOC" ) :
+			return QType::NIMLOC ;
+
+		case hash( "SRV" ) :
+			return QType::SRV ;
+
+		case hash( "ATMA" ) :
+			return QType::ATMA ;
+
+		case hash( "NAPTR" ) :
+			return QType::NAPTR ;
+
+		case hash( "KX" ) :
+			return QType::KX ;
+
+		case hash( "CERT" ) :
+			return QType::CERT ;
+
 		case hash( "A6" ) :
 			return QType::A6 ;
+
+		case hash( "DNAME" ) :
+			return QType::DNAME ;
+
+		case hash( "SINK" ) :
+			return QType::SINK ;
 
 		case hash( "OPT" ) :
 			return QType::OPT ; 
 
+		case hash( "APL" ) :
+			return QType::APL ;
+
 		case hash( "DS" ) :
 			return QType::DS ;
+
+		case hash( "SSHFP" ) :
+			return QType::SSHFP ;
+
+		case hash( "IPSECKEY" ) :
+			return QType::IPSECKEY ;
 
 		case hash( "RRSIG" ) :
 			return QType::RRSIG ;
 
+		case hash( "NSEC" ) :
+			return QType::NSEC ;
+
 		case hash( "DNSKEY" ) :
 			return QType::DNSKEY ;
 
+		case hash( "DHCID" ) :
+			return QType::DHCID ;
+
 		case hash( "NSEC3" ) :
 			return QType::NSEC3 ;
+
+		case hash( "NSEC3PARAM" ) :
+			return QType::NSEC3PARAM ;
+
+		case hash( "TLSA" ) :
+			return QType::TLSA ;
+
+		case hash( "SMIMEA" ) :
+			return QType::SMIMEA ;
+
+		case hash( "HIP" ) :
+			return QType::HIP ;
+
+		case hash( "NINFO" ) :
+			return QType::NINFO ;
+
+		case hash( "RKEY" ) :
+			return QType::RKEY ;
+
+		case hash( "TALINK" ) :
+			return QType::TALINK ;
+
+		case hash( "CDS" ) :
+			return QType::CDS ;
+
+		case hash( "CDNSKEY" ) :
+			return QType::CDNSKEY ;
+
+		case hash( "OPENPGPKEY" ) :
+			return QType::OPENPGPKEY ;
+
+		case hash( "CSYNC" ) :
+			return QType::CSYNC ;
+
+		case hash( "ZONEMD" ) :
+			return QType::ZONEMD ;
+
+		case hash( "SVCB" ) :
+			return QType::SVCB ;
+
+		case hash( "HTTPS" ) :
+			return QType::SVCB ;
+
+		case hash( "DSYNC" ) :
+			return QType::DSYNC ;
+
+		case hash( "HHIT" ) :
+			return QType::HHIT ;
+
+		case hash( "BRID" ) :
+			return QType::BRID ;
+
+		case hash( "SPF" ) :
+			return QType::SPF ;
+
+		case hash( "UINFO" ) :
+			return QType::UINFO ;
+
+		case hash( "UID" ) :
+			return QType::UID ;
+
+		case hash( "GID" ) :
+			return QType::GID ;
+
+		case hash( "UNSPEC" ) :
+			return QType::UNSPEC ;
+
+		case hash( "NID" ) :
+			return QType::NID ;
+
+		case hash( "L32" ) :
+			return QType::L32 ;
+
+		case hash( "L64" ) :
+			return QType::L64 ;
+
+		case hash( "LP" ) :
+			return QType::LP ;
+
+		case hash( "EUI48" ) :
+			return QType::EUI48 ;
+
+		case hash( "EUI64" ) :
+			return QType::EUI64 ;
+
+		case hash( "NXNAME" ) :
+			return QType::NXNAME ;
+
+		case hash( "TKEY" ) :
+			return QType::TKEY ;
+
+		case hash( "TSIG" ) :
+			return QType::TSIG ;
+
+		case hash( "IXFR" ) :
+			return QType::IXFR ;
 
 		case hash( "AXFR" ) :
 			return QType::AXFR ;
@@ -435,6 +604,39 @@ daniel::dns::QType daniel::dns::StrToQType( char const * pStr )
 		case hash( "ALL" ) :
 		case hash( "ANY" ) :
 			return QType::ALL ;
+
+		case hash( "URI" ) :
+			return QType::URI ;
+
+		case hash( "CAA" ) :
+			return QType::CAA ;
+
+		case hash( "AVC" ) :
+			return QType::AVC ;
+
+		case hash( "DOA" ) :
+			return QType::DOA ;
+
+		case hash( "AMTRELAY" ) :
+			return QType::AMTRELAY ;
+
+		case hash( "RESINFO" ) :
+			return QType::RESINFO ;
+
+		case hash( "WALLET" ) :
+			return QType::WALLET ;
+
+		case hash( "CLA" ) :
+			return QType::CLA ;
+
+		case hash( "IPN" ) :
+			return QType::IPN ;
+
+		case hash( "TA" ) :
+			return QType::TA ;
+
+		case hash( "DDLV" ) :
+			return QType::DDLV ;
 
 		default :
 			return QType::UNKNOWN ;
