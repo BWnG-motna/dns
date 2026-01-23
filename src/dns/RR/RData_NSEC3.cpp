@@ -43,7 +43,7 @@ uint16_t daniel::dns::RR::RData_NSEC3::ToNullStr( uint8_t * pStr , uint16_t cons
 	baseEncoding::Base32Hex conv ;
 	conv.Encode( base32hex , 100 , ownerName , ownerNameLen , false , & hexlen ) ;
 
-	ss << hexlen << " - ( " ;
+	ss << " ( " ;
 	for( uint8_t pos = 0 ; pos < hexlen ; ++pos )
 	{
 		ss << base32hex[ pos ] ;
@@ -60,6 +60,8 @@ uint16_t daniel::dns::RR::RData_NSEC3::ToNullStr( uint8_t * pStr , uint16_t cons
 		}
 		ss << " " << ToString( enumFromUint16< dns::QType >( types[ pos ] ) ) ;
 	}
+
+	ss << " )" ;
 
 	/* output */
 	std::string str = ss.str() ;
