@@ -10,6 +10,7 @@ include src/view/sources.mk
 include src/dns/sources.mk
 include src/dns/RR/sources.mk
 include src/net/sources.mk
+include src/baseEncoding/sources.mk
 
 PREFIX   ?= /usr/local
 BINDIR   ?= $(PREFIX)/bin

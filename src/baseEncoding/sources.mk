@@ -1,0 +1,1 @@
+OBJS += src/baseEncoding/Base32Hex.o
