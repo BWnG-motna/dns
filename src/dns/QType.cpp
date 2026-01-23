@@ -63,28 +63,200 @@ char const * daniel::dns::ToString( QType const & type )
 		case QType::RP :
 			return "RP" ;
 
-#if 0
 		case QType::AFSDB :
-			return "AFXDB" ;
-#endif
+			return "AFSDB" ;
+
+		case QType::X25 :
+			return "X25" ;
+
+		case QType::ISDN :
+			return "ISDN" ;
+
+		case QType::RT :
+			return "RT" ;
+
+		case QType::NSAP :
+			return "NSAP" ;
+
+		case QType::NSAP_PTR :
+			return "NSAP_PTR" ;
+
+		case QType::SIG :
+			return "SIG" ;
+
+		case QType::KEY :
+			return "KEY" ;
+
+		case QType::PX :
+			return "PX" ;
+
+		case QType::GPOS :
+			return "GPOS" ;
 
 		case QType::AAAA :
 			return "AAAA" ;
 
+		case QType::LOC :
+			return "LOC" ;
+
+		case QType::NXT :
+			return "NXT" ;
+
+		case QType::EID :
+			return "EID" ;
+
+		case QType::NIMLOC :
+			return "NIMLOC" ;
+
+		case QType::SRV :
+			return "SRV" ;
+
+		case QType::ATMA :
+			return "ATMA" ;
+
+		case QType::NAPTR :
+			return "NAPTR" ;
+
+		case QType::KX :
+			return "KX" ;
+
+		case QType::CERT :
+			return "CERT" ;
+
 		case QType::A6 :
 			return "A6" ;
+
+		case QType::DNAME :
+			return "DNAME" ;
+
+		case QType::SINK :
+			return "SINK" ;
 
 		case QType::OPT :
 			return "OPT" ;
 
+		case QType::APL :
+			return "APL" ;
+
 		case QType::DS :
 			return "DS" ;
+
+		case QType::SSHFP :
+			return "SSHFP" ;
+
+		case QType::IPSECKEY :
+			return "IPSECKEY" ;
 
 		case QType::RRSIG :
 			return "RRSIG" ;
 
+		case QType::NSEC :
+			return "NSEC" ;
+
 		case QType::DNSKEY :
 			return "DNSKEY" ;
+
+		case QType::DHCID :
+			return "DHCID" ;
+
+		case QType::NSEC3 :
+			return "NSEC3" ;
+
+		case QType::NSEC3PARAM :
+			return "NSEC3PARAM" ;
+
+		case QType::TLSA : 
+			return "TLSA" ;
+
+		case QType::SMIMEA :
+			return "SMIMEA" ;
+
+		case QType::HIP :
+			return "HIP" ;
+
+		case QType::NINFO :
+			return "NINFO" ;
+
+		case QType::RKEY :
+			return "RKEY" ;
+
+		case QType::TALINK :
+			return "TALINK" ;
+
+		case QType::CDS :
+			return "CDS" ;
+
+		case QType::CDNSKEY :
+			return "CDNSKEY" ;
+
+		case QType::OPENPGPKEY :
+			return "OPENPGPKEY" ;
+
+		case QType::CSYNC :
+			return "CSYNC" ;
+
+		case QType::ZONEMD :
+			return "ZONEMD" ;
+
+		case QType::SVCB :
+			return "SVCB" ;
+
+		case QType::HTTPS :
+			return "HTTPS" ;
+
+		case QType::DSYNC :
+			return "DSYNC" ;
+
+		case QType::HHIT :
+			return "HHIT" ;
+
+		case QType::BRID :
+			return "BRID" ;
+
+		case QType::SPF :
+			return "SPF" ;
+
+		case QType::UINFO :
+			return "UINFO" ;
+
+		case QType::UID :
+			return "UID" ;
+
+		case QType::GID :
+			return "GID" ;
+
+		case QType::UNSPEC :
+			return "UNSPEC" ;
+
+		case QType::NID :
+			return "NID" ;
+
+		case QType::L32 :
+			return "L32" ;
+
+		case QType::L64 :
+			return "L64" ;
+
+		case QType::LP :
+			return "LP" ;
+
+		case QType::EUI48 :
+			return "EUI48" ;
+
+		case QType::EUI64 :
+			return "EUI64" ;
+
+		case QType::NXNAME :
+			return "NXNAME" ;
+
+		case QType::TKEY :
+			return "TKEY" ;
+
+		case QType::TSIG :
+			return "TSIG" ;
+
+		case QType::IXFR :
+			return "IXFR" ;
 
 		case QType::AXFR :
 			return "AXFR" ;
@@ -97,6 +269,39 @@ char const * daniel::dns::ToString( QType const & type )
 
 		case QType::ALL :
 			return "*" ;
+
+		case QType::URI :
+			return "URI" ;
+
+		case QType::CAA :
+			return "CAA" ;
+
+		case QType::AVC :
+			return "AVC" ;
+
+		case QType::DOA :
+			return "DOA" ;
+
+		case QType::AMTRELAY :
+			return "AMTRELAY" ;
+
+		case QType::RESINFO :
+			return "RESINFO" ;
+
+		case QType::WALLET :
+			return "WALLET" ;
+
+		case QType::CLA :
+			return "CLA" ;
+
+		case QType::IPN :
+			return "IPN" ;
+
+		case QType::TA :
+			return "TA" ;
+
+		case QType::DDLV :
+			return "DDLV" ;
 
 		default :
 			return "UNKNOWN" ;
@@ -213,6 +418,9 @@ daniel::dns::QType daniel::dns::StrToQType( char const * pStr )
 
 		case hash( "DNSKEY" ) :
 			return QType::DNSKEY ;
+
+		case hash( "NSEC3" ) :
+			return QType::NSEC3 ;
 
 		case hash( "AXFR" ) :
 			return QType::AXFR ;

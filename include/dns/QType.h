@@ -28,8 +28,6 @@ enum class QType : uint16_t
 	MX          =     15  , // mail exchange
 	TXT         =     16  , // text string
 	RP          =     17  , // responsible persion
-
-#if 0
 	AFSDB       =     18  , // Andrew File System( AFS ) Database
 	X25         =     19  ,
 	ISDN        =     20  ,
@@ -40,11 +38,7 @@ enum class QType : uint16_t
 	KEY         =     25  ,
 	PX          =     26  ,
 	GPOS        =     27  ,
-#endif
-
 	AAAA        =     28  , // a single IPv6 address
-
-#if 0
 	LOC         =     29  ,
 	NXT         =     30  ,
 	EID         =     31  ,
@@ -54,38 +48,17 @@ enum class QType : uint16_t
 	NAPTR       =     35  ,
 	KX          =     36  ,
 	CERT        =     37  ,  
-
-#endif
-
 	A6          =     38  , // a signle IPv6 address ( obsolete - see AAAA )
-	
-#if 0
 	DNAME       =     39  ,
 	SINK        =     40  ,
-#endif
-
 	OPT         =     41  ,
-
-#if 0
 	APL         =     42  ,
-#endif
-	
 	DS          =     43  ,
-
-#if 0	
 	SSHFP       =     44  ,
 	IPSECKEY    =     45  ,
-#endif
-
 	RRSIG       =     46  ,
-
-#if 0
 	NSEC        =     47  ,
-#endif
-
 	DNSKEY      =     48  ,
-	
-#if 0
 	DHCID       =     49  ,
 	NSEC3       =     50  ,
 	NSEC3PARAM  =     51  ,
@@ -125,14 +98,10 @@ enum class QType : uint16_t
 	TKEY        =    249  ,
 	TSIG        =    250  ,
 	IXFR        =    251  ,
-#endif
-
 	AXFR        =    252  , // A request for a transfer of an entire zone 
 	MAILB       =    253  , // A request for a mailbox-related records ( MB, MG or MR )
 	MAILA       =    254  , // A request for mail agent RRs ( Obsolete - see MX )
 	ALL         =    255  , // A request for all records
-
-#if 0
 	URI         =    256 ,
 	CAA         =    257 ,
 	AVC         =    258 ,
@@ -145,7 +114,6 @@ enum class QType : uint16_t
 
 	TA          =  32768 ,
 	DDLV        =  32769 ,
-#endif
 
 	UNKNOWN     =  65535 ,
 
