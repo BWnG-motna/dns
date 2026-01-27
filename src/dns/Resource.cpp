@@ -31,6 +31,8 @@
 
 #include "dns/RR/RData_HTTPS.h"
 
+#include "dns/RR/RData_CAA.h"
+
 
 
 #undef NULL
@@ -253,6 +255,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::HTTPS :
 			pRDat = new RR::RData_HTTPS( pDataGram ) ;
+			break ;
+
+		case QType::CAA :
+			pRDat = new RR::RData_CAA() ;
 			break ;
 
 		default :

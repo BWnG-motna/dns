@@ -33,4 +33,6 @@ OBJS += src/dns/RR/RData.o        \
 		\
 		src/dns/RR/SvcKey.o       \
 		src/dns/RR/SvcParam.o     \
-		src/dns/RR/RData_HTTPS.o
+		src/dns/RR/RData_HTTPS.o  \
+		\
+		src/dns/RR/RData_CAA.o
