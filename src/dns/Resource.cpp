@@ -3,27 +3,34 @@
 
 
 #include "dns/RR/RData_A.h"
-#include "dns/RR/RData_AAAA.h"
-#include "dns/RR/RData_CNAME.h"
-#include "dns/RR/RData_HINFO.h"
-#include "dns/RR/RData_MB.h"
+#include "dns/RR/RData_NS.h"
 #include "dns/RR/RData_MD.h"
 #include "dns/RR/RData_MF.h"
-#include "dns/RR/RData_MG.h"
-#include "dns/RR/RData_MINFO.h"
-#include "dns/RR/RData_MR.h"
-#include "dns/RR/RData_MX.h"
-#include "dns/RR/RData_NS.h"
-#include "dns/RR/RData_NULL.h"
-#include "dns/RR/RData_PTR.h"
-#include "dns/RR/RData_RP.h"
+#include "dns/RR/RData_CNAME.h"
 #include "dns/RR/RData_SOA.h"
+#include "dns/RR/RData_MB.h"
+#include "dns/RR/RData_MG.h"
+#include "dns/RR/RData_MR.h"
+#include "dns/RR/RData_NULL.h"
+// WKS
+#include "dns/RR/RData_PTR.h"
+#include "dns/RR/RData_HINFO.h"
+#include "dns/RR/RData_MINFO.h"
+#include "dns/RR/RData_MX.h"
 #include "dns/RR/RData_TXT.h"
+#include "dns/RR/RData_RP.h"
 
+#include "dns/RR/RData_AAAA.h"
+
+#include "dns/RR/RData_SRV.h"
+
+#include "dns/RR/RData_DS.h"
 #include "dns/RR/RData_RRSIG.h"
 #include "dns/RR/RData_DNSKEY.h"
-#include "dns/RR/RData_DS.h"
 #include "dns/RR/RData_NSEC3.h"
+
+#include "dns/RR/RData_HTTPS.h"
+
 
 
 #undef NULL
@@ -140,7 +147,7 @@ uint16_t daniel::dns::Resource::Save( uint8_t * pBuf , uint16_t const & length )
 
 void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & length )
 {
-	if( nullptr == pBuf ) 
+	if( nullptr == pBuf || 1 > length ) 
 	{
 		pRDat = nullptr ;
 		return ;
@@ -152,20 +159,8 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 			pRDat = new RR::RData_A() ;
 			break ;
 
-		case QType::AAAA :
-			pRDat = new RR::RData_AAAA() ;
-			break ;
-
-		case QType::CNAME :
-			pRDat = new RR::RData_CNAME( pDataGram ) ;
-			break ;
-
-		case QType::HINFO :
-			pRDat = new RR::RData_HINFO( pDataGram ) ;
-			break ;
-
-		case QType::MB :
-			pRDat = new RR::RData_MB( pDataGram ) ;
+		case QType::NS :
+			pRDat = new RR::RData_NS( pDataGram ) ;
 			break ;
 
 		case QType::MD :
@@ -176,44 +171,72 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 			pRDat = new RR::RData_MF( pDataGram ) ;
 			break ;
 
-		case QType::MG :
-			pRDat = new RR::RData_MG( pDataGram ) ;
-			break ;
-
-		case QType::MINFO :
-			pRDat = new RR::RData_MINFO( pDataGram ) ;
-			break ;
-
-		case QType::MR :
-			pRDat = new RR::RData_MR( pDataGram ) ;
-			break ;
-
-		case QType::MX :
-			pRDat = new RR::RData_MX( pDataGram ) ;
-			break ;
-
-		case QType::NS :
-			pRDat = new RR::RData_NS( pDataGram ) ;
-			break ;
-
-		case QType::NULL :
-			pRDat = new RR::RData_NULL() ;
-			break ;
-
-		case QType::PTR :
-			pRDat = new RR::RData_PTR( pDataGram ) ;
-			break ;
-
-		case QType::RP :
-			pRDat = new RR::RData_RP( pDataGram ) ;
+		case QType::CNAME :
+			pRDat = new RR::RData_CNAME( pDataGram ) ;
 			break ;
 
 		case QType::SOA :
 			pRDat = new RR::RData_SOA( pDataGram ) ;
 			break ;
 
+		case QType::MB :
+			pRDat = new RR::RData_MB( pDataGram ) ;
+			break ;
+
+		case QType::MG :
+			pRDat = new RR::RData_MG( pDataGram ) ;
+			break ;
+
+		case QType::MR :
+			pRDat = new RR::RData_MR( pDataGram ) ;
+			break ;
+
+		case QType::NULL :
+			pRDat = new RR::RData_NULL() ;
+			break ;
+
+		case QType::WKS :
+			pRDat = nullptr ;
+			break ;
+
+		case QType::PTR :
+			pRDat = new RR::RData_PTR( pDataGram ) ;
+			break ;
+
+		case QType::HINFO :
+			pRDat = new RR::RData_HINFO( pDataGram ) ;
+			break ;
+
+		case QType::MINFO :
+			pRDat = new RR::RData_MINFO( pDataGram ) ;
+			break ;
+
+		case QType::MX :
+			pRDat = new RR::RData_MX( pDataGram ) ;
+			break ;
+
 		case QType::TXT :
 			pRDat = new RR::RData_TXT() ;
+			break ;
+
+		case QType::RP :
+			pRDat = new RR::RData_RP( pDataGram ) ;
+			break ;
+
+		case QType::AAAA :
+			pRDat = new RR::RData_AAAA() ;
+			break ;
+
+		case QType::SRV :
+			pRDat = new RR::RData_SRV( pDataGram ) ;
+			break ;
+
+		case QType::A6 :
+			pRDat = nullptr ;
+			break ;
+
+		case QType::DS :
+			pRDat = new RR::RData_DS() ;
 			break ;
 
 		case QType::RRSIG :
@@ -224,16 +247,13 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 			pRDat = new RR::RData_DNSKEY() ;
 			break ;
 
-		case QType::DS :
-			pRDat = new RR::RData_DS() ;
-			break ;
-
 		case QType::NSEC3 :
 			pRDat = new RR::RData_NSEC3() ;
 			break ;
 
-		case QType::A6  :
-		case QType::WKS :
+		case QType::HTTPS :
+			pRDat = new RR::RData_HTTPS( pDataGram ) ;
+			break ;
 
 		default :
 			pRDat = nullptr ;
