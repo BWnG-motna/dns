@@ -535,7 +535,7 @@ daniel::dns::QType daniel::dns::StrToQType( char const * pStr )
 			return QType::SVCB ;
 
 		case hash( "HTTPS" ) :
-			return QType::SVCB ;
+			return QType::HTTPS ;
 
 		case hash( "DSYNC" ) :
 			return QType::DSYNC ;

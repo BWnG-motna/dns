@@ -53,14 +53,16 @@ enum class QType : uint16_t
 	SINK        =     40  ,
 	OPT         =     41  ,
 	APL         =     42  ,
-	DS          =     43  ,
+	DS          =     43  , // Establishes a delegation signer record that creates the chian of trust 
+	                        // from the parent zone to the child zone by publishing a hash (digest) of the child zone's KSK
 	SSHFP       =     44  ,
 	IPSECKEY    =     45  ,
-	RRSIG       =     46  ,
+	RRSIG       =     46  , // Provides a cryptographic digital signature for specific RRset , signed with the zone's private key
 	NSEC        =     47  ,
-	DNSKEY      =     48  ,
+	DNSKEY      =     48  , // Publishes the public key(s) for zone ( ZSK and/or KSK ).
 	DHCID       =     49  ,
-	NSEC3       =     50  ,
+	NSEC3       =     50  , // Provides authenticated denial of existence for non-existent domain names and provides the absence of
+	                        // specific RR types , while preventing zone walking attacks through hashed owner names.
 	NSEC3PARAM  =     51  ,
 	TLSA        =     52  ,
 	SMIMEA      =     53  ,
