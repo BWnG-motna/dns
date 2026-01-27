@@ -20,7 +20,7 @@ uint16_t daniel::dns::RR::RData_SRV::ToNullStr( uint8_t * pStr , uint16_t const 
 	   << static_cast< uint16_t>( port     ) << '\t'
 	   << target ;
 
-	std::string s = std::string( ss.str() ) ;
+	std::string s = ss.str() ;
 	uint16_t len  = static_cast< uint16_t >( s.length() ) ;
 
 	for( uint16_t pos = 0 ; pos < length && pos < len ; ++pos )

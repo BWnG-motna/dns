@@ -28,7 +28,7 @@ uint16_t daniel::dns::RR::RData_HTTPS::ToNullStr( uint8_t * pStr , uint16_t cons
 		ss << param[ pos ].ToStr() ;
 	}
 
-	std::string s = std::string( ss.str() ) ;
+	std::string s = ss.str() ;
 	uint16_t len  = static_cast< uint16_t >( s.length() ) ;
 
 	for( uint16_t pos = 0 ; pos < length && pos < len ; ++pos )

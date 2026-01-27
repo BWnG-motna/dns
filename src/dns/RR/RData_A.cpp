@@ -19,7 +19,7 @@ uint16_t daniel::dns::RR::RData_A::ToNullStr( uint8_t * pStr , uint16_t const & 
 	   << static_cast< uint16_t>( ( address >>  8 ) & 0x000000FF ) << "."
 	   << static_cast< uint16_t>( ( address >>  0 ) & 0x000000FF ) ;
 
-	std::string s = std::string( ss.str() ) ;
+	std::string s = ss.str() ;
 	uint16_t len  = static_cast< uint16_t >( s.length() ) ;
 
 	for( uint16_t pos = 0 ; pos < length && pos < len ; ++pos )
