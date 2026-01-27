@@ -17,9 +17,6 @@ class RData
 
 private :
 	uint8_t const * pDataGram ; // the entire datagram is required to verify the compressed data
-
-protected :
-	bool GetCompressedIPv6( uint16_t const ( & addr )[ 8 ] , uint8_t * pBuf , uint16_t const & length ) const ;
 	
 protected :
 	uint16_t GetDNData( uint8_t       * pBuf , uint16_t const & length , uint8_t const * pRef , bool const & fqdn = true ) const ;

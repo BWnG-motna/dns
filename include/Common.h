@@ -36,5 +36,7 @@ constexpr Enum enumFromUint16( std::uint16_t value ) noexcept
 }
 
 
+bool GetCompressedIPv6( uint8_t * pBuf , uint16_t const & length , uint16_t const ( & addr )[ 8 ] ) ;
+
 
 } // namespace daniel

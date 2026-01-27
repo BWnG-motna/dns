@@ -1,1 +1,2 @@
-OBJS += src/Main.o
+OBJS += src/Main.o   \
+        src/Common.o 

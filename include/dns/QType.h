@@ -3,6 +3,9 @@
 #include "Common.h"
 
 
+#undef NULL 
+
+
 namespace daniel
 {
 	

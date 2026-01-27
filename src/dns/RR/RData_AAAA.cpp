@@ -15,7 +15,7 @@ uint16_t daniel::dns::RR::RData_AAAA::ToNullStr( uint8_t * pStr , uint16_t const
 	}
 
 	uint8_t addrStr[ 40 ] = { 0 , } ;
-	if( false == GetCompressedIPv6( address , addrStr , 40 ) )
+	if( false == GetCompressedIPv6( addrStr , 40 , address ) )
 	{
 		pStr[ 0 ] = '\0' ;
 		return 0 ;
