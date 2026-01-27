@@ -27,7 +27,7 @@ uint16_t daniel::dns::RR::RData_A::ToNullStr( uint8_t * pStr , uint16_t const & 
 		pStr[ pos ] = s[ pos ] ;
 	}
 
-	uint16_t less = len < length ? len : length ;
+	uint16_t less = len < ( length - 1 ) ? len : ( length - 1 ) ;
 	pStr[ less ] = '\0' ;
 
 	return less ;
