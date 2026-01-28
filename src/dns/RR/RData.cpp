@@ -41,13 +41,21 @@ uint16_t daniel::dns::RR::RData::GetDNData(
 
 		len = ( *p++ ) ;
 
-		for( uint8_t pos = 0 ; pos < len ; ++pos ) 
+		if( 1 == len && 0x00 == *p )
 		{
-			if( length <= bPos )
+			++p ;
+		}
+		else
+		{
+			for( uint8_t pos = 0 ; pos < len ; ++pos ) 
 			{
-				return bPos ;
+				if( length <= bPos )
+				{
+					return bPos ;
+				}
+
+				pBuf[ bPos++ ] = *p++ ;
 			}
-			pBuf[ bPos++ ] = *p++ ;
 		}
 
 		if( ( true == fqdn || '\0' != *p ) && ( length <= bPos ) )
