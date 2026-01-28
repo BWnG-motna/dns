@@ -18,10 +18,10 @@ class RData_NSEC : public RData
 {
 
 private :
-	uint8_t     ownerName[ 512 ] ;
+	uint8_t     nextDName[ 512 ] ;
 	TypeBitMap  tbm[ 256 ] ;
 
-	uint8_t     ownerNameLen ;
+	uint8_t     nextDNameLen ;
 
 private :
 	mutable uint16_t types[ 512 ] ;
@@ -33,10 +33,10 @@ public :
 	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
 
 public :
-	uint8_t  GetOwnerNameLength() const ;
+	uint8_t  GetNextDNameLength() const ;
 	uint16_t GetTypeCount()       const ;
 
-	uint8_t  const * GetOwnerName() const ;
+	uint8_t  const * GetNextDName() const ;
 	uint16_t const * GetTypes()     const ;
 
 public :

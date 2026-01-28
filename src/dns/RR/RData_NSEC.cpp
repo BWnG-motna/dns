@@ -8,11 +8,11 @@
 
 
 daniel::dns::RR::RData_NSEC::RData_NSEC()
-	: RData( nullptr ) , ownerNameLen( 0 )
+	: RData( nullptr ) , nextDNameLen( 0 )
 {
 	for( uint8_t pos = 0 ; pos < 50 ; ++pos )
 	{
-		ownerName[ pos ] = 0 ;
+		nextDName[ pos ] = 0 ;
 	}
 }
 
@@ -22,7 +22,7 @@ uint16_t daniel::dns::RR::RData_NSEC::ToNullStr( uint8_t * pStr , uint16_t const
 	std::stringstream ss ;
 
 	/* next owner name */
-	ss << ownerName ;
+	ss << nextDNameLen ;
 	
 	/* types */
 	uint16_t typeCount = GetTypeCount() ;
@@ -60,7 +60,7 @@ bool daniel::dns::RR::RData_NSEC::Load( uint8_t const * pData , uint16_t const &
 		return false ;
 	}
 
-	ownerNameLen = GetDNData( ownerName , sizeof( ownerName ) , pData ) ;
+	nextDNameLen = GetDNData( nextDName , sizeof( nextDName ) , pData ) ;
 	uint16_t len = SkipDName( pData , length ) ; 
 
 	uint16_t pos = len ;
@@ -94,9 +94,9 @@ bool daniel::dns::RR::RData_NSEC::Load( uint8_t const * pData , uint16_t const &
 }
 
 
-uint8_t daniel::dns::RR::RData_NSEC::GetOwnerNameLength() const 
+uint8_t daniel::dns::RR::RData_NSEC::GetNextDNameLength() const 
 {
-	return ownerNameLen ;
+	return nextDNameLen ;
 }
 
 
@@ -116,9 +116,9 @@ uint16_t daniel::dns::RR::RData_NSEC::GetTypeCount() const
 }
 
 
-uint8_t const * daniel::dns::RR::RData_NSEC::GetOwnerName() const 
+uint8_t const * daniel::dns::RR::RData_NSEC::GetNextDName() const 
 {
-	return ownerName ;
+	return nextDName ;
 }
 
 
