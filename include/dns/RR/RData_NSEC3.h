@@ -2,8 +2,8 @@
 
 #include "Common.h"
 #include "RData.h"
-#include "TypeBitMap.h" 
-#include "SECHashAlgo.h"
+#include "SEC/TypeBitMap.h" 
+#include "SEC/SECHashAlgo.h"
 
 
 namespace daniel

@@ -1,4 +1,4 @@
-#include "dns/RR/SECAlgo.h"
+#include "dns/RR/SEC/SECAlgo.h"
 
 
 bool daniel::dns::RR::IsValidAlgo( SECAlgo const & algorithm )

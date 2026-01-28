@@ -1,4 +1,4 @@
-#include "dns/RR/SECHashAlgo.h"
+#include "dns/RR/SEC/SECHashAlgo.h"
 
 
 bool daniel::dns::RR::IsValidHashAlgo( SECHashAlgo const & hashAlgo )

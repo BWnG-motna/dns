@@ -2,7 +2,7 @@
 
 #include "Common.h"
 #include "RData.h"
-#include "SECAlgo.h"
+#include "SEC/SECAlgo.h"
 
 
 namespace daniel

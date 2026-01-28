@@ -22,17 +22,11 @@ OBJS += src/dns/RR/RData.o        \
 		\
 		src/dns/RR/RData_SRV.o    \
 		\
-		src/dns/RR/SECAlog.o      \
-		src/dns/RR/SECDigest.o    \
-		src/dns/RR/TypeBitMap.o   \
-		src/dns/RR/SECHashAlgo.o  \
 		src/dns/RR/RData_RRSIG.o  \
 		src/dns/RR/RData_DNSKEY.o \
 		src/dns/RR/RData_DS.o     \
 		src/dns/RR/RData_NSEC3.o  \
 		\
-		src/dns/RR/SvcKey.o       \
-		src/dns/RR/SvcParam.o     \
 		src/dns/RR/RData_HTTPS.o  \
 		\
 		src/dns/RR/RData_CAA.o

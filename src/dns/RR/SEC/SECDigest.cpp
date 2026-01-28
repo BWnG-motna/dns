@@ -1,4 +1,4 @@
-#include "dns/RR/SECDigest.h"
+#include "dns/RR/SEC/SECDigest.h"
 
 
 bool daniel::dns::RR::IsValidDigest( SECDigest const & digest )

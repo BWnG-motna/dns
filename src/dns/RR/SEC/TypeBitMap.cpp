@@ -1,4 +1,4 @@
-#include "dns/RR/TypeBitMap.h"
+#include "dns/RR/SEC/TypeBitMap.h"
 
 
 daniel::dns::RR::TypeBitMap::TypeBitMap()

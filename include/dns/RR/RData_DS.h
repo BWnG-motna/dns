@@ -2,8 +2,8 @@
 
 #include "Common.h"
 #include "RData.h"
-#include "SECAlgo.h"
-#include "SECDigest.h"
+#include "SEC/SECAlgo.h"
+#include "SEC/SECDigest.h"
 
 
 namespace daniel
