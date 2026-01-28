@@ -1,4 +1,4 @@
-#include "dns/RR/HTTPS/SvcKey.h"
+#include "dns/RR/SVC/SvcKey.h"
 
 
 bool daniel::dns::RR::IsValidSvcKey( uint16_t const & key )

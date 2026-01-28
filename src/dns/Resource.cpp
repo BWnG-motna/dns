@@ -33,6 +33,7 @@
 
 #include "dns/RR/RData_TLSA.h"
 
+#include "dns/RR/RData_SVCB.h"
 #include "dns/RR/RData_HTTPS.h"
 
 #include "dns/RR/RData_CAA.h"
@@ -259,6 +260,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::TLSA :
 			pRDat = new RR::RData_TLSA() ;
+			break ;
+
+		case QType::SVCB :
+			pRDat = new RR::RData_SVCB( pDataGram ) ;
 			break ;
 
 		case QType::HTTPS :

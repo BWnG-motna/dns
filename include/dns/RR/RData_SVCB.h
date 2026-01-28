@@ -15,7 +15,7 @@ namespace RR
 {
 
 
-class RData_HTTPS : public RData
+class RData_SVCB : public RData
 {
 
 private :
@@ -46,10 +46,10 @@ public :
 	uint8_t const * GetTargetname() const ;
 
 public :
-	RData_HTTPS( uint8_t const * pRef ) ;
+	RData_SVCB( uint8_t const * pRef ) ;
 
 
-} ; // class RData_HTTPS
+} ; // class RData_SVCB
 
 
 }   // namespace RR

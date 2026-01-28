@@ -27,6 +27,7 @@ OBJS += src/dns/RR/RData.o        \
 		\
 		src/dns/RR/RData_TLSA.o   \
 		\
+		src/dns/RR/RData_SVCB.o   \
 		src/dns/RR/RData_HTTPS.o  \
 		\
 		src/dns/RR/RData_CAA.o    \
