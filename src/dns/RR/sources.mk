@@ -22,6 +22,7 @@ OBJS += src/dns/RR/RData.o        \
 		\
 		src/dns/RR/RData_DS.o     \
 		src/dns/RR/RData_RRSIG.o  \
+		src/dns/RR/RData_NSEC.o   \
 		src/dns/RR/RData_DNSKEY.o \
 		src/dns/RR/RData_NSEC3.o  \
 		\

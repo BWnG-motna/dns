@@ -28,6 +28,7 @@
 
 #include "dns/RR/RData_DS.h"
 #include "dns/RR/RData_RRSIG.h"
+#include "dns/RR/RData_NSEC.h"
 #include "dns/RR/RData_DNSKEY.h"
 #include "dns/RR/RData_NSEC3.h"
 
@@ -248,6 +249,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::RRSIG :
 			pRDat = new RR::RData_RRSIG( pDataGram ) ;
+			break ;
+
+		case QType::NSEC :
+			pRDat = new RR::RData_NSEC() ;
 			break ;
 
 		case QType::DNSKEY :
