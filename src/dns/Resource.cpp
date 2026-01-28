@@ -31,6 +31,8 @@
 #include "dns/RR/RData_DNSKEY.h"
 #include "dns/RR/RData_NSEC3.h"
 
+#include "dns/RR/RData_TLSA.h"
+
 #include "dns/RR/RData_HTTPS.h"
 
 #include "dns/RR/RData_CAA.h"
@@ -253,6 +255,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::NSEC3 :
 			pRDat = new RR::RData_NSEC3() ;
+			break ;
+
+		case QType::TLSA :
+			pRDat = new RR::RData_TLSA() ;
 			break ;
 
 		case QType::HTTPS :
