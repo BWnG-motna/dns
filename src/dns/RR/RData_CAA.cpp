@@ -20,6 +20,10 @@ uint16_t daniel::dns::RR::RData_CAA::ToNullStr( uint8_t * pStr , uint16_t const 
 	ss << static_cast< uint16_t>( flags  )        << ' '
 	   << reinterpret_cast< char const * >( tag ) << ' ' ;
 
+	if( 0 < valuelen )
+	{
+		ss << "\"" ;
+	}
 	for( uint16_t pos = 0 ; pos < valuelen ; ++pos )
 	{
 		if( true == static_cast< bool >( std::isprint( value[ pos ] ) ) )
@@ -30,6 +34,10 @@ uint16_t daniel::dns::RR::RData_CAA::ToNullStr( uint8_t * pStr , uint16_t const 
 		{
 			ss << "." ;
 		}
+	}
+	if( 0 < valuelen )
+	{
+		ss << "\"" ;
 	}
 
 	std::string s = ss.str() ;
