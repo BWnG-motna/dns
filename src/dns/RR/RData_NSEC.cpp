@@ -28,14 +28,10 @@ uint16_t daniel::dns::RR::RData_NSEC::ToNullStr( uint8_t * pStr , uint16_t const
 	uint16_t typeCount = GetTypeCount() ;
 	uint16_t const * types = GetTypes() ;
 
-	ss << " ( " ;
+	ss << " (" ;
 
 	for( uint16_t pos = 0 ; pos < typeCount ; ++pos )
 	{
-		if( 0 == pos )
-		{
-			ss << " " ;
-		}
 		ss << " " << ToString( enumFromUint16< dns::QType >( types[ pos ] ) ) ;
 	}
 
