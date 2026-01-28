@@ -1,6 +1,8 @@
 #include "dns/Resource.h"
 #include "view/HexView.h"
 
+#include <cstring>
+
 
 #include "dns/RR/RData_A.h"
 #include "dns/RR/RData_NS.h"
@@ -353,8 +355,17 @@ uint16_t daniel::dns::Resource::GetRData( uint8_t * pBuf , uint16_t const & leng
 
 	if( nullptr == pRDat )
 	{
-		pBuf[ 0 ] = '\0' ;
-		return 0 ;
+		char     const * pmsg = "(unsupported)" ;
+		uint16_t const   len  = strlen( pmsg ) ;
+		for( uint16_t pos = 0 ; pos < length && pos < len ; ++pos )
+		{
+			pBuf[ pos ] = pmsg[ pos ] ;
+		}
+
+		uint16_t less = len < length ? len : length ;
+		pBuf[ less ] = '\0' ;
+
+		return less ;
 	}
 
 	return pRDat->ToNullStr( pBuf , length ) ;
