@@ -166,18 +166,18 @@ bool daniel::dns::EDNS0::MakeOptions( uint8_t const * pRef , uint16_t const & le
 		return false ;
 	}
 
-	uint16_t rPos = 0 ;
-	while( rPos + 4 <= length )
+	uint16_t pos = 0 ;
+	while( pos + 4 <= length )
 	{
 		uint16_t code 
-			= ( ( pRef[	rPos + 0 ] << 8 ) & 0xFF00 )
-			| ( ( pRef[	rPos + 1 ] << 0 ) & 0x00FF ) ;
+			= ( ( pRef[	pos + 0 ] << 8 ) & 0xFF00 )
+			| ( ( pRef[	pos + 1 ] << 0 ) & 0x00FF ) ;
 
 		uint16_t len
-			= ( ( pRef[	rPos + 2 ] << 8 ) & 0xFF00 )
-			| ( ( pRef[	rPos + 3 ] << 0 ) & 0x00FF ) ;
+			= ( ( pRef[	pos + 2 ] << 8 ) & 0xFF00 )
+			| ( ( pRef[	pos + 3 ] << 0 ) & 0x00FF ) ;
 
-		if( length < ( rPos + 4 + len ) )
+		if( length < ( pos + 4 + len ) )
 		{
 			delete pOpt ;
 			pOpt = nullptr ;
@@ -185,16 +185,9 @@ bool daniel::dns::EDNS0::MakeOptions( uint8_t const * pRef , uint16_t const & le
 			return false ;
 		}
 
-		uint8_t * pDat = new ( std::nothrow ) uint8_t[ len ] ;
-		for( uint16_t pos = 0 ; pos < len ; ++pos )
-		{
-			pDat[ pos ] = pRef[ 4 +	pos ] ;
-		}
-
-		EDNS0_OPTION * pOption = new ( std::nothrow ) EDNS0_OPTION( code , len , pDat ) ;
+		EDNS0_OPTION * pOption = new ( std::nothrow ) EDNS0_OPTION( code , len , & ( pRef[ 4 + pos ] ) ) ;
 		if( nullptr == pOption )
 		{
-			delete [] pDat ;
 			delete pOpt ;
 
 			pOpt = nullptr ;
@@ -204,7 +197,7 @@ bool daniel::dns::EDNS0::MakeOptions( uint8_t const * pRef , uint16_t const & le
 
 		pOpt->Insert( pOption ) ;
 
-		rPos += 2 + 2 + len ;
+		pos += 2 + 2 + len ;
 	}
 
 	return true ;

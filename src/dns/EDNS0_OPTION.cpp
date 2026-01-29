@@ -1,6 +1,9 @@
 #include "dns/EDNS0_OPTION.h"
 
 
+#include <memory>
+
+
 daniel::dns::EDNS0_OPTION::EDNS0_OPTION()
 	: code( 0 ) , len( 0 ) , pDat( nullptr )
 {
@@ -9,9 +12,25 @@ daniel::dns::EDNS0_OPTION::EDNS0_OPTION()
 
 
 daniel::dns::EDNS0_OPTION::EDNS0_OPTION( uint16_t const & _code , uint16_t const & _len , uint8_t const * _pDat )
-	: code ( _code ) , len ( _len ) , pDat( _pDat )
+	: code( _code ) , len( _len )
 {
+	if( nullptr == _pDat || 1 > _len )
+	{
+		pDat = nullptr ;
+		return ;
+	}
 
+	pDat = new ( std::nothrow ) uint8_t[ len ] ;
+	if( nullptr == pDat )
+	{
+		len = 0 ;
+		return ;
+	}
+
+	for( uint16_t pos = 0 ; pos < len ; ++pos )
+	{
+		pDat[ pos ] = _pDat[ pos ] ;
+	}
 }
 
 
@@ -31,21 +50,44 @@ void daniel::dns::EDNS0_OPTION::SetCode( uint16_t const & _code )
 }
 
 
-void daniel::dns::EDNS0_OPTION::SetLen ( uint16_t const & _len ) 
+void daniel::dns::EDNS0_OPTION::SetData( uint8_t const * _pDat , uint16_t const & _len ) 
 {
-	len = _len ;
-}
+	bool isEqual = true ;
 
+	if( len != _len )
+	{
+		isEqual = false ;
+	}
 
-void daniel::dns::EDNS0_OPTION::SetData( uint8_t const * _pDat ) 
-{
-	if( pDat == _pDat )
+	if( true == isEqual )
+	{
+		for( uint16_t pos = 0 ; pos < len ; ++pos )
+		{
+			if( pDat[ pos ] != _pDat[ pos ] )
+			{
+				isEqual = false ;
+				break ;
+			}
+		}
+	}
+
+	if( true == isEqual )
 	{
 		return ;
 	}
 
-	delete [] pDat ;
-	pDat = _pDat ;
+	if( len < _len )
+	{
+		delete [] pDat ;
+		pDat = new ( std::nothrow ) uint8_t[ _len ] ;
+	}
+
+	len = _len ;
+
+	for( uint16_t pos = 0 ; pos < len ; ++pos )
+	{
+		pDat[ pos ] = _pDat[ pos ] ;
+	}
 }
 
 

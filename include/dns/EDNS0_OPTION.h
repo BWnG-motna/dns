@@ -18,12 +18,11 @@ class EDNS0_OPTION
 private :
 	uint16_t  code ;
 	uint16_t  len  ;
-	uint8_t const * pDat ;
+	uint8_t * pDat ;
 
 public :
 	void SetCode( uint16_t const & code ) ;
-	void SetLen ( uint16_t const & len  ) ;
-	void SetData( uint8_t  const * pDat ) ;
+	void SetData( uint8_t  const * pDat , uint16_t const & len ) ;
 
 public :
 	uint16_t  GetCode() const ;
