@@ -13,6 +13,9 @@
 #include <random>
 
 
+#include "ds/LinkedList.h"
+
+
 namespace daniel::dns
 {
 
@@ -198,7 +201,7 @@ DNS_QUERY :
 		
 		if( daniel::dns::QType::OPT == r.GetType() )
 		{
-			adLen = e.Load( & ( rbuf[ sPos ] ) , tLen - len ) ;
+			adLen = e.Load( & ( rbuf[ sPos ] ) , tLen - len , rbuf ) ;
 			ViewResource( e ) ;
 		}
 		else

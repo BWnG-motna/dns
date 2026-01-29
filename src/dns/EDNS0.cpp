@@ -1,6 +1,9 @@
 #include "dns/EDNS0.h"
 
 
+#include <memory>
+
+
 daniel::dns::EDNS0::EDNS0()
 	: payloadSize( 1500 ) , version( 0 ) , extRCode( 0 ) , isDnsSecOk( false ) , pOpt( nullptr )
 {
@@ -66,40 +69,145 @@ bool daniel::dns::EDNS0::IsDnsSecOk() const
 }
 
 
-uint16_t daniel::dns::EDNS0::Load( uint8_t const * pBuf , uint16_t const & length )
+uint16_t daniel::dns::EDNS0::Load( uint8_t const * pBuf , uint16_t const & length , uint8_t const * pRef )
 {
-	if( 1 > length || nullptr == pBuf )
+	if( 1 > length || nullptr == pBuf || nullptr == pRef  )
 	{
 		return 0 ;
 	}
 
-	if( 11 > length )
+	pDataGram = pRef ;
+
+	uint16_t bPos = 0 ;
+	uint16_t nPos = 0 ;
+
+	bool isCompressed = false ;
+
+	while( '\0' != pBuf[ bPos ] && bPos < length )
+	{
+		if( 0xC0 <= ( pBuf[ bPos ] & 0xC0 ) )
+		{
+			if( nameMaxLen < ( nPos + 2 ) )
+			{
+				return 0 ;
+			}
+
+			name[ nPos++ ] = pBuf[ bPos++ ] ;
+			name[ nPos++ ] = pBuf[ bPos++ ] ;
+
+			isCompressed = true ;
+			break ;
+		}
+
+		if( nameMaxLen <= nPos )
+		{
+			return 0 ;
+		}
+
+		name[ nPos++ ] = pBuf[ bPos++ ] ;
+	}
+
+	if( bPos >= length )
 	{
 		return 0 ;
 	}
+
+	if( false == isCompressed && '\0' == pBuf[ bPos ] )
+	{
+		++bPos ;
+	}
+
+	name[ nPos ] = '\0' ;
+	nameLen = nPos ;
 
 	uint16_t type = 0 ;
-	type = ( ( pBuf[ 1 ] << 8 ) & 0xFF00 )
-	     | ( ( pBuf[ 2 ] << 0 ) & 0x00FF ) ;
+	type = ( ( pBuf[ bPos + 0 ] << 8 ) & 0xFF00 )
+	     | ( ( pBuf[ bPos + 1 ] << 0 ) & 0x00FF ) ;
 
 	if( 41 != type )
 	{
 		return 0 ;
 	} 
 
-	payloadSize = ( ( pBuf[ 3 ] << 8 ) & 0xFF00 )
-	            | ( ( pBuf[ 4 ] << 0 ) & 0x00FF ) ;
+	payloadSize = ( ( pBuf[ bPos + 2 ] << 8 ) & 0xFF00 )
+	            | ( ( pBuf[ bPos + 3 ] << 0 ) & 0x00FF ) ;
 
-	extRCode   = pBuf[ 5 ] ;
-	version    = pBuf[ 6 ] ;
-	isDnsSecOk = ( 0 < ( pBuf[ 7 ] ^ 0x80 ) ? true : false ) ;
+	extRCode   = pBuf[ bPos + 4 ] ;
+	version    = pBuf[ bPos + 5 ] ;
+	isDnsSecOk = ( 0 < ( pBuf[ bPos + 6 ] & 0x80 ) ? true : false ) ;
 
 	uint16_t rdlength = 0x00 ;
 
-	rdlength = ( ( pBuf[ 3 ] << 8 ) & 0xFF00 )
-	         | ( ( pBuf[ 4 ] << 0 ) & 0x00FF ) ;
+	rdlength = ( ( pBuf[ bPos + 8 ] << 8 ) & 0xFF00 )
+	         | ( ( pBuf[ bPos + 9 ] << 0 ) & 0x00FF ) ;
 
-	return 11 + 2 + rdlength ;
+	MakeOptions( & ( pBuf[ bPos + 10 ] ) , rdlength ) ;
+
+	return bPos + 10 + rdlength ;
+}
+
+
+bool daniel::dns::EDNS0::MakeOptions( uint8_t const * pRef , uint16_t const & length )
+{
+	if( nullptr == pRef || 1 > length )
+	{
+		return false ;
+	}
+
+	if( nullptr != pOpt )
+	{
+		delete pOpt ;
+		pOpt = nullptr ;
+	}
+
+	pOpt = new ( std::nothrow ) ds::LinkedList< EDNS0_OPTION >() ;
+	if( nullptr == pOpt )
+	{
+		return false ;
+	}
+
+	uint16_t rPos = 0 ;
+	while( rPos + 4 <= length )
+	{
+		uint16_t code 
+			= ( ( pRef[	rPos + 0 ] << 8 ) & 0xFF00 )
+			| ( ( pRef[	rPos + 1 ] << 0 ) & 0x00FF ) ;
+
+		uint16_t len
+			= ( ( pRef[	rPos + 2 ] << 8 ) & 0xFF00 )
+			| ( ( pRef[	rPos + 3 ] << 0 ) & 0x00FF ) ;
+
+		if( length < ( rPos + 4 + len ) )
+		{
+			delete pOpt ;
+			pOpt = nullptr ;
+
+			return false ;
+		}
+
+		uint8_t * pDat = new ( std::nothrow ) uint8_t[ len ] ;
+		for( uint16_t pos = 0 ; pos < len ; ++pos )
+		{
+			pDat[ pos ] = pRef[ 4 +	pos ] ;
+		}
+
+		EDNS0_OPTION * pOption = new ( std::nothrow ) EDNS0_OPTION( code , len , pDat ) ;
+		if( nullptr == pOption )
+		{
+			delete [] pDat ;
+			delete pOpt ;
+
+			pOpt = nullptr ;
+
+			return false ;
+		}
+
+		pOpt->Insert( pOption ) ;
+
+		rPos += 2 + 2 + len ;
+	}
+
+	return true ;
 }
 
 

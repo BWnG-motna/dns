@@ -6,6 +6,8 @@
 #include "QClass.h"
 #include "EDNS0_OPTION.h"
 
+#include "ds/LinkedList.h"
+
 
 namespace daniel
 {
@@ -17,12 +19,25 @@ class EDNS0
 {
 
 private :
+	static constexpr uint16_t const nameMaxLen = 255 ;
+
+private :
+	uint8_t const * pDataGram ;
+
+private :
+	uint8_t  name[ nameMaxLen + 1 ] ;
+	uint16_t nameLen ; 
+
+private :
 	uint16_t payloadSize ;
 	uint8_t  version     ;
 	uint8_t  extRCode    ;
 	bool     isDnsSecOk  ;
 
-	EDNS0_OPTION * pOpt ;
+	ds::LinkedList< EDNS0_OPTION > * pOpt ;
+
+private :
+	bool MakeOptions( uint8_t const * pRef , uint16_t const & length ) ;
 
 public :
 	void SetPayloadSize( uint16_t const & size ) ;
@@ -40,7 +55,7 @@ public :
 	QType GetType() const ;
 
 public :
-	uint16_t Load( uint8_t const * pBuf , uint16_t const & length ) ;
+	uint16_t Load( uint8_t const * pBuf , uint16_t const & length , uint8_t const * pRef ) ;
 	uint16_t Save( uint8_t       * pBuf , uint16_t const & length ) ;
 
 public :
