@@ -9,6 +9,7 @@ include src/sources.mk
 include src/baseEncoding/sources.mk
 
 include src/dns/sources.mk
+include src/dns/EDNS0/sources.mk
 include src/dns/RR/sources.mk
 include src/dns/RR/SEC/sources.mk
 include src/dns/RR/SVC/sources.mk

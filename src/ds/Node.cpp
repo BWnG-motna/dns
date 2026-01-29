@@ -1,6 +1,6 @@
 #include "ds/Node.h"
 
-#include "dns/EDNS0_OPTION.h"
+#include "dns/EDNS0/EDNS0_OPTION.h"
 
 
 template < typename T >

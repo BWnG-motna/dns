@@ -1,17 +1,17 @@
-#include "dns/EDNS0_OPTION.h"
+#include "dns/EDNS0/EDNS0_OPTION.h"
 
 
 #include <memory>
 
 
 daniel::dns::EDNS0_OPTION::EDNS0_OPTION()
-	: code( 0 ) , len( 0 ) , pDat( nullptr )
+	: code( EDNS0_OptCode::RESERVED ) , len( 0 ) , pDat( nullptr )
 {
 	
 }
 
 
-daniel::dns::EDNS0_OPTION::EDNS0_OPTION( uint16_t const & _code , uint16_t const & _len , uint8_t const * _pDat )
+daniel::dns::EDNS0_OPTION::EDNS0_OPTION( EDNS0_OptCode const & _code , uint16_t const & _len , uint8_t const * _pDat )
 	: code( _code ) , len( _len )
 {
 	if( nullptr == _pDat || 1 > _len )
@@ -44,9 +44,20 @@ daniel::dns::EDNS0_OPTION::~EDNS0_OPTION()
 }
 
 
-void daniel::dns::EDNS0_OPTION::SetCode( uint16_t const & _code )
+void daniel::dns::EDNS0_OPTION::SetCode( EDNS0_OptCode const & _code )
 {
 	code = _code ;
+}
+
+
+void daniel::dns::EDNS0_OPTION::SetCode( uint16_t const & _code )
+{
+	if( false == IsValidEDNS0_OptCode( _code ) )
+	{
+		return ;
+	} 
+
+	code = enumFromUint16< EDNS0_OptCode >( _code ) ;
 }
 
 
@@ -91,7 +102,7 @@ void daniel::dns::EDNS0_OPTION::SetData( uint8_t const * _pDat , uint16_t const 
 }
 
 
-uint16_t daniel::dns::EDNS0_OPTION::GetCode() const 
+daniel::dns::EDNS0_OptCode daniel::dns::EDNS0_OPTION::GetCode() const 
 {
 	return code ;
 }

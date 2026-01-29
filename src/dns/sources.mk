@@ -3,5 +3,4 @@ OBJS += src/dns/Header.o   \
 		src/dns/Resource.o \
 		src/dns/QType.o    \
 		src/dns/QClass.o   \
-		src/dns/EDNS0.o    \
-		src/dns/EDNS0_OPTION.o
+		src/dns/EDNS0.o

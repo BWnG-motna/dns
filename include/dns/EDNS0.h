@@ -4,7 +4,7 @@
 #include "Common.h"
 #include "QType.h"
 #include "QClass.h"
-#include "EDNS0_OPTION.h"
+#include "EDNS0/EDNS0_OPTION.h"
 
 #include "ds/LinkedList.h"
 

@@ -185,7 +185,15 @@ bool daniel::dns::EDNS0::MakeOptions( uint8_t const * pRef , uint16_t const & le
 			return false ;
 		}
 
-		EDNS0_OPTION * pOption = new ( std::nothrow ) EDNS0_OPTION( code , len , & ( pRef[ 4 + pos ] ) ) ;
+		if( false == IsValidEDNS0_OptCode( code ) )
+		{
+			pos += 2 + 2 + len ;
+			continue ;
+		}
+
+		EDNS0_OptCode optCode = enumFromUint16< EDNS0_OptCode >( code ) ;
+
+		EDNS0_OPTION * pOption = new ( std::nothrow ) EDNS0_OPTION( optCode , len , & ( pRef[ 4 + pos ] ) ) ;
 		if( nullptr == pOption )
 		{
 			delete pOpt ;

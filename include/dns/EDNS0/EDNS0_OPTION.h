@@ -2,8 +2,10 @@
 
 
 #include "Common.h"
-#include "QType.h"
-#include "QClass.h"
+#include "dns/QType.h"
+#include "dns/QClass.h"
+
+#include "EDNS0_OptCode.h"
 
 
 namespace daniel
@@ -16,17 +18,19 @@ class EDNS0_OPTION
 {
 
 private :
-	uint16_t  code ;
-	uint16_t  len  ;
-	uint8_t * pDat ;
+	EDNS0_OptCode  code ;
+	uint16_t       len  ;
+	uint8_t  *     pDat ;
 
 public :
-	void SetCode( uint16_t const & code ) ;
+	void SetCode( EDNS0_OptCode const & code ) ;
+	void SetCode(      uint16_t const & code ) ;
+	
 	void SetData( uint8_t  const * pDat , uint16_t const & len ) ;
 
 public :
-	uint16_t  GetCode() const ;
-	uint16_t  GetLen()  const ;
+	EDNS0_OptCode GetCode() const ;
+	uint16_t GetLen()  const ;
 
 	uint8_t const * GetData() const ;
 
@@ -35,7 +39,7 @@ public :
      EDNS0_OPTION & operator=( EDNS0_OPTION const & opt ) = delete ;
 
 public :
-	 EDNS0_OPTION( uint16_t const & code , uint16_t const & len , uint8_t const * pDat ) ;
+	 EDNS0_OPTION( EDNS0_OptCode const & code , uint16_t const & len , uint8_t const * pDat ) ;
 	 EDNS0_OPTION() ;
 	~EDNS0_OPTION() ;
 	
