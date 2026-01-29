@@ -153,7 +153,7 @@ uint16_t daniel::dns::Resource::Save( uint8_t * pBuf , uint16_t const & length )
 #endif
 
 
-void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & length )
+void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & length ) noexcept
 {
 	if( nullptr == pBuf || 1 > length ) 
 	{
@@ -164,43 +164,43 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 	switch( qtype )
 	{
 		case QType::A :
-			pRDat = new RR::RData_A() ;
+			pRDat = new ( std::nothrow ) RR::RData_A() ;
 			break ;
 
 		case QType::NS :
-			pRDat = new RR::RData_NS( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_NS( pDataGram ) ;
 			break ;
 
 		case QType::MD :
-			pRDat = new RR::RData_MD( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_MD( pDataGram ) ;
 			break ;
 
 		case QType::MF :
-			pRDat = new RR::RData_MF( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_MF( pDataGram ) ;
 			break ;
 
 		case QType::CNAME :
-			pRDat = new RR::RData_CNAME( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_CNAME( pDataGram ) ;
 			break ;
 
 		case QType::SOA :
-			pRDat = new RR::RData_SOA( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_SOA( pDataGram ) ;
 			break ;
 
 		case QType::MB :
-			pRDat = new RR::RData_MB( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_MB( pDataGram ) ;
 			break ;
 
 		case QType::MG :
-			pRDat = new RR::RData_MG( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_MG( pDataGram ) ;
 			break ;
 
 		case QType::MR :
-			pRDat = new RR::RData_MR( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_MR( pDataGram ) ;
 			break ;
 
 		case QType::NULL :
-			pRDat = new RR::RData_NULL() ;
+			pRDat = new ( std::nothrow ) RR::RData_NULL() ;
 			break ;
 
 		case QType::WKS :
@@ -208,35 +208,35 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 			break ;
 
 		case QType::PTR :
-			pRDat = new RR::RData_PTR( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_PTR( pDataGram ) ;
 			break ;
 
 		case QType::HINFO :
-			pRDat = new RR::RData_HINFO( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_HINFO( pDataGram ) ;
 			break ;
 
 		case QType::MINFO :
-			pRDat = new RR::RData_MINFO( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_MINFO( pDataGram ) ;
 			break ;
 
 		case QType::MX :
-			pRDat = new RR::RData_MX( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_MX( pDataGram ) ;
 			break ;
 
 		case QType::TXT :
-			pRDat = new RR::RData_TXT() ;
+			pRDat = new ( std::nothrow ) RR::RData_TXT() ;
 			break ;
 
 		case QType::RP :
-			pRDat = new RR::RData_RP( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_RP( pDataGram ) ;
 			break ;
 
 		case QType::AAAA :
-			pRDat = new RR::RData_AAAA() ;
+			pRDat = new ( std::nothrow ) RR::RData_AAAA() ;
 			break ;
 
 		case QType::SRV :
-			pRDat = new RR::RData_SRV( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_SRV( pDataGram ) ;
 			break ;
 
 		case QType::A6 :
@@ -244,39 +244,39 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 			break ;
 
 		case QType::DS :
-			pRDat = new RR::RData_DS() ;
+			pRDat = new ( std::nothrow ) RR::RData_DS() ;
 			break ;
 
 		case QType::RRSIG :
-			pRDat = new RR::RData_RRSIG( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_RRSIG( pDataGram ) ;
 			break ;
 
 		case QType::NSEC :
-			pRDat = new RR::RData_NSEC() ;
+			pRDat = new ( std::nothrow ) RR::RData_NSEC() ;
 			break ;
 
 		case QType::DNSKEY :
-			pRDat = new RR::RData_DNSKEY() ;
+			pRDat = new ( std::nothrow ) RR::RData_DNSKEY() ;
 			break ;
 
 		case QType::NSEC3 :
-			pRDat = new RR::RData_NSEC3() ;
+			pRDat = new ( std::nothrow ) RR::RData_NSEC3() ;
 			break ;
 
 		case QType::TLSA :
-			pRDat = new RR::RData_TLSA() ;
+			pRDat = new ( std::nothrow ) RR::RData_TLSA() ;
 			break ;
 
 		case QType::SVCB :
-			pRDat = new RR::RData_SVCB( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_SVCB( pDataGram ) ;
 			break ;
 
 		case QType::HTTPS :
-			pRDat = new RR::RData_HTTPS( pDataGram ) ;
+			pRDat = new ( std::nothrow ) RR::RData_HTTPS( pDataGram ) ;
 			break ;
 
 		case QType::CAA :
-			pRDat = new RR::RData_CAA() ;
+			pRDat = new ( std::nothrow ) RR::RData_CAA() ;
 			break ;
 
 		default :

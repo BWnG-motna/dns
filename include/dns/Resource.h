@@ -41,7 +41,7 @@ private :
 		                bool    const & fqdn = true    ) const ;
 
 private :
-	void MakeRData( uint8_t const * pBuf , uint32_t const & length ) ;
+	void MakeRData( uint8_t const * pBuf , uint32_t const & length ) noexcept ;
 
 public :
 	uint16_t Load( uint8_t const * pBuf , uint16_t const & length , uint8_t const * pRef ) ;
