@@ -28,7 +28,7 @@ constexpr uint16_t const   svrPort = 53 ;
 
 void Run( char const * qname , char const * qtype , char const * svrIp , uint16_t const & port ) ;
 
-uint16_t MakeQuery ( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * qname , char const * qytpe ) ;
+uint16_t MakeQuery( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * qname , char const * qytpe , bool const & isTcp ) ;
 uint16_t MakeId() ;
 
 void ViewHeader  ( daniel::dns::Header   const & h ) ;
@@ -87,26 +87,32 @@ int main( int argc , char * argv[] )
 void Run( char const * qname , char const * sqtype , char const * svrIp , uint16_t const & port )
 {
 	uint8_t  sbuf[ 1500 + 1 ] ;
-	uint16_t slen = MakeQuery( sbuf , 1500 , qname , sqtype ) ;
-
 	uint8_t  rbuf[ 4096 + 1 ] ;
 
 	bool isTcp = false ;
 	int  tLen  = 0 ;
+
+	uint16_t slen = 0 ;
 
 
 DNS_QUERY :
 
 	if( true == isTcp )
 	{
+		slen = MakeQuery( sbuf , 1500 , qname , sqtype , true  ) ;
 		tLen = daniel::net::RequestOnTcp( rbuf , 4096 , sbuf , slen , svrIp , port ) ;
 	}
 	else
 	{
-		tLen = daniel::net::RequestOnUdp( rbuf , 1500 , sbuf , slen , "8.8.8.8" , port ) ;	
+		slen = MakeQuery( sbuf , 1500 , qname , sqtype , false ) ;
+		tLen = daniel::net::RequestOnUdp( rbuf , 1500 , sbuf , slen , svrIp , port ) ;	
 	}
 
-	/**/ if( 12 > tLen )
+	/**/ if( 0 > tLen )
+	{
+		std::cerr << "reponse error - no reponse" << std::endl ;
+	}
+	else if( 12 > tLen )
 	{
 		std::cerr << "response error - length of received datagram is less than 12" << std::endl ;
 		return ;
@@ -222,7 +228,7 @@ DNS_QUERY :
 }
 
 
-uint16_t MakeQuery( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * qname , char const * sqtype )
+uint16_t MakeQuery( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * qname , char const * sqtype , bool const & isTcp )
 {
 	daniel::dns::QType qtype = ( nullptr == sqtype ) ? daniel::dns::QType::A : daniel::dns::StrToQType( sqtype )  ;
 
@@ -230,19 +236,21 @@ uint16_t MakeQuery( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * q
 	h.SetId( MakeId() ) ;
 	h.SetQR( daniel::dns::QR::Query ) ;
 	h.SetQdCount( 1 ) ;
-	h.SetArCount( 1 ) ;
-	h.SetRD( true ) ;
+	h.SetArCount( 0 ) ;
+	h.SetRD( false ) ;
 
 	daniel::dns::Question q ;
 	q.SetName ( qname , strlen( qname ) ) ;
 	q.SetType ( qtype ) ;
 	q.SetClass( daniel::dns::QClass::IN ) ;
 
+#if 0
 	daniel::dns::EDNS0 e ;
 	e.SetPayloadSize( 1232 ) ;
 	e.SetVersion ( 0 ) ;
 	e.SetExtRCode( 0 ) ;
 	e.SetDNSSecOk( true ) ;
+#endif
 
 #if ( EDNS0_PADDING_TEST )
 
@@ -285,11 +293,21 @@ uint16_t MakeQuery( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * q
 	uint16_t qslen = 0 ;
 	uint16_t eslen = 0 ;
 
-	hslen = h.Save( & ( pBuf[ 0             ] ) , bufMaxLen ) ;
-	qslen = q.Save( & ( pBuf[ hslen         ] ) , bufMaxLen - hslen ) ;
-	eslen = e.Save( & ( pBuf[ hslen + qslen ] ) , bufMaxLen - hslen - qslen ) ;
+	uint16_t const beginPos = ( true == isTcp ) ? 2 : 0 ; 
 
-	return hslen + qslen + eslen ;
+	hslen = h.Save( & ( pBuf[ beginPos + 0             ] ) , bufMaxLen - beginPos ) ;
+	qslen = q.Save( & ( pBuf[ beginPos + hslen         ] ) , bufMaxLen - beginPos - hslen ) ;
+	//eslen = e.Save( & ( pBuf[ beginPos + hslen + qslen ] ) , bufMaxLen - beginPos - hslen - qslen ) ;
+
+	uint16_t totalLen = hslen + qslen + eslen ;
+
+	if( true == isTcp )
+	{
+		pBuf[ 0 ] = ( totalLen >> 8 ) & 0x00FF ;
+		pBuf[ 1 ] = ( totalLen >> 0 ) & 0x00FF ;
+	}
+
+	return ( true == isTcp ) ? ( totalLen + 2 ) : totalLen ;
 }
 
 
