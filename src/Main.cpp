@@ -24,7 +24,8 @@ constexpr char     const * qtype   = "ns" ;
 constexpr char     const * svrIp   = "8.8.8.8" ;
 constexpr uint16_t const   svrPort = 53 ;
 
-} // namespace daniel::server 
+} // namespace daniel::dns // server information
+
 
 void Run( char const * qname , char const * qtype , char const * svrIp , uint16_t const & port ) ;
 
