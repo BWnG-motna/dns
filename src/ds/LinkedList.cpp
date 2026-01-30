@@ -2,15 +2,17 @@
 
 #include "dns/EDNS0/EDNS0_OPTION.h"
 
-
 #include <memory>
 #include <iostream>
 #include <iomanip>
 
 
+#define DEBUG_OR_TEST ( 0 )
+
+
 template < typename T >
 daniel::ds::LinkedList< T >::LinkedList()
-	: pHead( nullptr ) , pTail( nullptr )
+	: pHead( nullptr ) , pTail( nullptr ) , nodeCount( 0 )
 {
 
 }
@@ -43,6 +45,8 @@ daniel::ds::LinkedList< T >::~LinkedList()
 	}
 
 	pTail = nullptr ;
+
+	nodeCount = 0 ;
 }
 
 
@@ -69,9 +73,64 @@ bool daniel::ds::LinkedList< T >::Insert( T const * pDat ) noexcept
 		pTail = pNode ;
 	}
 
+#if ( DEBUG_OR_TEST )
+
 	Dbg() ;
 
+#endif
+
+	++nodeCount ;
+
 	return true ;
+}
+
+
+template < typename T >
+uint32_t daniel::ds::LinkedList< T >::GetCount() const
+{
+	return nodeCount ;
+}
+
+
+template < typename T >
+typename daniel::ds::LinkedList< T >::iterator daniel::ds::LinkedList< T >::begin()
+{
+	return iterator( pHead ) ;
+}
+
+
+template < typename T >
+typename daniel::ds::LinkedList< T >::iterator daniel::ds::LinkedList< T >::end()
+{
+	return iterator( nullptr ) ;
+}
+
+
+template < typename T >
+typename daniel::ds::LinkedList< T >::const_iterator daniel::ds::LinkedList< T >::begin() const
+{
+	return const_iterator( const_cast< Node< T > * >( pHead ) ) ;
+}
+
+
+template < typename T >
+typename daniel::ds::LinkedList< T >::const_iterator daniel::ds::LinkedList< T >::end() const
+{
+	return const_iterator( nullptr ) ;
+}
+
+
+template < typename T >
+typename daniel::ds::LinkedList< T >::const_iterator daniel::ds::LinkedList< T >::cbegin() const
+{
+	return const_iterator( const_cast< Node< T > * >( pHead ) ) ;
+}
+
+
+template < typename T >
+typename daniel::ds::LinkedList< T >::const_iterator daniel::ds::LinkedList< T >::cend() const
+{
+	return const_iterator( nullptr ) ;
 }
 
 

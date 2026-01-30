@@ -29,7 +29,7 @@ bool daniel::dns::IsValidEDNS0_OptCode( uint16_t const & codeNo )
 
 		case 20292 :
 		case 26946 :
-			return true ; 
+			return false ; 
 
 		default :
 			return false ;

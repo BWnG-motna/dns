@@ -39,6 +39,9 @@ private :
 private :
 	bool MakeOptions( uint8_t const * pRef , uint16_t const & length ) ;
 
+private :
+	bool InsertOption( EDNS0_OptCode const & optCode , uint8_t const * pDat , uint16_t const & len ) ;
+
 public :
 	void SetPayloadSize( uint16_t const & size ) ;
 	void SetVersion ( uint8_t const & ver   ) ;
@@ -50,6 +53,11 @@ public :
 	uint8_t  GetVersion()     const ;
 	uint8_t  GetExtRCode()    const ;
 	bool     IsDnsSecOk()     const ;
+
+public :
+	bool InsertOptPadding( uint8_t const * pDat , uint16_t const & len ) ;
+	bool InsertOptDAU() ;
+	bool InsertOptCookie( uint8_t const * pDat , uint16_t const & len ) ;
 
 public :
 	QType GetType() const ;

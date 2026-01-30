@@ -1,4 +1,5 @@
 #include "dns/EDNS0.h"
+#include "dns/RR/SEC/SECAlgo.h"
 
 
 #include <memory>
@@ -212,10 +213,84 @@ bool daniel::dns::EDNS0::MakeOptions( uint8_t const * pRef , uint16_t const & le
 }
 
 
+bool daniel::dns::EDNS0::InsertOption( EDNS0_OptCode const & optCode , uint8_t const * pDat , uint16_t const & len )
+{
+	if( 0 != len && nullptr == pDat ) 
+	{
+		return false ;
+	}
+
+	if( nullptr == pOpt )
+	{
+		pOpt = new ( std::nothrow ) ds::LinkedList< EDNS0_OPTION >() ;
+		if( nullptr == pOpt )
+		{
+			return false ;
+		}
+	}
+
+	EDNS0_OPTION * pOption = new ( std::nothrow ) EDNS0_OPTION( optCode , len , pDat ) ;
+	if( nullptr == pOption )
+	{
+		return false ;
+	}
+
+	pOpt->Insert( pOption ) ;
+
+	return true ;
+}
+
+
+bool daniel::dns::EDNS0::InsertOptPadding( uint8_t const * pDat , uint16_t const & len )
+{
+	return InsertOption( EDNS0_OptCode::PADDING , pDat , len ) ;
+}
+
+
+bool daniel::dns::EDNS0::InsertOptDAU()
+{
+	uint8_t  algos[ 256 ] ;
+	uint16_t len = 0 ;
+
+	for( uint16_t pos = 0 ; pos < 256 ; ++pos )
+	{
+		if( true == RR::IsValidAlgo( pos ) )
+		{
+			algos[ len++ ] = pos ;
+		}
+	}
+
+	if( 0 == len )
+	{
+		return false ;
+	}
+
+	return InsertOption( EDNS0_OptCode::DAU , algos , len ) ;
+}
+
+
+bool daniel::dns::EDNS0::InsertOptCookie( uint8_t const * pDat , uint16_t const & len )
+{
+	if( nullptr == pDat || 8 > len )
+	{
+		return false ;
+	}
+
+	uint16_t clen = len ;
+
+	if( clen > 32 )
+	{
+		clen = 32 ;
+	}
+
+	return InsertOption( EDNS0_OptCode::COOKIE , pDat , clen ) ;
+}
+
+
 uint16_t daniel::dns::EDNS0::Save( uint8_t * pBuf , uint16_t const & length )
 {
 	// the case what pOpt is not null is not implemented, not handled.
-	if( 1 > length || nullptr == pBuf || nullptr != pOpt )
+	if( 1 > length || nullptr == pBuf )
 	{
 		return 0 ;
 	}
@@ -248,9 +323,50 @@ uint16_t daniel::dns::EDNS0::Save( uint8_t * pBuf , uint16_t const & length )
 	pBuf[  9 ] = 0x00 ;
 	pBuf[ 10 ] = 0x00 ;
 
-	// rdata is not considered because rdlength is 0
+	if( nullptr == pOpt || ( nullptr != pOpt && 0 == pOpt->GetCount() ) )
+	{
+		return 11 ;
+	}
 
-	return 11 ;
+	uint16_t rdlength = 0 ;
+
+	ds::LinkedList< EDNS0_OPTION >::const_iterator posIter = pOpt->begin() ;
+	ds::LinkedList< EDNS0_OPTION >::const_iterator endIter = pOpt->end() ;
+
+	uint16_t pos = 11 ;
+	while( posIter != endIter )
+	{
+		EDNS0_OPTION const & p = *posIter ; 
+		
+		uint16_t const   code = static_cast< uint16_t >( p.GetCode() ) ;
+		uint16_t const    len = p.GetLen() ;
+		uint8_t  const * pDat = p.GetData() ; 
+
+		if( ( pos + 4 + len ) > length )
+		{
+			break ;
+		}
+
+		pBuf[ pos + 0 ] = ( code >> 8 ) & 0x00FF ;
+		pBuf[ pos + 1 ] = ( code >> 0 ) & 0x00FF ;
+		pBuf[ pos + 2 ] = (  len >> 8 ) & 0x00FF ;
+		pBuf[ pos + 3 ] = (  len >> 0 ) & 0x00FF ;
+
+		for( uint16_t optPos = 0 ; optPos < len ; ++optPos )
+		{
+			pBuf[ pos + 4 + optPos ] = pDat[ optPos ] ;
+		} 
+
+		pos      += 4 + len ;
+		rdlength += 4 + len ;
+
+		++posIter ;
+	}
+
+	pBuf[  9 ] = ( rdlength >> 8 ) & 0x00FF ;
+	pBuf[ 10 ] = ( rdlength >> 0 ) & 0x00FF; 
+
+	return pos ;
 }
 
 

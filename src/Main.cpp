@@ -37,6 +37,11 @@ void ViewResource( daniel::dns::Resource const & r ) ;
 void ViewResource( daniel::dns::EDNS0    const & e ) ;
 
 
+#define EDNS0_OPT_PADDING_TEST ( 0 )
+#define EDNS0_DAU_TEST         ( 0 )
+#define EDNS0_COOKIE           ( 0 )
+
+
 int main( int argc , char * argv[] )
 {
 	/**/ if( 1 >= argc )
@@ -238,6 +243,43 @@ uint16_t MakeQuery( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * q
 	e.SetVersion ( 0 ) ;
 	e.SetExtRCode( 0 ) ;
 	e.SetDNSSecOk( true ) ;
+
+#if ( EDNS0_PADDING_TEST )
+
+	uint8_t padding[ 5 ] = { 0x01 , 0x02 , 0x03 , 0x04 , 0x05 } ;
+
+	bool is = e.InsertOptPadding( padding , 5 ) ;
+	if( false == is )
+	{
+		std::cout << "EDNS0_OptCode insertion ( padding ) has error" << std::endl ;
+	}
+
+#endif
+
+#if ( EDNS0_DAU_TEST )
+
+	bool is = e.InsertOptDAU() ;
+	if( false == is ) 
+	{
+		std::cout << "EDNS0_OptCode insertion ( DAU ) has error" << std::endl ;
+	}
+
+#endif
+
+
+#if ( EDNS0_COOKIE )
+
+	uint8_t cookie[ 16 ] = 
+		{ 0xef , 0x13 , 0x33 , 0xa1 , 0xb5 , 0x55 , 0xf3 , 0x3f ,
+	      0xf3 , 0x3f , 0x55 , 0x5b , 0x1a , 0x33 , 0x31 , 0xfe } ;
+
+	bool is = e.InsertOptCookie( cookie , 16 ) ;
+	if( false == is )
+	{
+		std::cout << "EDNS0_OptCode insertion ( Cookie ) has error" << std::endl ;
+	}
+
+#endif
 
 	uint16_t hslen = 0 ;
 	uint16_t qslen = 0 ;
