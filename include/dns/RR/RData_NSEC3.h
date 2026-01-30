@@ -15,6 +15,7 @@ namespace dns
 namespace RR
 {
 
+
 class RData_NSEC3 : public RData
 {
 
@@ -57,6 +58,7 @@ public :
 	RData_NSEC3() ;
 
 } ; // class RData_NSEC3
+	
 	
 }   // name RR
 

@@ -13,6 +13,7 @@ namespace dns
 namespace RR
 {
 
+
 class RData_HINFO : public RData
 {
 
@@ -32,6 +33,7 @@ public :
 	RData_HINFO( uint8_t const * pRef ) ;
 
 } ; // class RData_HINFO
+
 	
 }   // name RR
 

@@ -13,6 +13,7 @@ namespace dns
 namespace RR
 {
 
+
 class RData_RP : public RData
 {
 
@@ -34,6 +35,7 @@ public :
 	RData_RP( uint8_t const * pRef ) ;
 
 } ; // class RData_RP
+	
 	
 }   // name RR
 

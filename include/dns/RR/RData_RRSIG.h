@@ -15,6 +15,7 @@ namespace dns
 namespace RR
 {
 
+
 class RData_RRSIG : public RData
 {
 
@@ -59,6 +60,7 @@ public :
 	RData_RRSIG( uint8_t const * pRef ) ;
 
 } ; // class RData_RRSIG
+	
 	
 }   // name RR
 

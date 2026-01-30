@@ -13,6 +13,7 @@ namespace dns
 namespace RR
 {
 
+
 class RData_A : public RData
 {
 
@@ -30,6 +31,7 @@ public :
 	RData_A() ;
 
 } ; // class RData_A
+	
 	
 }   // name RR
 

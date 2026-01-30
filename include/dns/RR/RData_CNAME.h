@@ -13,6 +13,7 @@ namespace dns
 namespace RR
 {
 
+
 class RData_CNAME : public RData_NAME
 {
 
@@ -23,6 +24,7 @@ public :
 	RData_CNAME( uint8_t const * pRef ) ;
 
 } ; // class RData_CNAME
+	
 	
 }   // name RR
 

@@ -13,6 +13,7 @@ namespace dns
 namespace RR
 {
 
+
 class RData_CAA : public RData
 {
 
@@ -49,6 +50,7 @@ public :
 	RData_CAA() ;
 
 } ; // class RData_CAA
+	
 	
 }   // name RR
 

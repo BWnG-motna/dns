@@ -49,6 +49,9 @@ public :
 	void SetDNSSecOk( bool const & isSet ) ;
 
 public :
+	uint32_t GetOptCount()    const ;
+
+public :
 	uint16_t GetPayloadSize() const ;
 	uint8_t  GetVersion()     const ;
 	uint8_t  GetExtRCode()    const ;

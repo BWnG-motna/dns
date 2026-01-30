@@ -17,6 +17,7 @@ namespace dns
 namespace RR
 {
 
+
 class RData_TLSA : public RData
 {
 
@@ -49,6 +50,7 @@ public :
 	RData_TLSA() ;
 
 } ; // class RData_TLSA
+	
 	
 }   // name RR
 

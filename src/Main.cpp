@@ -29,6 +29,7 @@ constexpr uint16_t const   svrPort = 53 ;
 
 void Run( char const * qname , char const * qtype , char const * svrIp , uint16_t const & port ) ;
 
+
 uint16_t MakeQuery( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * qname , char const * qytpe , bool const & isTcp ) ;
 uint16_t MakeId() ;
 
@@ -39,9 +40,9 @@ void ViewResource( daniel::dns::Resource const & r ) ;
 void ViewResource( daniel::dns::EDNS0    const & e ) ;
 
 
-#define EDNS0_OPT_PADDING_TEST ( 0 )
-#define EDNS0_DAU_TEST         ( 0 )
-#define EDNS0_COOKIE           ( 0 )
+#define EDNS0_OPT_PADDING ( 0 )
+#define EDNS0_DAU_        ( 0 )
+#define EDNS0_COOKIE      ( 1 )
 
 
 int main( int argc , char * argv[] )
@@ -252,7 +253,7 @@ uint16_t MakeQuery( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * q
 	e.SetExtRCode( 0 ) ;
 	e.SetDNSSecOk( true ) ;
 
-#if ( EDNS0_PADDING_TEST )
+#if ( EDNS0_PADDING )
 
 	uint8_t padding[ 5 ] = { 0x01 , 0x02 , 0x03 , 0x04 , 0x05 } ;
 
@@ -264,7 +265,7 @@ uint16_t MakeQuery( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * q
 
 #endif
 
-#if ( EDNS0_DAU_TEST )
+#if ( EDNS0_DAU )
 
 	bool is = e.InsertOptDAU() ;
 	if( false == is ) 
@@ -390,5 +391,6 @@ void ViewResource( daniel::dns::EDNS0 const & e )
 	          << daniel::dns::ToString( e.GetType() ) << "\t"
 	          << "Payload size  : " << static_cast< uint16_t >( e.GetPayloadSize() ) << std::endl << "        "
 	          << "Extended RCode: " << static_cast< uint16_t >( e.GetExtRCode()    ) << std::endl << "        "
-	          << "Version       : " << static_cast< uint16_t >( e.GetVersion()     ) << std::endl ;
+	          << "Version       : " << static_cast< uint16_t >( e.GetVersion()     ) << std::endl << "        "
+	          << "Option Count  : " << e.GetOptCount() << std::endl ;
 }

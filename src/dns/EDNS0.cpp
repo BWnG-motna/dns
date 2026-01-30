@@ -374,3 +374,14 @@ daniel::dns::QType daniel::dns::EDNS0::GetType() const
 {
 	return QType::OPT ;
 }
+
+
+uint32_t daniel::dns::EDNS0::GetOptCount() const
+{
+	if( nullptr == pOpt )
+	{
+		return 0 ;
+	}
+
+	return pOpt->GetCount() ;
+}
