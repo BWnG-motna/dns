@@ -32,6 +32,7 @@ void Run( char const * qname , char const * qtype , char const * svrIp , uint16_
 uint16_t MakeQuery( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * qname , char const * qytpe , bool const & isTcp ) ;
 uint16_t MakeId() ;
 
+
 void ViewHeader  ( daniel::dns::Header   const & h ) ;
 void ViewQuestion( daniel::dns::Question const & q ) ;
 void ViewResource( daniel::dns::Resource const & r ) ;
@@ -109,7 +110,7 @@ DNS_QUERY :
 		tLen = daniel::net::RequestOnUdp( rbuf , 1500 , sbuf , slen , svrIp , port ) ;	
 	}
 
-	/**/ if( 0 > tLen )
+	/**/ if(  0 > tLen )
 	{
 		std::cerr << "reponse error - no reponse" << std::endl ;
 	}
@@ -237,21 +238,19 @@ uint16_t MakeQuery( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * q
 	h.SetId( MakeId() ) ;
 	h.SetQR( daniel::dns::QR::Query ) ;
 	h.SetQdCount( 1 ) ;
-	h.SetArCount( 0 ) ;
-	h.SetRD( false ) ;
+	h.SetArCount( 1 ) ;
+	h.SetRD( 1 ) ;
 
 	daniel::dns::Question q ;
 	q.SetName ( qname , strlen( qname ) ) ;
 	q.SetType ( qtype ) ;
 	q.SetClass( daniel::dns::QClass::IN ) ;
 
-#if 0
 	daniel::dns::EDNS0 e ;
 	e.SetPayloadSize( 1232 ) ;
 	e.SetVersion ( 0 ) ;
 	e.SetExtRCode( 0 ) ;
 	e.SetDNSSecOk( true ) ;
-#endif
 
 #if ( EDNS0_PADDING_TEST )
 
@@ -298,7 +297,7 @@ uint16_t MakeQuery( uint8_t * pBuf , uint16_t const & bufMaxLen , char const * q
 
 	hslen = h.Save( & ( pBuf[ beginPos + 0             ] ) , bufMaxLen - beginPos ) ;
 	qslen = q.Save( & ( pBuf[ beginPos + hslen         ] ) , bufMaxLen - beginPos - hslen ) ;
-	//eslen = e.Save( & ( pBuf[ beginPos + hslen + qslen ] ) , bufMaxLen - beginPos - hslen - qslen ) ;
+	eslen = e.Save( & ( pBuf[ beginPos + hslen + qslen ] ) , bufMaxLen - beginPos - hslen - qslen ) ;
 
 	uint16_t totalLen = hslen + qslen + eslen ;
 
