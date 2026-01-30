@@ -12,6 +12,9 @@
 #include <errno.h>
 
 
+#include <iostream>
+
+
 int daniel::net::RequestOnTcp(
 	uint8_t       * prBuf , uint16_t const & rbufMaxLen , 
 	uint8_t const * psBuf , uint16_t const & sbufLen    ,
@@ -26,7 +29,7 @@ int daniel::net::RequestOnTcp(
 	int res = 0 ;
 
 	struct timeval tvRecv ;
-	tvRecv.tv_sec  = 2 ;
+	tvRecv.tv_sec  = 5 ;
 	tvRecv.tv_usec = 0 ;
 
 	res = setsockopt( sockid , SOL_SOCKET , SO_RCVTIMEO , & tvRecv , sizeof( tvRecv ) ) ;
@@ -97,10 +100,54 @@ int daniel::net::RequestOnTcp(
 		return -1 ;
 	}
 
-	int len = recv( sockid , prBuf , rbufMaxLen , 0 ) ;
-	close( sockid ) ;
+	uint8_t tmp[ 65535 + 2 ] ;
 
-	return ( 0 <= len ) ? len : -1 ;
+	ssize_t acclen = 0 ;
+	while( 2 > acclen )
+	{
+		ssize_t len = recv( sockid , & tmp[ acclen ] , sizeof( tmp ) - acclen , 0 ) ;
+		
+		if( 0 >= len )
+		{
+			exit( 1 ) ;
+		}
+
+		acclen += len ;
+	}
+
+	uint16_t msglen 
+		= ( ( tmp[ 0 ] << 8 ) & 0xFF00 ) 
+		| ( ( tmp[ 1 ] << 0 ) & 0x00FF ) ;
+
+	if( 0 == msglen || rbufMaxLen < msglen )
+	{
+		close( sockid ) ;
+		return -1 ;
+	}
+
+	if( 0 < ( acclen - 2 ) )
+	{
+		for( uint8_t pos = 0 ; pos < ( acclen - 2 ) ; ++pos )
+		{
+			prBuf[ pos ] = tmp[ 2 + pos ] ;
+		}
+	}
+
+	uint16_t recvlen = acclen - 2 ;
+	while( recvlen < msglen )
+	{
+		ssize_t len = recv( sockid , & prBuf[ recvlen ] , rbufMaxLen - recvlen , 0 ) ;
+
+		if( 0 >= len )
+		{
+			close( sockid ) ;
+			return -1 ;
+		}
+
+		recvlen += len ;
+	}
+
+	return recvlen ;
 }
 
 
