@@ -37,6 +37,8 @@
 #include "dns/RR/RData_TLSA.h"
 #include "dns/RR/RData_SMIMEA.h"
 
+#include "dns/RR/RData_OPENPGPKEY.h"
+
 #include "dns/RR/RData_SVCB.h"
 #include "dns/RR/RData_HTTPS.h"
 
@@ -264,6 +266,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::NSEC3 :
 			pRDat = new ( std::nothrow ) RR::RData_NSEC3() ;
+			break ;
+
+		case QType::OPENPGPKEY :
+			pRDat = new ( std::nothrow ) RR::RData_OPENPGPKEY() ;
 			break ;
 
 		case QType::TLSA :
