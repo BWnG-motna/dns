@@ -109,7 +109,8 @@ int daniel::net::RequestOnTcp(
 		
 		if( 0 >= len )
 		{
-			exit( 1 ) ;
+			close( sockid ) ;
+			return -1 ;
 		}
 
 		acclen += len ;
