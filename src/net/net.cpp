@@ -128,7 +128,7 @@ int daniel::net::RequestOnTcp(
 
 	if( 0 < ( acclen - 2 ) )
 	{
-		for( uint8_t pos = 0 ; pos < ( acclen - 2 ) ; ++pos )
+		for( ssize_t pos = 0 ; pos < ( acclen - 2 ) ; ++pos )
 		{
 			prBuf[ pos ] = tmp[ 2 + pos ] ;
 		}
