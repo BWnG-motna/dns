@@ -1,0 +1,1 @@
+OBJS += src/view/HexView.o
