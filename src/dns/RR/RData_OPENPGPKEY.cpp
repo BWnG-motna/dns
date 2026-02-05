@@ -1,10 +1,8 @@
 #include "dns/RR/RData_OPENPGPKEY.h"
-
 #include "baseEncoding/Base64.h"
 
 
 #include <sstream>
-#include <iostream>
 
 
 daniel::dns::RR::RData_OPENPGPKEY::RData_OPENPGPKEY()
