@@ -1,9 +1,6 @@
 #include "dns/RR/HIP/RVS.h"
 
 
-#include <iostream>
-
-
 daniel::dns::RR::HIP::RVS::RVS()
 	: pDat( nullptr ) , len( 0 )
 {

@@ -5,8 +5,6 @@
 #include <iomanip>
 #include <memory>
 
-#include <iostream>
-
 
 daniel::dns::RR::RData_HIP::RData_HIP()
 	: RData( nullptr ) , hitLen( 0 ) , pkAlgo( 0 ) , pkLen( 0 ) , pHit( nullptr ) , pKey( nullptr ) , pRvsList( nullptr )
@@ -87,7 +85,7 @@ uint16_t daniel::dns::RR::RData_HIP::ToNullStr( uint8_t * pStr , uint16_t const 
 		{
 			HIP::RVS const & rvs = *posIter++ ;
 			uint8_t  const * p   = rvs.Get() ;
-			
+
 			ss << " " << reinterpret_cast< char const * >( p ) ;
 		}
 	}
