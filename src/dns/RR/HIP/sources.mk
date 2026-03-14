@@ -1,0 +1,1 @@
+OBJS += src/dns/RR/HIP/RVS.o
