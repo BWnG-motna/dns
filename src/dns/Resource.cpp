@@ -30,6 +30,7 @@
 #include "dns/RR/RData_APL.h"
 #include "dns/RR/RData_DS.h"
 #include "dns/RR/RData_SSHFP.h"
+#include "dns/RR/RData_IPSECKEY.h"
 #include "dns/RR/RData_RRSIG.h"
 #include "dns/RR/RData_NSEC.h"
 #include "dns/RR/RData_DNSKEY.h"
@@ -273,6 +274,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::SSHFP :
 			pRDat = new ( std::nothrow ) RR::RData_SSHFP() ;
+			break ;
+
+		case QType::IPSECKEY :
+			pRDat = new ( std::nothrow ) RR::RData_IPSECKEY() ;
 			break ;
 
 		case QType::RRSIG :

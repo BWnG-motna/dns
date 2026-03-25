@@ -15,6 +15,7 @@ include src/dns/RR/APL/sources.mk
 include src/dns/RR/CERT/sources.mk
 include src/dns/RR/DANE/sources.mk
 include src/dns/RR/HIP/sources.mk
+include src/dns/RR/IPSECKEY/sources.mk
 include src/dns/RR/SEC/sources.mk
 include src/dns/RR/SSHFP/sources.mk
 include src/dns/RR/SVC/sources.mk
