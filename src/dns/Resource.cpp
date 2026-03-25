@@ -24,7 +24,7 @@
 
 #include "dns/RR/RData_SRV.h"
 #include "dns/RR/RData_NAPTR.h"
-
+#include "dns/RR/RData_KX.h"
 #include "dns/RR/RData_CERT.h"
 
 #include "dns/RR/RData_APL.h"
@@ -258,6 +258,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::NAPTR :
 			pRDat = new ( std::nothrow ) RR::RData_NAPTR( pDatagram ) ;
+			break ;
+
+		case QType::KX :
+			pRDat = new ( std::nothrow ) RR::RData_KX( pDatagram ) ;
 			break ;
 
 		case QType::CERT :

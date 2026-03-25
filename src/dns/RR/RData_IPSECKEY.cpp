@@ -4,7 +4,6 @@
 
 
 #include <sstream>
-#include <iostream>
 
 
 daniel::dns::RR::RData_IPSECKEY::RData_IPSECKEY()

@@ -23,7 +23,7 @@ OBJS += src/dns/RR/RData.o            \
 		\
 		src/dns/RR/RData_SRV.o        \
 		src/dns/RR/RData_NAPTR.o      \
-		\
+		src/dns/RR/RData_KX.o         \
 		src/dns/RR/RData_CERT.o       \
 		\
 		src/dns/RR/RData_APL.o        \
