@@ -55,6 +55,8 @@
 #include "dns/RR/RData_URI.h"
 #include "dns/RR/RData_CAA.h"
 
+#include "dns/RR/RData_TA.h"
+
 
 
 #undef NULL
@@ -358,6 +360,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::CAA :
 			pRDat = new ( std::nothrow ) RR::RData_CAA() ;
+			break ;
+
+		case QType::TA :
+			pRDat = new ( std::nothrow ) RR::RData_TA() ;
 			break ;
 
 		default :

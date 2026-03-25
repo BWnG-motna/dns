@@ -54,4 +54,6 @@ OBJS += src/dns/RR/RData.o            \
 		src/dns/RR/RData_URI.o        \
 		src/dns/RR/RData_CAA.o        \
 		\
+		src/dns/RR/RData_TA.o         \
+		\
 		src/dns/RR/RData_NAME.o
