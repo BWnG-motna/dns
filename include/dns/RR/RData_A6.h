@@ -35,9 +35,6 @@ public :
 	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
 
 public :
-
-
-public :
 	 RData_A6() ;
 	~RData_A6() ;
 

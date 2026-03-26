@@ -1,3 +1,6 @@
+include src/dns/EDNS0/sources.mk
+include src/dns/RR/sources.mk
+
 OBJS += src/dns/Header.o    \
 		src/dns/Question.o  \
 		src/dns/Resource.o  \
