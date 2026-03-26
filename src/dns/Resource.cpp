@@ -26,6 +26,7 @@
 #include "dns/RR/RData_NAPTR.h"
 #include "dns/RR/RData_KX.h"
 #include "dns/RR/RData_CERT.h"
+#include "dns/RR/RData_A6.h"
 
 #include "dns/RR/RData_APL.h"
 #include "dns/RR/RData_DS.h"
@@ -48,6 +49,8 @@
 #include "dns/RR/RData_ZONEMD.h"
 #include "dns/RR/RData_SVCB.h"
 #include "dns/RR/RData_HTTPS.h"
+
+#include "dns/RR/RData_SPF.h"
 
 #include "dns/RR/RData_EUI48.h"
 #include "dns/RR/RData_EUI64.h"
@@ -270,6 +273,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 			pRDat = new ( std::nothrow ) RR::RData_CERT() ;
 			break ;
 
+		case QType::A6 :
+			pRDat = new ( std::nothrow ) RR::RData_A6() ;
+			break ;
+
 		case QType::APL :
 			pRDat = new ( std::nothrow ) RR::RData_APL() ;
 			break ;
@@ -344,6 +351,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::HTTPS :
 			pRDat = new ( std::nothrow ) RR::RData_HTTPS( pDatagram ) ;
+			break ;
+
+		case QType::SPF :
+			pRDat = new ( std::nothrow ) RR::RData_SPF() ;
 			break ;
 
 		case QType::EUI48 :

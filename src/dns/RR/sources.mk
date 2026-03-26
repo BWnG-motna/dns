@@ -25,6 +25,7 @@ OBJS += src/dns/RR/RData.o            \
 		src/dns/RR/RData_NAPTR.o      \
 		src/dns/RR/RData_KX.o         \
 		src/dns/RR/RData_CERT.o       \
+		src/dns/RR/RData_A6.o         \
 		\
 		src/dns/RR/RData_APL.o        \
 		src/dns/RR/RData_DS.o         \
@@ -47,6 +48,8 @@ OBJS += src/dns/RR/RData.o            \
 		src/dns/RR/RData_ZONEMD.o     \
 		src/dns/RR/RData_SVCB.o       \
 		src/dns/RR/RData_HTTPS.o      \
+		\
+		src/dns/RR/RData_SPF.o        \
 		\
 		src/dns/RR/RData_EUI48.o      \
 		src/dns/RR/RData_EUI64.o      \
