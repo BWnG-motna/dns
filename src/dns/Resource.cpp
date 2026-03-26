@@ -35,6 +35,7 @@
 #include "dns/RR/RData_RRSIG.h"
 #include "dns/RR/RData_NSEC.h"
 #include "dns/RR/RData_DNSKEY.h"
+#include "dns/RR/RData_DHCID.h"
 #include "dns/RR/RData_NSEC3.h"
 #include "dns/RR/RData_NSEC3PARAM.h"
 
@@ -303,6 +304,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::DNSKEY :
 			pRDat = new ( std::nothrow ) RR::RData_DNSKEY() ;
+			break ;
+
+		case QType::DHCID :
+			pRDat = new ( std::nothrow ) RR::RData_DHCID() ;
 			break ;
 
 		case QType::NSEC3 :
