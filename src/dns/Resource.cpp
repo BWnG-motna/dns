@@ -19,6 +19,8 @@
 #include "dns/RR/RData_RP.h"
 #include "dns/RR/RData_AFSDB.h"
 
+#include "dns/RR/RData_SIG.h"
+
 #include "dns/RR/RData_AAAA.h"
 #include "dns/RR/RData_LOC.h"
 
@@ -248,6 +250,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::AFSDB :
 			pRDat = new ( std::nothrow ) RR::RData_AFSDB( pDatagram ) ;
+			break ;
+
+		case QType::SIG :
+			pRDat = new ( std::nothrow ) RR::RData_SIG( pDatagram ) ;
 			break ;
 
 		case QType::AAAA :
