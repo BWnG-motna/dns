@@ -14,6 +14,7 @@ namespace dns
 	
 enum class QType : uint16_t
 {
+	Sp          =      0  , // for RData SIG
 	A           =      1  , // a host address
 	NS          =      2  , // an authoritative name server
 	MD          =      3  , // a mail destination ( Obsolete - use MX )

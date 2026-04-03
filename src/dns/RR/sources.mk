@@ -29,6 +29,8 @@ OBJS += src/dns/RR/RData.o            \
 		src/dns/RR/RData_RP.o         \
 		src/dns/RR/RData_AFSDB.o      \
 		\
+		src/dns/RR/RData_SIG.o        \
+		\
 		src/dns/RR/RData_AAAA.o       \
 		src/dns/RR/RData_LOC.o        \
 		\
