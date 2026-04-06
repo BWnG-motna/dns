@@ -79,7 +79,7 @@ uint16_t daniel::dns::RR::RData_SIG::ToNullStr( uint8_t * pStr , uint16_t const 
 	   << "0x"       << std::hex << std::setw( 4 ) << std::setfill( '0' ) << keyTag << "\t"
 	   << reinterpret_cast< char const * >( pName ) << "\t"
 	   << std::dec   << std::setw( 0 ) << std::setfill( ' ' ) 
-	   << static_cast< uint16_t >( signLen )       << " bytes - signature" ;
+	   << static_cast< uint16_t >( signLen )       << " byte(s) - signature" ;
 
 	std::string str = ss.str() ;
 

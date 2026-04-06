@@ -58,9 +58,9 @@ uint16_t daniel::dns::RR::RData_CDNSKEY::ToNullStr( uint8_t * pStr , uint16_t co
 	   << "sep: "  << ( true == sep ? 1 : 0 )    << "\t"
 	   << "flag: " << std::hex << std::setw( 4 ) << std::setfill( '0' ) << flags << "\t"
 	   << std::dec << std::setw( 0 ) << std::setfill( ' ' )
-	   << static_cast< uint16_t >( protocol )  << "\t"
-	   << static_cast< uint16_t >( algorithm ) << "\t"
-	   << static_cast< uint16_t >( pklen )     << " bytes - publickey" ;
+	   << "protocol: "   << static_cast< uint16_t >( protocol )  << "\t"
+	   << "algorithm: "  << static_cast< uint16_t >( algorithm ) << "\t"
+	   << "public key: " << static_cast< uint16_t >( pklen )     << " byte(s)" ;
 
 	std::string str = ss.str() ;
 
