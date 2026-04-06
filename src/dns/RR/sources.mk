@@ -32,7 +32,7 @@ OBJS += src/dns/RR/RData.o            \
 		src/dns/RR/RData_ISDN.o       \
 		src/dns/RR/RData_RT.o         \
 		src/dns/RR/RData_NSAP.o       \
-		\
+		src/dns/RR/RData_NSAP_PTR.o   \
 		src/dns/RR/RData_SIG.o        \
 		\
 		src/dns/RR/RData_AAAA.o       \

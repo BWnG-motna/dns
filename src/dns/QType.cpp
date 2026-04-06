@@ -414,6 +414,9 @@ daniel::dns::QType daniel::dns::StrToQType( char const * pStr )
 		case hash( "NSAP_PTR" ) :
 			return QType::NSAP_PTR ;
 
+		case hash( "NSAP-PTR" ) :
+			return QType::NSAP_PTR ;
+
 		case hash( "SIG" ) :
 			return QType::SIG ;
 
