@@ -7,17 +7,20 @@ bool daniel::dns::RR::SEC::IsValidAlgo( SECAlgo const & algorithm )
 	
 	switch( algorithm )
 	{
-		case A::RSA_MD5  :              
+		case A::RSA_MD5  :
+		case A::DH       :          
 		case A::DSA_SHA1 :                 
-		case A::RSA_SHA1 :                 
+		case A::RSA_SHA1 :
+		case A::DSA_NSEC3_SHA1 :                 
 		case A::RSA_SHA1_NSEC3_SHA1 :    
 		case A::RSA_SHA256 :              
 		case A::RSA_SHA512 :              
-		case A::GOST_R_34_10_2011 :        
+		case A::GOST_R_34_10_2001 :        
 		case A::ECDSA_CURVE_P256_SHA256 :  
 		case A::ECDSA_CURVE_P384_SHA384 : 
 		case A::ED25519 :                 
 		case A::ED448 :
+		case A::GOST_R_34_10_2012 :
 			return true ;
 
 		default :
@@ -30,17 +33,20 @@ bool daniel::dns::RR::SEC::IsValidAlgo( uint8_t const & algorithmNumber )
 {
 	switch( algorithmNumber )
 	{
-		case 1 :
-		case 2 :
-		case 5 :
-		case 7 :
-		case 8 :
+		case  1 :
+		case  2 :
+		case  3 :
+		case  5 :
+		case  6 :
+		case  7 :
+		case  8 :
 		case 10 :
 		case 12 :
 		case 13 :
 		case 14 :
 		case 15 :
 		case 16 :
+		case 23 :
 			return true ;
 
 		default :
@@ -58,11 +64,17 @@ char const * daniel::dns::RR::SEC::ToString( SECAlgo const & algo )
 		case A::RSA_MD5  :    
 			return "RSA/MD5" ;
 
+		case A::DH :
+			return "Diffelman" ;
+
 		case A::DSA_SHA1 :
 			return "DSA/SHA-1" ;
 
 		case A::RSA_SHA1 :
 			return "RSA/SHA-1" ;
+
+		case A::DSA_NSEC3_SHA1 :
+			return "DSA/NSEC3/SHA-1" ;
 
 		case A::RSA_SHA1_NSEC3_SHA1 :
 			return "RSA/SHA-1 - NSEC3/SHA-1" ;
@@ -73,7 +85,7 @@ char const * daniel::dns::RR::SEC::ToString( SECAlgo const & algo )
 		case A::RSA_SHA512 :
 			return "RSA/SHA-512" ;
 
-		case A::GOST_R_34_10_2011 :
+		case A::GOST_R_34_10_2001 :
 			return "GOST R 34.10-2001" ;
 
 		case A::ECDSA_CURVE_P256_SHA256 :  
@@ -87,6 +99,9 @@ char const * daniel::dns::RR::SEC::ToString( SECAlgo const & algo )
 
 		case A::ED448 :
 			return "ED448" ;
+
+		case A::GOST_R_34_10_2012 :
+			return "GOST R 34.10-2012" ;
 
 		default :
 			return "UNKNOWN" ;    
