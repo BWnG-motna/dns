@@ -21,6 +21,7 @@
 #include "dns/RR/RData_X25.h"
 #include "dns/RR/RData_ISDN.h"
 #include "dns/RR/RData_RT.h"
+#include "dns/RR/RData_NSAP.h"
 
 #include "dns/RR/RData_SIG.h"
 
@@ -265,6 +266,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::RT :
 			pRDat = new ( std::nothrow ) RR::RData_RT( pDatagram ) ;
+			break ;
+
+		case QType::NSAP :
+			pRDat = new ( std::nothrow ) RR::RData_NSAP() ;
 			break ;
 
 		case QType::SIG :

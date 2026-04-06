@@ -37,7 +37,7 @@ enum class QType : uint16_t
 	X25         =     19  , // for X.25 network, PSDN-address is described.
 	ISDN        =     20  , // mapping hostname and address(phone number) - ISDN-address is described.
 	RT          =     21  , // Route Through record. Specifies the Intermediate hosts
-	NSAP        =     22  ,
+	NSAP        =     22  , // Network Service Access Point( NSAP ) address
 	NSAP_PTR    =     23  ,
 	SIG         =     24  , // Signature record ( Obsoleted by RRSIG in morden DNSEC per RFC 3755 )
 	KEY         =     25  ,

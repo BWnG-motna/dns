@@ -31,6 +31,7 @@ OBJS += src/dns/RR/RData.o            \
 		src/dns/RR/RData_X25.o        \
 		src/dns/RR/RData_ISDN.o       \
 		src/dns/RR/RData_RT.o         \
+		src/dns/RR/RData_NSAP.o       \
 		\
 		src/dns/RR/RData_SIG.o        \
 		\
