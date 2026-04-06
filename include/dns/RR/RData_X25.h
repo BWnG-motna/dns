@@ -30,6 +30,9 @@ public :
 	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
 
 public :
+	uint8_t const * GetAddress() const ;
+
+public :
 	 RData_X25() ;
 	~RData_X25() ;
 

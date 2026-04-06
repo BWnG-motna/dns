@@ -99,3 +99,9 @@ bool daniel::dns::RR::RData_X25::Load( uint8_t const * pData , uint16_t const & 
 
 	return true ;
 }
+
+
+uint8_t const * daniel::dns::RR::RData_X25::GetAddress() const
+{
+	return pAddr ;
+}
