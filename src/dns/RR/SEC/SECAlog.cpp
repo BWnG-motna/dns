@@ -65,7 +65,7 @@ char const * daniel::dns::RR::SEC::ToString( SECAlgo const & algo )
 			return "RSA/MD5" ;
 
 		case A::DH :
-			return "Diffelman" ;
+			return "Diffie-Hellman" ;
 
 		case A::DSA_SHA1 :
 			return "DSA/SHA-1" ;
