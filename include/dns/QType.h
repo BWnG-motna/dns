@@ -35,7 +35,7 @@ enum class QType : uint16_t
 	RP          =     17  , // responsible persion
 	AFSDB       =     18  , // Andrew File System( AFS ) Database
 	X25         =     19  , // for X.25 network, PSDN-address is described.
-	ISDN        =     20  ,
+	ISDN        =     20  , // mapping hostname and address(phone number) - ISDN-address is described.
 	RT          =     21  ,
 	NSAP        =     22  ,
 	NSAP_PTR    =     23  ,
@@ -53,7 +53,7 @@ enum class QType : uint16_t
 	NAPTR       =     35  , // Naming Authority Pointer record, Provide rules for dynamic rewriting of to domain names or URIs
 	KX          =     36  ,
 	CERT        =     37  , // Ceritifate record. Stores X.509 cerificates, PGP keys, or other cryptographic certificates in the DNS
-	A6          =     38  , // a signle IPv6 address ( obsolete - see AAAA )
+	A6          =     38  , // a single IPv6 address ( obsolete - see AAAA )
 	DNAME       =     39  ,
 	SINK        =     40  ,
 	OPT         =     41  ,
