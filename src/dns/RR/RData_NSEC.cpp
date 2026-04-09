@@ -1,7 +1,5 @@
 #include "dns/RR/RData_NSEC.h"
 #include "dns/QType.h"
-#include "baseEncoding/Base32Hex.h"
-
 
 #include <sstream>
 #include <iomanip>
