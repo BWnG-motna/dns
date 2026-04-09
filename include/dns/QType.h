@@ -44,7 +44,7 @@ enum class QType : uint16_t
 	                        // including flags, protocol, algorithm, and the actual public key data.
 	PX          =     26  , // It is to provide a mapping between RFC822-style Internet email addresses(SMTP) and X.400 addresses, 
 	                        // which was an older international email standard.
-	GPOS        =     27  ,
+	GPOS        =     27  , // Geographical Position information. Legacy record, less commonly used than LOC. 
 	AAAA        =     28  , // a single IPv6 address
 	LOC         =     29  , // Location information , based WGS84 , experimental
 	NXT         =     30  ,

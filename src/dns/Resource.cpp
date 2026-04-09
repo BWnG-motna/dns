@@ -26,7 +26,7 @@
 #include "dns/RR/RData_SIG.h"
 #include "dns/RR/RData_KEY.h"
 #include "dns/RR/RData_PX.h"
-
+#include "dns/RR/RData_GPOS.h"
 #include "dns/RR/RData_AAAA.h"
 #include "dns/RR/RData_LOC.h"
 
@@ -288,6 +288,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::PX :
 			pRDat = new ( std::nothrow ) RR::RData_PX( pDatagram ) ;
+			break ;
+
+		case QType::GPOS :
+			pRDat = new ( std::nothrow ) RR::RData_GPOS() ;
 			break ;
 
 		case QType::AAAA :
