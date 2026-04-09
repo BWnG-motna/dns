@@ -40,8 +40,10 @@ enum class QType : uint16_t
 	NSAP        =     22  , // Network Service Access Point( NSAP ) address
 	NSAP_PTR    =     23  , // a domain name pointer related with NSAP
 	SIG         =     24  , // Signature record ( Obsoleted by RRSIG in morden DNSEC per RFC 3755 )
-	KEY         =     25  ,
-	PX          =     26  ,
+	KEY         =     25  , // It is the resource record that continas a public key used for security purposes in DNS,
+	                        // including flags, protocol, algorithm, and the actual public key data.
+	PX          =     26  , // It is to provide a mapping between RFC822-style Internet email addresses(SMTP) and X.400 addresses, 
+	                        // which was an older international email standard.
 	GPOS        =     27  ,
 	AAAA        =     28  , // a single IPv6 address
 	LOC         =     29  , // Location information , based WGS84 , experimental
