@@ -48,6 +48,7 @@ OBJS += src/dns/RR/RData.o            \
 		src/dns/RR/RData_KX.o         \
 		src/dns/RR/RData_CERT.o       \
 		src/dns/RR/RData_A6.o         \
+		src/dns/RR/RData_DNAME.o      \
 		\
 		src/dns/RR/RData_APL.o        \
 		src/dns/RR/RData_DS.o         \

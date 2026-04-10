@@ -62,7 +62,7 @@ enum class QType : uint16_t
 	                        // primarily for some crytographic systems to delegate key exchange services (it has nothing to do with DNSSEC).
 	CERT        =     37  , // Ceritifate record. Stores X.509 cerificates, PGP keys, or other cryptographic certificates in the DNS
 	A6          =     38  , // a single IPv6 address ( obsolete - see AAAA )
-	DNAME       =     39  ,
+	DNAME       =     39  , // It is a DNS resource record that redirects an entire subtree of domain names to another domain name.
 	SINK        =     40  ,
 	OPT         =     41  ,
 	APL         =     42  , // Address Prefix List record, Specifies lists of address prefixes to be associated with a DNS name.

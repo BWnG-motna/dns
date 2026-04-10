@@ -38,6 +38,7 @@
 #include "dns/RR/RData_KX.h"
 #include "dns/RR/RData_CERT.h"
 #include "dns/RR/RData_A6.h"
+#include "dns/RR/RData_DNAME.h"
 
 #include "dns/RR/RData_APL.h"
 #include "dns/RR/RData_DS.h"
@@ -339,6 +340,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::A6 :
 			pRDat = new ( std::nothrow ) RR::RData_A6() ;
+			break ;
+
+		case QType::DNAME :
+			pRDat = new ( std::nothrow ) RR::RData_DNAME( pDatagram ) ;
 			break ;
 
 		case QType::APL :
