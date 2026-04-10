@@ -47,8 +47,11 @@ enum class QType : uint16_t
 	GPOS        =     27  , // Geographical Position information. Legacy record, less commonly used than LOC. 
 	AAAA        =     28  , // a single IPv6 address
 	LOC         =     29  , // Location information , based WGS84 , experimental
-	NXT         =     30  ,
-	EID         =     31  ,
+	NXT         =     30  , // It was used in early DNSSEC to prove the non-existence of a domain name 
+	                        // and to indicate which RR types are absent between the current name and next name in canonical order.
+	EID         =     31  , // It is used to map a domain name to an Endpoint Identifier, 
+	                        // primarily for the experimental Nimrod Routing Architecture to uniquely identify network endpoints 
+	                        // separately from their topological location.
 	NIMLOC      =     32  ,
 	SRV         =     33  , // Service locator record, Specifies the hostname and port number of servers providing a specific service
 	ATMA        =     34  ,
