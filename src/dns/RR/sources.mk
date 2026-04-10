@@ -43,7 +43,7 @@ OBJS += src/dns/RR/RData.o            \
 		src/dns/RR/RData_EID.o        \
 		src/dns/RR/RData_NIMLOC.o     \
 		src/dns/RR/RData_SRV.o        \
-		\
+		src/dns/RR/RData_ATMA.o       \
 		src/dns/RR/RData_NAPTR.o      \
 		src/dns/RR/RData_KX.o         \
 		src/dns/RR/RData_CERT.o       \

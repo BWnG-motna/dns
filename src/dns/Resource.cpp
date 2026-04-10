@@ -33,7 +33,7 @@
 #include "dns/RR/RData_EID.h"
 #include "dns/RR/RData_NIMLOC.h"
 #include "dns/RR/RData_SRV.h"
-
+#include "dns/RR/RData_ATMA.h"
 #include "dns/RR/RData_NAPTR.h"
 #include "dns/RR/RData_KX.h"
 #include "dns/RR/RData_CERT.h"
@@ -319,6 +319,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::SRV :
 			pRDat = new ( std::nothrow ) RR::RData_SRV( pDatagram ) ;
+			break ;
+
+		case QType::ATMA :
+			pRDat = new ( std::nothrow ) RR::RData_ATMA() ;
 			break ;
 
 		case QType::NAPTR :

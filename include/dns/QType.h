@@ -56,7 +56,7 @@ enum class QType : uint16_t
 	                        // primarily for the experimental Nimrod Routing Architecture to identify the topological location
 	                        // of network endpoints separately from their unique Endpoint Identifier.
 	SRV         =     33  , // Service locator record, Specifies the hostname and port number of servers providing a specific service
-	ATMA        =     34  ,
+	ATMA        =     34  , // ATM address. It is used to map a domain name to ATM address.
 	NAPTR       =     35  , // Naming Authority Pointer record, Provide rules for dynamic rewriting of to domain names or URIs
 	KX          =     36  , // It is used to identify a key management agent (key exchanger) for a domain name,
 	                        // primarily for some crytographic systems to delegate key exchange services (it has nothing to do with DNSSEC).
