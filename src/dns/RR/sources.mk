@@ -40,8 +40,10 @@ OBJS += src/dns/RR/RData.o            \
 		src/dns/RR/RData_AAAA.o       \
 		src/dns/RR/RData_LOC.o        \
 		src/dns/RR/RData_NXT.o        \
-		\
+		src/dns/RR/RData_EID.o        \
+		src/dns/RR/RData_NIMLOC.o     \
 		src/dns/RR/RData_SRV.o        \
+		\
 		src/dns/RR/RData_NAPTR.o      \
 		src/dns/RR/RData_KX.o         \
 		src/dns/RR/RData_CERT.o       \
