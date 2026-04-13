@@ -50,10 +50,10 @@
 #include "dns/RR/RData_DHCID.h"
 #include "dns/RR/RData_NSEC3.h"
 #include "dns/RR/RData_NSEC3PARAM.h"
-
 #include "dns/RR/RData_TLSA.h"
 #include "dns/RR/RData_SMIMEA.h"
 #include "dns/RR/RData_HIP.h"
+#include "dns/RR/RData_NINFO.h"
 
 #include "dns/RR/RData_CDS.h"
 #include "dns/RR/RData_CDNSKEY.h"
@@ -396,6 +396,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::HIP :
 			pRDat = new ( std::nothrow ) RR::RData_HIP() ;
+			break ;
+
+		case QType::NINFO :
+			pRDat = new ( std::nothrow ) RR::RData_NINFO() ;
 			break ;
 
 		case QType::CDS :

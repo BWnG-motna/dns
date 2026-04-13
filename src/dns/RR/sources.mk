@@ -60,10 +60,10 @@ OBJS += src/dns/RR/RData.o            \
 		src/dns/RR/RData_DHCID.o      \
 		src/dns/RR/RData_NSEC3.o      \
 		src/dns/RR/RData_NSEC3PARAM.o \
-		\
 		src/dns/RR/RData_TLSA.o       \
 		src/dns/RR/RData_SMIMEA.o     \
 		src/dns/RR/RData_HIP.o        \
+		src/dns/RR/RData_NINFO.o      \
 		\
 		src/dns/RR/RData_CDS.o        \
 		src/dns/RR/RData_CDNSKEY.o    \

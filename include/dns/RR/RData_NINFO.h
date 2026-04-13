@@ -1,0 +1,46 @@
+#pragma once
+
+#include "Common.h"
+#include "RData.h"
+
+
+namespace daniel
+{
+
+namespace dns
+{
+
+namespace RR
+{
+
+
+class RData_NINFO : public RData
+{
+
+private :
+	uint8_t * pZsData ;
+
+private :
+	void Initialize() override ;
+	
+public :
+	uint16_t ToNullStr( uint8_t * pStr , uint16_t const & length ) const override ;
+
+public :
+	bool Load( uint8_t const * pData , uint16_t const & length ) override ;
+
+public :
+	uint8_t const * GetZSData() const ;
+
+public :
+	 RData_NINFO() ;
+	~RData_NINFO() ;
+
+} ; // class RData_NINFO
+	
+	
+}   // name RR
+
+}   // namespace dns
+	
+}   // namespace daniel
