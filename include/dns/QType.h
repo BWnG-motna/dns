@@ -99,7 +99,9 @@ enum class QType : uint16_t
 	SVCB        =     64  , // Service Binding record. Provides information to help clients connect to a service more efficiently, 
 	                        // including alternative endpoints, IP hints, port numbers, and transport parameters.
 	HTTPS       =     65  , // HTTPS Service Binding record. A special use of SVCB record for HTTPS service.
-	DSYNC       =     66  ,
+	DSYNC       =     66  , // It allows a parent zone to publish the endpoint ( hostname and port ) 
+	                        // where a child zone should send generalized DNS NOTIFY message for delegation synchronization, 
+	                        // such as CDS or CSYNC updates.
 	HHIT        =     67  ,
 	BRID        =     68  ,
 
@@ -148,6 +150,8 @@ enum class QType : uint16_t
 char const * ToString( QType const & type ) ;
 
 QType StrToQType( char const * str ) ;
+
+bool IsValidQType( uint16_t const & type ) ;
 
 
 }   // namespace dns

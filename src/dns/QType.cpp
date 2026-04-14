@@ -645,3 +645,122 @@ daniel::dns::QType daniel::dns::StrToQType( char const * pStr )
 			return QType::UNKNOWN ;
 	}
 }
+
+
+bool daniel::dns::IsValidQType( uint16_t const & type )
+{
+	switch( type )
+	{
+		case     1 : // A
+		case     2 : // NS
+		case     3 : // MD
+		case     4 : // MF
+		case     5 : // CNAME
+		case     6 : // SOA
+		case     7 : // MB
+		case     8 : // MG
+		case     9 : // MR
+		case    10 : // NULL
+		case    11 : // WKS
+		case    12 : // PTR
+		case    13 : // HINFO
+		case    14 : // MINFO
+		case    15 : // MX
+		case    16 : // TXT
+		case    17 : // RP
+		case    18 : // AFSDB
+		case    19 : // X25
+		case    20 : // ISDN
+		case    21 : // RT
+		case    22 : // NSAP
+		case    23 : // NSAP_PTR
+		case    24 : // SIG
+		case    25 : // KEY
+		case    26 : // PX
+		case    27 : // GPOS
+		case    28 : // AAAA
+		case    29 : // LOC
+		case    30 : // NXT
+		case    31 : // EID
+		case    32 : // NIMLOC
+		case    33 : // SRV
+		case    34 : // ATMA
+		case    35 : // NAPTR
+		case    36 : // KX
+		case    37 : // CERT
+		case    38 : // A6
+		case    39 : // DNAME
+		case    40 : // SINK
+		case    41 : // OPT
+		case    42 : // APL
+		case    43 : // DS
+		case    44 : // SSHFP
+		case    45 : // IPSECKEY
+		case    46 : // RRSIG
+		case    47 : // NSEC
+		case    48 : // DNSKEY
+		case    49 : // DHCID
+		case    50 : // NSEC3
+		case    51 : // NSEC3PARAM
+		case    52 : // TLSA
+		case    53 : // SMIMEA
+			return true ;
+
+		case    55 : // HIP
+		case    56 : // NINFO
+		case    57 : // RKEY
+		case    58 : // TALINK
+		case    59 : // CDS
+		case    60 : // CDNSKEY
+		case    61 : // OPENPGPKEY
+		case    62 : // CSYNC
+		case    63 : // ZONEMD
+		case    64 : // SVCB
+		case    65 : // HTTPS
+		case    66 : // DSYNC
+		case    67 : // HHIT
+		case    68 : // BRID
+			return true ;
+	      
+		case    99 : // SPF
+		case   100 : // UINFO
+		case   101 : // UID
+		case   102 : // GID
+		case   103 : // UNSPEC
+		case   104 : // NID
+		case   105 : // L32
+		case   106 : // L64
+		case   107 : // LP
+		case   108 : // EUI48
+		case   109 : // EUI64
+			return true ;
+
+		case   128 : // NXNAME
+			return true ;
+	      
+		case   249 : // TKEY
+		case   250 : // TSIG
+		case   251 : // IXFR
+		case   252 : // AXFR
+		case   253 : // MAILB
+		case   254 : // MAILA
+		case   255 : // ALL
+		case   256 : // URI
+		case   257 : // CAA
+		case   258 : // AVC
+		case   259 : // DOA
+		case   260 : // AMTRELAY
+		case   261 : // RESINFO
+		case   262 : // WALLET
+		case   263 : // CLA
+		case   264 : // IPN
+			return true ;
+
+		case 32768 : // TA
+		case 32769 : // DDLV
+			return true ;
+
+		default :    // UNKNOWN
+			return false ;
+	}  
+}

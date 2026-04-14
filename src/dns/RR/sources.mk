@@ -72,6 +72,7 @@ OBJS += src/dns/RR/RData.o            \
 		src/dns/RR/RData_ZONEMD.o     \
 		src/dns/RR/RData_SVCB.o       \
 		src/dns/RR/RData_HTTPS.o      \
+		src/dns/RR/RData_DSYNC.o      \
 		\
 		src/dns/RR/RData_SPF.o        \
 		\
