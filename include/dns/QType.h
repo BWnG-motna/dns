@@ -142,7 +142,7 @@ enum class QType : uint16_t
 	IPN         =    264  ,
 
 	TA          =  32768  ,
-	DDLV        =  32769  ,
+	DLV         =  32769  ,
 
 	UNKNOWN     =  65535  ,
 

@@ -75,6 +75,8 @@
 
 #include "dns/RR/RData_TA.h"
 
+#include "dns/RR/RData_DLV.h"
+
 
 
 #undef NULL
@@ -462,6 +464,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::TA :
 			pRDat = new ( std::nothrow ) RR::RData_TA() ;
+			break ;
+
+		case QType::DLV :
+			pRDat = new ( std::nothrow ) RR::RData_DLV() ;
 			break ;
 
 		default :

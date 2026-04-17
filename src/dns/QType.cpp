@@ -300,8 +300,8 @@ char const * daniel::dns::ToString( QType const & type )
 		case QType::TA :
 			return "TA" ;
 
-		case QType::DDLV :
-			return "DDLV" ;
+		case QType::DLV :
+			return "DLV" ;
 
 		default :
 			return "UNKNOWN" ;
@@ -638,8 +638,8 @@ daniel::dns::QType daniel::dns::StrToQType( char const * pStr )
 		case hash( "TA" ) :
 			return QType::TA ;
 
-		case hash( "DDLV" ) :
-			return QType::DDLV ;
+		case hash( "DLV" ) :
+			return QType::DLV ;
 
 		default :
 			return QType::UNKNOWN ;
@@ -757,7 +757,7 @@ bool daniel::dns::IsValidQType( uint16_t const & type )
 			return true ;
 
 		case 32768 : // TA
-		case 32769 : // DDLV
+		case 32769 : // DLV
 			return true ;
 
 		default :    // UNKNOWN
