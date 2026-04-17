@@ -97,8 +97,6 @@ void Run( char const * qname , char const * sqtype , char const * svrIp , uint16
 
 	uint16_t slen = 0 ;
 
-#if 0
-
 DNS_QUERY :
 
 	if( true == isTcp )
@@ -154,52 +152,6 @@ DNS_QUERY :
 	}
 
 	daniel::view::HexView::View( sbuf , slen , 2 ) ;
-
-#else
-	unsigned char dns_response[] = {
-	    0x12 , 0x34 ,                    // ID = 0x1234
-	    0x81 , 0x80 ,                    // Flags: QR=1 , RD=1 , RA=1
-	    0x00 , 0x01 ,                    // QDCOUNT = 1
-	    0x00 , 0x01 ,                    // ANCOUNT = 1
-	    0x00 , 0x00 ,                    // NSCOUNT = 0
-	    0x00 , 0x00 ,                    // ARCOUNT = 0
-
-	    // Question Section
-	    0x04 , 't' , 'e' , 's' , 't' ,
-	    0x07 , 'e' , 'x' , 'a' , 'm' , 'p' , 'l' , 'e' ,
-	    0x03 , 'c' , 'o' , 'm' , 0x00 ,
-	    0x00 , 0x43 ,                    // QTYPE = HHIT (67)
-	    0x00 , 0x01 ,                    // QCLASS = IN (1)
-
-	    // Answer Section
-	    0xc0 , 0x0c ,                    // Name pointer to question name
-	    0x00 , 0x43 ,                    // TYPE = HHIT (67)
-	    0x00 , 0x01 ,                    // CLASS = IN (1)
-	    0x00 , 0x00 , 0x00 , 0x3c ,        // TTL = 60 seconds
-	    0x00 , 0x4d ,                    // RDLENGTH = 98 (정확한 값)
-
-	    // RDATA: CBOR [1 , "RAA-TESTDEVICE" , h'...' ]
-	    0x83 ,                          // array(3)
-	    0x01 ,                          // unsigned(1)
-	    0x6e ,                          // text(14)
-	    'R' ,'A' ,'A' ,'-' ,'T' ,'E' ,'S' ,'T' ,'D' ,'E' ,'V' ,'I' ,'C' ,'E' ,  // 14바이트 정확
-	    0x58 , 0x3a ,                    // bytes(79) ← 정확히 수정
-	    0x30 , 0x82 , 0x01 , 0x0A , 0x30 , 0x82 , 0x01 , 0x07 , 0xA0 , 0x03 ,
-	    0x02 , 0x01 , 0x02 , 0x02 , 0x01 , 0x01 , 0x30 , 0x0D , 0x06 , 0x09 ,
-	    0x2A , 0x86 , 0x48 , 0x86 , 0xF7 , 0x0D , 0x01 , 0x01 , 0x0B , 0x05 ,
-	    0x00 , 0x30 , 0x1E , 0x31 , 0x1C , 0x30 , 0x1A , 0x06 , 0x03 , 0x55 ,
-	    0x04 , 0x03 , 0x0C , 0x13 , 0x54 , 0x45 , 0x53 , 0x54 , 0x20 , 0x48 ,
-	    0x48 , 0x49 , 0x54 , 0x20 , 0x43 , 0x45 , 0x52 , 0x54
-	} ;
-
-	for( uint16_t pos = 0 ; pos < sizeof( dns_response ) ; ++pos )
-	{
-		rbuf[ pos ] = dns_response[ pos ] ;
-	}
-
-	tLen = sizeof( dns_response ) ;
-
-#endif
 	daniel::view::HexView::View( rbuf , tLen , 2 ) ;
 
 	daniel::dns::Header h ;
