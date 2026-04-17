@@ -139,10 +139,11 @@ enum class QType : uint16_t
 	RESINFO     =    261  ,
 	WALLET      =    262  ,
 	CLA         =    263  ,
-	IPN         =    264  ,
+	IPN         =    264  , // It is used to map a domain name to DTN(Delay-Tolerant Networking) node number in the ipn URI scheme.
 
-	TA          =  32768  ,
-	DLV         =  32769  ,
+                            // TA and DLV is same structure with DS(43). DLV(obsolete) , TA(experimental)
+	TA          =  32768  , // It allows publishing DNSSEC trust anchors outside the normal DNS delegation chain.
+	DLV         =  32769  , // It allows publishing DNSSEC trust anchors outside the normal DNS delegation chain.
 
 	UNKNOWN     =  65535  ,
 
