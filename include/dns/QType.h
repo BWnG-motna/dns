@@ -102,7 +102,9 @@ enum class QType : uint16_t
 	DSYNC       =     66  , // It allows a parent zone to publish the endpoint ( hostname and port ) 
 	                        // where a child zone should send generalized DNS NOTIFY message for delegation synchronization, 
 	                        // such as CDS or CSYNC updates.
-	HHIT        =     67  ,
+	HHIT        =     67  , // It stores metadata and registration information for a Hierarchical Host Identity Tag(HHIT),
+	                        // including entity type, HID abbreviation, and CBOR-encoded certificate for verification,
+	                        // primarily used in DRIP for unmanned aircraft systems and Host Identity Portocol environments.
 	BRID        =     68  ,
 
 	SPF         =     99  , // Sender Policy Framework record. 

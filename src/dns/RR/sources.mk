@@ -2,6 +2,7 @@ include src/dns/RR/APL/sources.mk
 include src/dns/RR/CERT/sources.mk
 include src/dns/RR/DANE/sources.mk
 include src/dns/RR/DHCID/sources.mk
+include src/dns/RR/HHIT/sources.mk
 include src/dns/RR/HIP/sources.mk
 include src/dns/RR/IPSECKEY/sources.mk
 include src/dns/RR/SEC/sources.mk
@@ -73,6 +74,7 @@ OBJS += src/dns/RR/RData.o            \
 		src/dns/RR/RData_SVCB.o       \
 		src/dns/RR/RData_HTTPS.o      \
 		src/dns/RR/RData_DSYNC.o      \
+		src/dns/RR/RData_HHIT.o       \
 		\
 		src/dns/RR/RData_SPF.o        \
 		\

@@ -63,6 +63,7 @@
 #include "dns/RR/RData_SVCB.h"
 #include "dns/RR/RData_HTTPS.h"
 #include "dns/RR/RData_DSYNC.h"
+#include "dns/RR/RData_HHIT.h"
 
 #include "dns/RR/RData_SPF.h"
 
@@ -433,6 +434,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::DSYNC :
 			pRDat = new ( std::nothrow ) RR::RData_DSYNC() ;
+			break ;
+
+		case QType::HHIT :
+			pRDat = new ( std::nothrow ) RR::RData_HHIT() ;
 			break ;
 
 		case QType::SPF :
