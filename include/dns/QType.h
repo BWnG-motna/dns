@@ -138,7 +138,7 @@ enum class QType : uint16_t
 	AMTRELAY    =    260  ,
 	RESINFO     =    261  ,
 	WALLET      =    262  ,
-	CLA         =    263  ,
+	CLA         =    263  , // It specifies the protocol family or network class ( such as IN for Internet ) to which the resource record belongs.
 	IPN         =    264  , // It is used to map a domain name to DTN(Delay-Tolerant Networking) node number in the ipn URI scheme.
 
                             // TA and DLV is same structure with DS(43). DLV(obsolete) , TA(experimental)
