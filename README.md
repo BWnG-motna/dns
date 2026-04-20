@@ -5,3 +5,9 @@
 - 여기에 작성되는 코드는 DNS에 대한 이해를 높이기 위한 학습 + 남은 시간 동안 심심풀이로 진행하는 취미를 위해 작성되었음
 - 특별한 목적을 가지고 있지 않으므로 적당히 작성되고 있을 수 있음
 - 이곳에 있는 코드를 참조할 때 위 설명을 고려하여 유의할 것
+
+
+
+- The code was created to enhance understanding of DNS and to spend time in spare times.
+- It has no specific purpose, it may be written haphazardly.
+- Please use this code keeping the above explanation in mind.
