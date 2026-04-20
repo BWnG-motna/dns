@@ -1,0 +1,1 @@
+OBJS += src/dns/RR/CLA/Label.o

@@ -3,6 +3,7 @@
 #include "dns/EDNS0/EDNS0_OPTION.h"
 
 #include "dns/RR/APL/APItem.h"
+#include "dns/RR/CLA/Label.h"
 #include "dns/RR/HIP/RVS.h"
 #include "dns/RR/SVC/SvcParam.h"
 #include "dns/RR/SEC/TypeBitMap.h"
@@ -101,6 +102,8 @@ template class daniel::ds::LinkedListIterator< daniel::ds::Node< daniel::dns::ED
 template class daniel::ds::LinkedListIterator< daniel::ds::Node< daniel::dns::EDNS0_OPTION > const > ;
 template class daniel::ds::LinkedListIterator< daniel::ds::Node< daniel::dns::RR::APL::APItem > > ;
 template class daniel::ds::LinkedListIterator< daniel::ds::Node< daniel::dns::RR::APL::APItem > const > ;
+template class daniel::ds::LinkedListIterator< daniel::ds::Node< daniel::dns::RR::CLA::Label > > ;
+template class daniel::ds::LinkedListIterator< daniel::ds::Node< daniel::dns::RR::CLA::Label > const > ;
 template class daniel::ds::LinkedListIterator< daniel::ds::Node< daniel::dns::RR::HIP::RVS > > ;
 template class daniel::ds::LinkedListIterator< daniel::ds::Node< daniel::dns::RR::HIP::RVS > const > ;
 template class daniel::ds::LinkedListIterator< daniel::ds::Node< daniel::dns::RR::SVC::SvcParam > > ;

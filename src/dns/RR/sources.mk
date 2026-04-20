@@ -1,5 +1,6 @@
 include src/dns/RR/APL/sources.mk
 include src/dns/RR/CERT/sources.mk
+include src/dns/RR/CLA/sources.mk
 include src/dns/RR/DANE/sources.mk
 include src/dns/RR/DHCID/sources.mk
 include src/dns/RR/HHIT/sources.mk
@@ -84,6 +85,7 @@ OBJS += src/dns/RR/RData.o            \
 		src/dns/RR/RData_URI.o        \
 		src/dns/RR/RData_CAA.o        \
 		\
+		src/dns/RR/RData_CLA.o        \
 		src/dns/RR/RData_IPN.o        \
 		src/dns/RR/RData_TA.o         \
 		src/dns/RR/RData_DLV.o        \

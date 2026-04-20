@@ -3,6 +3,7 @@
 #include "dns/EDNS0/EDNS0_OPTION.h"
 
 #include "dns/RR/APL/APItem.h"
+#include "dns/RR/CLA/Label.h"
 #include "dns/RR/HIP/RVS.h"
 #include "dns/RR/SVC/SvcParam.h"
 #include "dns/RR/SEC/TypeBitMap.h"
@@ -79,6 +80,7 @@ void daniel::ds::Node< T >::SetNext( Node * pNode )
 template class daniel::ds::Node< uint16_t > ;
 template class daniel::ds::Node< daniel::dns::EDNS0_OPTION > ;
 template class daniel::ds::Node< daniel::dns::RR::APL::APItem > ;
+template class daniel::ds::Node< daniel::dns::RR::CLA::Label > ;
 template class daniel::ds::Node< daniel::dns::RR::HIP::RVS > ;
 template class daniel::ds::Node< daniel::dns::RR::SVC::SvcParam > ;
 template class daniel::ds::Node< daniel::dns::RR::SEC::TypeBitMap > ;

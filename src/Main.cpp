@@ -16,6 +16,9 @@
 #include "ds/LinkedList.h"
 
 
+#define DUMP_TEST ( 0 )
+
+
 namespace daniel::dns
 {
 
@@ -97,6 +100,8 @@ void Run( char const * qname , char const * sqtype , char const * svrIp , uint16
 
 	uint16_t slen = 0 ;
 
+#if ( !DUMP_TEST )
+
 DNS_QUERY :
 
 	if( true == isTcp )
@@ -152,6 +157,59 @@ DNS_QUERY :
 	}
 
 	daniel::view::HexView::View( sbuf , slen , 2 ) ;
+
+#else
+
+	uint8_t const dns_packet[] = {
+	    // ==================== DNS Header (12 bytes) ====================
+	    0xAB , 0xCD ,           // ID: 0xABCD (임의의 식별자)
+	    0x85 , 0x00 ,           // Flags: QR=1(응답) , Opcode=0 , AA=1(권위 있는 응답) , 
+	                            //        TC=0 , RD=1 , RA=0 , Z=0 , RCODE=0(No error)
+	    0x00 , 0x01 ,           // QDCOUNT: 질문 섹션 개수 = 1
+	    0x00 , 0x01 ,           // ANCOUNT: 답변 RR 개수 = 1
+	    0x00 , 0x00 ,           // NSCOUNT: 권한 RR 개수 = 0
+	    0x00 , 0x00 ,           // ARCOUNT: 추가 RR 개수 = 0
+
+	    // ==================== Question Section ====================
+	    0x04 , 0x74 , 0x65 , 0x73 , 0x74 ,  // label: "test" (길이 4)
+	    0x07 , 0x65 , 0x78 , 0x61 , 0x6D , 
+	    0x70 , 0x6C , 0x65 ,                // label: "example" (길이 7)
+	    0x03 , 0x63 , 0x6F , 0x6D ,         // label: "com" (길이 3)
+	    0x00 ,                              // root label (도메인 이름 종료)
+
+	    0x01 , 0x07 ,                       // QTYPE: 263 (0x0107) → CLA 레코드 타입
+	    0x00 , 0x01 ,                       // QCLASS: 1 (IN , Internet 클래스)
+
+	    // ==================== Answer Resource Record ====================
+	    0xC0 , 0x0C ,                       // NAME: 압축 포인터 (0xC00C → offset 12 , Question의 이름 참조)
+
+	    0x01 , 0x07 ,                       // TYPE: 263 (CLA)
+	    0x00 , 0x01 ,                       // CLASS: 1 (IN)
+
+	    0x00 , 0x00 , 0x0E , 0x10 ,         // TTL: 3600 초 (0x00000E10)
+
+	    0x00 , 0x14 ,                       // RDLENGTH: 20 바이트 (아래 RDATA의 정확한 길이)
+
+	    // ==================== RDATA (CLA 레코드 데이터) ====================
+	    // RDATA는 하나 이상의 character-string으로 구성 (draft-johnson-dns-ipn-cla-07 규정)
+	    // 각 character-string = 1바이트 길이 + 문자열 내용
+
+	    // 첫 번째 CLA label
+	    0x09 , 0x54 , 0x43 , 0x50 , 0x2D , 0x56 , 0x34 , 0x2D , 0x56 , 0x36 ,  // "TCP-V4-V6" (길이 9)
+
+	    // 두 번째 CLA label
+	    0x09 , 0x55 , 0x44 , 0x50 , 0x2D , 0x56 , 0x36 , 0x2D , 0x56 , 0x37    // "UDP-V6-V7" (길이 9)
+	} ;
+
+	tLen = sizeof( dns_packet ) ;
+	for( uint16_t pos = 0 ; pos < tLen ; ++pos )
+	{
+		rbuf[ pos ] = dns_packet[ pos ] ;
+	}
+
+#endif
+
+
 	daniel::view::HexView::View( rbuf , tLen , 2 ) ;
 
 	daniel::dns::Header h ;
