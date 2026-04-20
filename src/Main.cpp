@@ -7,9 +7,12 @@
 #include "net/net.h"
 #include "view/HexView.h"
 
+#include <arpa/inet.h>
+
 #include <iostream>
 #include <sstream>
 #include <cstring>
+#include <string>
 #include <random>
 
 
@@ -99,6 +102,13 @@ void Run( char const * qname , char const * sqtype , char const * svrIp , uint16
 	int  tLen  = 0 ;
 
 	uint16_t slen = 0 ;
+
+	struct in_addr addrV4 ;
+	if( 1 != inet_pton( AF_INET , svrIp , & addrV4 ) )
+	{
+     	std::cerr << "server ip error" << std::endl ;
+     	return ;
+    }
 
 #if ( !DUMP_TEST )
 
