@@ -103,31 +103,68 @@ void Run( char const * qname , char const * sqtype , char const * svrIp , uint16
 
 	uint16_t slen = 0 ;
 
-	struct in_addr addrV4 ;
-	if( 1 != inet_pton( AF_INET , svrIp , & addrV4 ) )
+	struct in_addr      addrV4 ;
+	struct sockaddr_in6 addrV6 ;
+
+	memset( & addrV4 , 0 , sizeof( struct in_addr ) ) ;
+	memset( & addrV6 , 0 , sizeof( struct sockaddr_in6 ) ) ;
+
+	bool isIpV4 = false ;
+	bool isIpV6 = false ;
+
+	if( 1 == inet_pton( AF_INET  , svrIp , & addrV4 ) ) 
+	{
+		isIpV4 = true ;
+	}
+
+	if( 1 == inet_pton( AF_INET6 , svrIp , & addrV6.sin6_addr ) )
+	{
+		isIpV6 = true ;
+	}
+
+	if( false == isIpV4 && false == isIpV6 )
 	{
      	std::cerr << "server ip error" << std::endl ;
      	return ;
     }
 
+    
+
 #if ( !DUMP_TEST )
 
 DNS_QUERY :
-
+	
 	if( true == isTcp )
 	{
 		slen = MakeQuery( sbuf , 1500 , qname , sqtype , true  ) ;
-		tLen = daniel::net::RequestOnTcp( rbuf , 4096 , sbuf , slen , svrIp , port ) ;
 	}
 	else
 	{
 		slen = MakeQuery( sbuf , 1500 , qname , sqtype , false ) ;
-		tLen = daniel::net::RequestOnUdp( rbuf , 1500 , sbuf , slen , svrIp , port ) ;	
 	}
+
+	/**/ if( true == isIpV6 &&  true == isTcp )
+	{
+		tLen = daniel::net::RequestOnTcpV6( rbuf , 4096 , sbuf , slen , svrIp , port ) ;
+	}
+	else if( true == isIpV6 && false == isTcp )
+	{
+		tLen = daniel::net::RequestOnUdpV6( rbuf , 1500 , sbuf , slen , svrIp , port ) ;	
+	}
+	else if( true == isIpV4 &&  true == isTcp )
+	{
+		tLen = daniel::net::RequestOnTcpV4( rbuf , 4096 , sbuf , slen , svrIp , port ) ;
+	}
+	else if( true == isIpV4 && false == isTcp )
+	{
+		tLen = daniel::net::RequestOnUdpV4( rbuf , 1500 , sbuf , slen , svrIp , port ) ;	
+	}
+	
 
 	/**/ if(  0 > tLen )
 	{
 		std::cerr << "reponse error - no reponse" << std::endl ;
+		return ;
 	}
 	else if( 12 > tLen )
 	{
