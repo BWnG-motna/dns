@@ -114,10 +114,10 @@ enum class QType : uint16_t
 	UID         =    101  ,
 	GID         =    102  ,
 	UNSPEC      =    103  ,
-	NID         =    104  , // It records store a node's identifier for the ILNP(Identifier-Locator Network Protocol).
+	NID         =    104  , // It record store a node's identifier for the ILNP(Identifier-Locator Network Protocol).
 	                        // It separates node identity from network location in experimental networking.
-	L32         =    105  ,
-	L64         =    106  ,
+	L32         =    105  , // It record store a node's 32-bits locator for the ILNP(Identifer-Locator Network Protocol).
+	L64         =    106  , // It record store a node's 64-bits locator for the ILNP(Identifer-Locator Network Protocol).
 	LP          =    107  ,
 	EUI48       =    108  , // 48-bit Extended Unique Identifier record.
 	EUI64       =    109  , // 64-bit Extended Unique Identifier record.

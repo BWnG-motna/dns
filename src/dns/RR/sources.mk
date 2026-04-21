@@ -80,6 +80,8 @@ OBJS += src/dns/RR/RData.o            \
 		src/dns/RR/RData_SPF.o        \
 		\
 		src/dns/RR/RData_NID.o        \
+		src/dns/RR/RData_L32.o        \
+		src/dns/RR/RData_L64.o        \
 		\
 		src/dns/RR/RData_EUI48.o      \
 		src/dns/RR/RData_EUI64.o      \
