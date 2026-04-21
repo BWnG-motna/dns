@@ -4,5 +4,4 @@ include src/ds/sources.mk
 include src/net/sources.mk
 include src/view/sources.mk
 
-OBJS += src/Main.o   \
-        src/Common.o 
+OBJS += src/Common.o 

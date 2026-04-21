@@ -1,4 +1,4 @@
-APP       = q
+Q         = q
 
 CC        = clang
 CXX       = clang++
@@ -13,9 +13,9 @@ DESTDIR  ?=
 
 .PHONY : all clean install
 
-all : $(APP)
+all : $(Q)
 	
-$(APP): $(OBJS)
+$(Q): src/Q.o $(OBJS)
 	$(CXX) $(CXXARGS) $(CXXFLAGS) -o $@ $^ 
 
 %.o: %.cpp
