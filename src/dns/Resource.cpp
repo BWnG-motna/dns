@@ -70,7 +70,7 @@
 #include "dns/RR/RData_NID.h"
 #include "dns/RR/RData_L32.h"
 #include "dns/RR/RData_L64.h"
-
+#include "dns/RR/RData_LP.h"
 #include "dns/RR/RData_EUI48.h"
 #include "dns/RR/RData_EUI64.h"
 
@@ -461,6 +461,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::L64 :
 			pRDat = new ( std::nothrow ) RR::RData_L64() ;
+			break ;
+
+		case QType::LP :
+			pRDat = new ( std::nothrow ) RR::RData_LP( pDatagram ) ;
 			break ;
 
 		case QType::EUI48 :
