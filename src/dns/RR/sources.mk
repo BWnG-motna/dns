@@ -79,6 +79,8 @@ OBJS += src/dns/RR/RData.o            \
 		\
 		src/dns/RR/RData_SPF.o        \
 		\
+		src/dns/RR/RData_NID.o        \
+		\
 		src/dns/RR/RData_EUI48.o      \
 		src/dns/RR/RData_EUI64.o      \
 		\
