@@ -67,6 +67,8 @@
 
 #include "dns/RR/RData_SPF.h"
 
+#include "dns/RR/RData_NID.h"
+
 #include "dns/RR/RData_EUI48.h"
 #include "dns/RR/RData_EUI64.h"
 
@@ -445,6 +447,10 @@ void daniel::dns::Resource::MakeRData( uint8_t const * pBuf , uint32_t const & l
 
 		case QType::SPF :
 			pRDat = new ( std::nothrow ) RR::RData_SPF() ;
+			break ;
+
+		case QType::NID :
+			pRDat = new ( std::nothrow ) RR::RData_NID() ;
 			break ;
 
 		case QType::EUI48 :
