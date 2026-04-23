@@ -57,6 +57,9 @@ public :
 	bool InsertOptCookie( uint8_t const * pDat , uint16_t const & len ) ;
 
 public :
+	ds::LinkedList< EDNS0_OPTION > const * GetOptions() const ;
+
+public :
 	QType GetType() const ;
 
 public :

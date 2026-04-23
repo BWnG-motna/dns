@@ -286,23 +286,23 @@ uint16_t daniel::dns::EDNS0::Save( uint8_t * pBuf , uint16_t const & length )
 	}
 
 	// name data - resource record 
-	pBuf[ 0 ] = '\0' ;  
+	pBuf[  0 ] = '\0' ;  
 
 	uint16_t type = 41 ; // OPT RR - ENDS0
 
 	// type = 41 - OPT RR
-	pBuf[ 1 ] = ( type >> 8 ) & 0x00FF ;
-	pBuf[ 2 ] = ( type >> 0 ) & 0x00FF ; 
+	pBuf[  1 ] = ( type >> 8 ) & 0x00FF ;
+	pBuf[  2 ] = ( type >> 0 ) & 0x00FF ; 
 
 	// class = UDP playload size
-	pBuf[ 3 ] = ( payloadSize >> 8 ) & 0x00FF ;
-	pBuf[ 4 ] = ( payloadSize >> 0 ) & 0x00FF ; 
+	pBuf[  3 ] = ( payloadSize >> 8 ) & 0x00FF ;
+	pBuf[  4 ] = ( payloadSize >> 0 ) & 0x00FF ; 
 
 	// ttl
-	pBuf[ 5 ] = extRCode ;
-	pBuf[ 6 ] = version  ;
-	pBuf[ 7 ] = ( true == isDnsSecOk ) ? 0x80 : 0x00 ;
-	pBuf[ 8 ] = 0x00 ; // z - reserved
+	pBuf[  5 ] = extRCode ;
+	pBuf[  6 ] = version  ;
+	pBuf[  7 ] = ( true == isDnsSecOk ) ? 0x80 : 0x00 ;
+	pBuf[  8 ] = 0x00 ; // z - reserved
 
 	// rdlength
 	pBuf[  9 ] = 0x00 ;
@@ -348,6 +348,7 @@ uint16_t daniel::dns::EDNS0::Save( uint8_t * pBuf , uint16_t const & length )
 		++posIter ;
 	}
 
+	// update rdlength 
 	pBuf[  9 ] = ( rdlength >> 8 ) & 0x00FF ;
 	pBuf[ 10 ] = ( rdlength >> 0 ) & 0x00FF; 
 
@@ -375,4 +376,10 @@ uint32_t daniel::dns::EDNS0::GetOptCount() const
 uint8_t const * daniel::dns::EDNS0::GetName() const
 {
 	return pName ;
+}
+
+
+daniel::ds::LinkedList< daniel::dns::EDNS0_OPTION > const * daniel::dns::EDNS0::GetOptions() const
+{
+	return pOpt ;
 }

@@ -43,6 +43,8 @@ enum class EDNS0_OptCode : uint16_t
 
 
 bool IsValidEDNS0_OptCode( uint16_t const & codeNo ) ;
+char const * GetMeaningOfOptCode( uint16_t const & codeNo ) ;
+char const * GetMeaningOfOptCode( EDNS0_OptCode const & code ) ;
 
 }   // namespace dns
 

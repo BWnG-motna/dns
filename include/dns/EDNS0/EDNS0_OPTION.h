@@ -25,7 +25,6 @@ private :
 public :
 	void SetCode( EDNS0_OptCode const & code ) ;
 	void SetCode(      uint16_t const & code ) ;
-	
 	void SetData( uint8_t  const * pDat , uint16_t const & len ) ;
 
 public :

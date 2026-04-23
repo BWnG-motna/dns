@@ -35,3 +35,131 @@ bool daniel::dns::IsValidEDNS0_OptCode( uint16_t const & codeNo )
 			return false ;
 	}
 }
+
+
+char const * daniel::dns::GetMeaningOfOptCode( uint16_t const & codeNo )
+{
+	switch( codeNo ) 
+	{
+		case 1 : 
+			return "Long Lived Queries" ;
+
+		case 2 : 
+			return "Update Lease" ;
+
+		case 3 :
+			return "Name Server Identifier" ;
+
+		case 5 :
+			return "DNSSEC algorithm understood" ;
+
+		case 6 :
+			return "DS Hash Understood" ;
+
+		case 7 :
+			return "NSEC3 Hash Understood" ;
+
+		case 8 :
+			return "edns-client-subnet" ;
+
+		case 9 :
+			return "EDNS EXPIRE" ;
+
+		case 10 :
+			return "COOKIE" ;
+
+		case 11 :
+			return "edns-tcp-Keepalive" ;
+
+		case 12 :
+			return "padding" ;
+
+		case 13 :
+			return "CHAIN" ;
+
+		case 14 :
+			return "ends-key-tag" ;
+
+		case 15 :
+			return "Extended DNS Error" ;
+
+		case 18 :
+			return "Report-Channel" ;
+
+		case 19 :
+			return "ZONEVERSION" ;
+
+		case 20292 :
+			return "Umbrella Ident" ;
+
+		case 26946 :
+			return "Device ID" ; 
+
+		default :
+			return "Unknown" ;
+	}
+}
+
+
+char const * daniel::dns::GetMeaningOfOptCode( EDNS0_OptCode const & code )
+{
+	switch( code ) 
+	{
+		case EDNS0_OptCode::LLQ : 
+			return "Long Lived Queries" ;
+
+		case EDNS0_OptCode::UL : 
+			return "Update Lease" ;
+
+		case EDNS0_OptCode::NSID :
+			return "Name Server Identifier" ;
+
+		case EDNS0_OptCode::DAU :
+			return "DNSSEC algorithm understood" ;
+
+		case EDNS0_OptCode::DHU :
+			return "DS Hash Understood" ;
+
+		case EDNS0_OptCode::N3U :
+			return "NSEC3 Hash Understood" ;
+
+		case EDNS0_OptCode::ECS :
+			return "edns-client-subnet" ;
+
+		case EDNS0_OptCode::EDNS_EXPIRE :
+			return "EDNS EXPIRE" ;
+
+		case EDNS0_OptCode::COOKIE :
+			return "COOKIE" ;
+
+		case EDNS0_OptCode::TCP_KEEPALIVE :
+			return "edns-tcp-Keepalive" ;
+
+		case EDNS0_OptCode::PADDING :
+			return "padding" ;
+
+		case EDNS0_OptCode::CHAIN :
+			return "CHAIN" ;
+
+		case EDNS0_OptCode::EDNS_KEY_TAG :
+			return "ends-key-tag" ;
+
+		case EDNS0_OptCode::EDE :
+			return "Extended DNS Error" ;
+
+		case EDNS0_OptCode::REPORT_CHANNEL :
+			return "Report-Channel" ;
+
+		case EDNS0_OptCode::ZONEVERSION :
+			return "ZONEVERSION" ;
+
+		case EDNS0_OptCode::UmbrellaIdent :
+			return "Umbrella Ident" ;
+
+		case EDNS0_OptCode::DeviceID :
+			return "Device ID" ; 
+
+		default :
+			return "Unknown" ;
+	}
+}
