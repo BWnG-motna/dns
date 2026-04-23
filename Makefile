@@ -25,8 +25,8 @@ $(Q): src/Q.o $(OBJS)
 	$(CC)  $(CXXARGS) $(CXXFLAGS) -o $@ -c $<
 
 clean :
-	rm -f $(APP) $(OBJS)
+	rm -f $(Q) $(OBJS)
 
-install : $(APP)
+install : $(Q)
 	mkdir -p $(DESTDIR)$(BINDIR)
-	install -m 755 $(APP) $(DESTDIR)$(BINDIR)/$(APP)
+	install -m 755 $(Q) $(DESTDIR)$(BINDIR)/$(Q)
