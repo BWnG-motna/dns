@@ -9,6 +9,7 @@
 #include "dns/RR/SEC/TypeBitMap.h"
 
 #include <memory>
+#include <limits>
 #include <iostream>
 #include <iomanip>
 
@@ -59,6 +60,11 @@ daniel::ds::LinkedList< T >::~LinkedList()
 template < typename T >
 bool daniel::ds::LinkedList< T >::Insert( T * pDat ) noexcept
 {
+	if( std::numeric_limits< uint32_t >::max() == nodeCount )
+	{
+		return false ;
+	}
+
 	Node< T > * pNode = new ( std::nothrow ) Node< T >() ;
 	if( nullptr == pNode )
 	{
