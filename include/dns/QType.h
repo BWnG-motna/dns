@@ -86,7 +86,7 @@ enum class QType : uint16_t
 	SMIMEA      =     53  , // S/MIME certificate association record. Associates an S/MIME certificate or public key with a domain name for secure email.
 	
 	HIP         =     55  , // Host Identity Protocol record. Publishes Host Identity and redezvous information for the Host Identity Protocol.
-	NINFO       =     56  , // silmilar with TXT ( obsolete )
+	NINFO       =     56  , // similar with TXT ( obsolete )
 	RKEY        =     57  ,
 	TALINK      =     58  ,
 	CDS         =     59  , // Child DS record. Contains a Delegation Singer record that the child zone wants the parent to publish.
